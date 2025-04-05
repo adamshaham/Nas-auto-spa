@@ -10,8 +10,9 @@ const Navbar = () => {
         <div className="bg-black/90 backdrop-blur-sm rounded-full px-8 py-4 border border-gray-800">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="/" className="text-3xl font-bold text-white tracking-wider">
-              NAS AUTO SPA
+            <a href="/" className="text-3xl font-bold tracking-wider">
+              <span className="text-white">NAS </span>
+              <span className="text-yellow-400">AUTO SPA</span>
             </a>
 
             {/* Slogan - Added in the middle */}
@@ -21,19 +22,17 @@ const Navbar = () => {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-12">
-              <a href="#about" className="text-white text-lg hover:text-gold-400 transition-colors duration-300">About</a>
               <a href="#services" className="text-white text-lg hover:text-gold-400 transition-colors duration-300">Services</a>
-              <a href="#pricing" className="text-white text-lg hover:text-gold-400 transition-colors duration-300">Pricing</a>
               <a href="#contact" className="text-white text-lg hover:text-gold-400 transition-colors duration-300">Contact</a>
-              <button className="px-6 py-2 border-2 border-gold-500 text-gold-500 hover:bg-gold-500 
+              <a href="#pricing" className="px-6 py-2 border-2 border-gold-500 text-gold-500 hover:bg-gold-500 
                                hover:text-black transition-all duration-300 text-lg rounded-full">
                 Book Now
-              </button>
+              </a>
             </div>
 
             {/* Mobile Menu Button */}
             <button 
-              className="md:hidden text-white"
+              className="md:hidden text-white focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
@@ -58,14 +57,13 @@ const Navbar = () => {
                 Your Cars, Our Passion
               </p>
               <div className="flex flex-col items-center space-y-6">
-                <a href="#about" className="text-white text-lg hover:text-gold-400 transition-colors duration-300">About</a>
                 <a href="#services" className="text-white text-lg hover:text-gold-400 transition-colors duration-300">Services</a>
                 <a href="#pricing" className="text-white text-lg hover:text-gold-400 transition-colors duration-300">Pricing</a>
                 <a href="#contact" className="text-white text-lg hover:text-gold-400 transition-colors duration-300">Contact</a>
-                <button className="px-6 py-2 border-2 border-gold-500 text-gold-500 hover:bg-gold-500 
+                <a href="#pricing" className="px-6 py-2 border-2 border-gold-500 text-gold-500 hover:bg-gold-500 
                                  hover:text-black transition-all duration-300 text-lg rounded-full">
                   Book Now
-                </button>
+                </a>
               </div>
             </div>
           </div>
