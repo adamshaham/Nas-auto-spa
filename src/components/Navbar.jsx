@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="bg-black/90 backdrop-blur-sm rounded-full px-8 py-4 border border-gray-800">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="/" className="text-3xl font-bold tracking-wider">
+            <a href="/" className="text-xl md:text-3xl font-bold tracking-wider">
               <span className="text-white">NAS </span>
               <span className="text-yellow-400">AUTO SPA</span>
             </a>
