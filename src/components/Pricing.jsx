@@ -22,7 +22,7 @@ const Pricing = () => {
     },
     {
       title: 'Stage 2',
-      price: 'From $50',
+      price: '$50',
       features: [
         { text: 'Hand Wash (2 stage)', included: true },
         { text: 'Wheel & Tire Cleaning', included: true },

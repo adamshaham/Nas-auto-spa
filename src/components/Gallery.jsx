@@ -9,17 +9,14 @@ const Gallery = () => {
     {
       url: '/images/gallery/IMG_4271.png',
       title: 'BMW M4 Competition',
-      description: 'Full paint correction and ceramic coating'
     },
     {
       url: '/images/gallery/IMG_4637.png',
       title: 'Porsche 911 Turbo',
-      description: 'Premium detail and paint protection'
     },
     {
       url: '/images/gallery/IMG_7717.png',
       title: 'BMW M6 Competition',
-      description: 'Complete exterior transformation'
     }
   ];
 
