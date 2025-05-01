@@ -12,7 +12,7 @@ const Navbar = () => {
             {/* Logo */}
             <a href="/" className="text-xl md:text-3xl font-bold tracking-wider">
               <span className="text-white">NAS </span>
-              <span className="text-yellow-400">AUTO SPA</span>
+              <span className="text-yellow-400">WORKS</span>
             </a>
 
             {/* Slogan - Added in the middle */}

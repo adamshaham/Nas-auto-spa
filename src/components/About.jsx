@@ -60,7 +60,7 @@ const About = () => {
                 
                 <div className="space-y-6 text-lg">
                   <p className="text-gray-300">
-                    We're three friends in our twenties united by an unwavering passion for luxury automobiles. What began as meticulous care for our own vehicles has evolved into <span className="text-gold-400 font-medium">NAS Auto Spa</span>—where enthusiasm meets expertise.
+                    We're three friends in our twenties united by an unwavering passion for luxury automobiles. What began as meticulous care for our own vehicles has evolved into <span className="text-gold-400 font-medium">NAS WORKS</span>—where enthusiasm meets expertise.
                   </p>
                   
                   <p className="text-gray-300">
@@ -72,7 +72,7 @@ const About = () => {
                   </p>
                   
                   <p className="text-gray-300">
-                    Today, we bring that same dedication, precision, and reverence to every vehicle we touch. When you choose NAS Auto Spa, you're experiencing the culmination of our lifelong passion, delivered with uncompromising standards.
+                    Today, we bring that same dedication, precision, and reverence to every vehicle we touch. When you choose NAS WORKS, you're experiencing the culmination of our lifelong passion, delivered with uncompromising standards.
                   </p>
                 </div>
 

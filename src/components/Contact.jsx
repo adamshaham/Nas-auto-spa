@@ -73,7 +73,7 @@ const Contact = () => {
       const formData = new FormData(formElement);
       
       // Send form data to FormSubmit
-      await fetch("https://formsubmit.co/ajax/hello.nasautospa@gmail.com", {
+      await fetch("https://formsubmit.co/ajax/contactnasworks@gmail.com", {
         method: "POST",
         headers: { 
             'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const Contact = () => {
               <div className="flex items-center space-x-4">
                 <div>
                   <p className="text-gray-400 text-sm">Email</p>
-                  <p className="text-xl">hello.nasautospa@gmail.com</p>
+                  <p className="text-xl">contactnasworks@gmail.com</p>
                 </div>
               </div>
               

@@ -5,7 +5,7 @@ const Testimonials = () => {
     {
       name: "Michael Anderson",
       role: "Luxury Car Owner",
-      text: "NAS Auto Spa transformed my Mercedes-Benz. Their attention to detail and professional service is unmatched in the industry.",
+      text: "NAS WORKS transformed my Mercedes-Benz. Their attention to detail and professional service is unmatched in the industry.",
       rating: 5,
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
     },
@@ -13,7 +13,7 @@ const Testimonials = () => {
     {
       name: "David Thompson",
       role: "Classic Car Collector",
-      text: "I trust only NAS Auto Spa with my vintage collection. Their knowledge and careful handling of classic vehicles is impressive.",
+      text: "I trust only NAS WORKS with my vintage collection. Their knowledge and careful handling of classic vehicles is impressive.",
       rating: 5,
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
     },
@@ -28,7 +28,7 @@ const Testimonials = () => {
             Client Experiences
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Discover why luxury car owners trust NAS Auto Spa for their premium detailing needs
+            Discover why luxury car owners trust NAS WORKS for their premium detailing needs
           </p>
         </div>
 
