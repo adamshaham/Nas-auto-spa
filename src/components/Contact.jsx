@@ -126,7 +126,7 @@ const Contact = () => {
               </div>
 
               <div className="flex justify-center">
-                <img src="/images/nas-logo.png" alt="NAS Logo" className="h-24 md:h-32 w-auto" />
+                <img src="/images/nas-logo 1 (1).png" alt="NAS Logo" className="h-10 md:h-16 w-auto" />
               </div>
             </div>
           </div>

@@ -35,7 +35,7 @@ const Hero = () => {
         {/* Business Name */}
         <h1 className="text-5xl font-bold mb-4">
           <span className="text-white block">NAS</span>
-          <span className="text-yellow-400">WORKS<span className="text-white">.</span></span>
+          <span className="text-yellow-400">AUTO SPA<span className="text-white">.</span></span>
         </h1>
 
         {/* Description */}

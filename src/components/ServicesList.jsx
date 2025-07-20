@@ -4,13 +4,31 @@ const ServicesList = () => {
   const services = [
     {
       title: "EXTERIOR DETAILING",
-      description: "Complete exterior transformation with premium products and techniques",
+      description: [
+        "Hand wash and two-bucket method for scratch-free cleaning",
+        "Wheel, tire, and fender deep cleaning",
+        "Bug/tar removal and gentle decontamination",
+        "Clay bar treatment for a glass-smooth finish",
+        "Premium wax or sealant for lasting shine and protection",
+        "Streak-free window and mirror cleaning",
+        "Trim and plastic restoration for a like-new look",
+        "Final touch and inspection for perfection"
+      ],
       image: "/images/gallery/ext-gal.jpg",
       stage: "stage1"
     },
     {
       title: "INTERIOR DETAILING",
-      description: "Thorough interior cleaning and restoration for the ultimate cabin experience",
+      description: [
+        "Thorough vacuuming of carpets, seats, and all crevices",
+        "Steam cleaning and shampoo extraction for deep sanitization",
+        "Leather cleaning and conditioning (if applicable)",
+        "Dashboard, console, and door panel detailing",
+        "Stain and odor removal for a fresh cabin",
+        "Crystal-clear interior glass and mirrors",
+        "Mat and upholstery treatment for a renewed feel",
+        "Final inspection and luxury scent finish"
+      ],
       image: "/images/gallery/int-gal.jpg",
       stage: "stage2"
     }
@@ -61,7 +79,11 @@ const ServicesList = () => {
                   </h3>
                   <div className="w-20 h-1.5 bg-gold-500 rounded-md"></div>
                   <p className="text-gray-300 text-lg">
-                    {service.description}
+                    <ul className="list-disc list-inside space-y-2 text-left text-base md:text-lg">
+                      {service.description.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
                   </p>
                 </div>
               </div>
