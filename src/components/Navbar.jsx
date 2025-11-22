@@ -29,6 +29,7 @@ const Navbar = () => {
           {/* Desktop Menu - Moved to center */}
           <div className="hidden md:flex items-center space-x-12">
             <Link to="/services" className="text-[#e1b11b] text-lg hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full">Services</Link>
+            <Link to="/Blog" className="text-[#e1b11b] text-lg hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full">Blog</Link>
             <a href="#contact" className="text-[#e1b11b] text-lg hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full">Contact</a>
           </div>
 
@@ -66,6 +67,7 @@ const Navbar = () => {
             <div className="bg-black/95 backdrop-blur-lg rounded-2xl py-6 border border-gray-800">
               <div className="flex flex-col items-center space-y-6">
                 <Link to="/services" onClick={() => setIsMenuOpen(false)} className="text-[#e1b11b] text-lg hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full">Services</Link>
+                <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="text-[#e1b11b] text-lg hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full">Blog</Link>
                 <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="text-[#e1b11b] text-lg hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full">Pricing</a>
                 <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-[#e1b11b] text-lg hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full">Contact</a>
                 <div className="flex flex-col items-center">

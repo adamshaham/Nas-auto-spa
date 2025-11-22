@@ -79,6 +79,7 @@ const Pricing = () => {
       { text: 'PAINT CORRECTION', included: true },
       { text: 'CERAMIC COATING', included: true },
       { text: 'ENGINE BAY CLEANING', included: true },
+      { text: 'HEADLIGHT RESTORATION', included: true },
       { text: '', included: false }, // Spacer
       { text: '', included: false }, // Spacer
       { text: '', included: false }, // Spacer

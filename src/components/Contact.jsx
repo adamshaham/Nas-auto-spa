@@ -8,40 +8,49 @@ const Contact = () => {
     email: '',
     phone: '',
     message: '',
-    selectedServices: []
+    selectedServices: [],
   });
   const [showThankYou, setShowThankYou] = useState(false);
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Define available services
   const serviceCategories = [
     {
-      title: "Wash & Detailing Packages",
-      options: ["Quick Wash ($30)", "Stage 1 Detail ($200)", "Stage 2 Detail ($300+)"]
+      title: 'Wash & Detailing Packages',
+      options: ['QUICK WASH ($30)', 'Stage 1', 'Stage 2', 'Stage 3'],
     },
     {
-      title: "Enhancements & Add-ons",
-      options: ["Paint Correction", "Ceramic Coating", "Interior Deep Clean", "Headlight Restoration"]
-    }
+      title: 'Enhancements & Add-ons',
+      options: [
+        'Paint Correction',
+        'Ceramic Coating',
+        'Engine Bay cleaning',
+        'Headlight Restoration',
+      ],
+    },
   ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const toggleService = (service) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const exists = prev.selectedServices.includes(service);
       if (exists) {
-        return { ...prev, selectedServices: prev.selectedServices.filter(s => s !== service) };
-      } else {
-        return { ...prev, selectedServices: [...prev.selectedServices, service] };
+        return {
+          ...prev,
+          selectedServices: prev.selectedServices.filter((s) => s !== service),
+        };
       }
+      return {
+        ...prev,
+        selectedServices: [...prev.selectedServices, service],
+      };
     });
   };
 
@@ -53,20 +62,31 @@ const Contact = () => {
     try {
       const formElement = e.target;
       const submissionData = new FormData(formElement);
-      
-      submissionData.append('_subject', `New Inquiry: ${formData.firstName} ${formData.lastName}`);
-      
+
+      // custom subject line for the email
+      submissionData.append(
+        '_subject',
+        `New Inquiry: ${formData.firstName} ${formData.lastName}`
+      );
+
+      // extra field with nice label for services
       if (formData.selectedServices.length > 0) {
-        submissionData.append('Services_Interested_In', formData.selectedServices.join(', '));
+        submissionData.append(
+          'Services_Interested_In',
+          formData.selectedServices.join(', ')
+        );
       }
 
-      const response = await fetch("https://formsubmit.co/ajax/contactnasworks@gmail.com", {
-        method: "POST",
-        headers: { 
-            'Accept': 'application/json' 
-        },
-        body: submissionData
-      });
+      const response = await fetch(
+        'https://formsubmit.co/ajax/contact@nasautospa.com',
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+          },
+          body: submissionData,
+        }
+      );
 
       const result = await response.json();
 
@@ -74,13 +94,25 @@ const Contact = () => {
         throw new Error(result.message || 'Failed to submit form. Please try again.');
       }
 
+      // success – show thank you screen + then redirect
       setShowThankYou(true);
+
+      // optional: clear form state
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        message: '',
+        selectedServices: [],
+      });
+
       setTimeout(() => {
         window.location.href = '/';
       }, 4000);
-    } catch (error) {
+    } catch (err) {
+      console.error('Error submitting form:', err);
       setError('Something went wrong. Please call us directly at (929) 307-6986.');
-      console.error('Error submitting form:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -93,29 +125,40 @@ const Contact = () => {
   return (
     <section id="contact" className="relative py-24 bg-black text-white overflow-hidden">
       {/* Ambient Background Effects */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#e1b11b] opacity-5 blur-[120px] rounded-full pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-900 opacity-5 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#e1b11b] opacity-5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-900 opacity-5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="container-wrapper relative z-10 px-4 max-w-7xl mx-auto">
-        
-        {/* Centered Form Container - Changed max-w-3xl to max-w-5xl for wider form */}
+      <div className="relative z-10 px-4 max-w-7xl mx-auto">
         <div className="max-w-5xl mx-auto">
           <div className="bg-[#0a0a0a] p-8 md:p-12 rounded-2xl border border-gray-800 shadow-2xl relative">
-            
             {/* Header Section */}
             <div className="text-center mb-10">
-              <h2 className="text-[#e1b11b] text-sm font-bold tracking-[0.2em] uppercase mb-3">Get in Touch</h2>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready for a Transformation?</h3>
-              <p className="text-gray-400 max-w-2xl mx-auto">Select your desired services below and fill out your details. We'll get back to you immediately to confirm your appointment.</p>
+              <h2 className="text-[#e1b11b] text-sm font-bold tracking-[0.2em] uppercase mb-3">
+                Get in Touch
+              </h2>
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Ready for a Transformation?
+              </h3>
+              <p className="text-gray-400 max-w-2xl mx-auto">
+                Select your desired services below and fill out your details. We'll get back to you
+                to confirm your appointment.
+              </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
-              
-              {/* Hidden Input to pass selected services to FormSubmit */}
-              <input type="hidden" name="services_list" value={formData.selectedServices.join(', ')} />
+              {/* Hidden: selected services */}
+              <input
+                type="hidden"
+                name="services_list"
+                value={formData.selectedServices.join(', ')}
+              />
+              {/* FormSubmit bot & config fields */}
               <input type="text" name="_honey" style={{ display: 'none' }} />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
+              {/* You can also add a redirect if you ever use non-AJAX:
+                  <input type="hidden" name="_next" value="https://your-site.com/thank-you" />
+              */}
 
               {error && (
                 <div className="bg-red-500/10 border border-red-500/50 text-red-200 p-4 rounded-lg text-center text-sm">
@@ -186,10 +229,10 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* --- SERVICE SELECTION SECTION --- */}
+              {/* Services */}
               <div className="space-y-6 bg-white/5 p-6 rounded-xl border border-white/5">
                 {serviceCategories.map((category, idx) => (
-                  <div key={idx}>
+                  <div key={category.title}>
                     <label className="block text-xs font-medium text-[#e1b11b] uppercase tracking-wider mb-3">
                       {category.title}
                     </label>
@@ -201,12 +244,11 @@ const Contact = () => {
                             key={option}
                             type="button"
                             onClick={() => toggleService(option)}
-                            className={`
-                              px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 border flex-grow md:flex-grow-0 text-center
-                              ${isSelected 
-                                ? 'bg-[#e1b11b] border-[#e1b11b] text-black shadow-[0_0_15px_rgba(225,177,27,0.3)] scale-105' 
-                                : 'bg-black/40 border-white/10 text-gray-300 hover:border-[#e1b11b]/50 hover:bg-white/5'}
-                            `}
+                            className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 border flex-grow md:flex-grow-0 text-center ${
+                              isSelected
+                                ? 'bg-[#e1b11b] border-[#e1b11b] text-black shadow-[0_0_15px_rgba(225,177,27,0.3)] scale-105'
+                                : 'bg-black/40 border-white/10 text-gray-300 hover:border-[#e1b11b]/50 hover:bg-white/5'
+                            }`}
                           >
                             {option}
                           </button>
@@ -216,7 +258,6 @@ const Contact = () => {
                   </div>
                 ))}
               </div>
-              {/* --------------------------------- */}
 
               {/* Message */}
               <div className="group">
@@ -230,16 +271,15 @@ const Contact = () => {
                   onChange={handleInputChange}
                   className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300 resize-none"
                   placeholder="Year, Make, Model and any specific concerns..."
-                ></textarea>
+                />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-4 bg-[#e1b11b] hover:bg-[#cda218] text-black font-bold tracking-wide rounded-xl 
-                         transform transition-all duration-300 shadow-lg hover:shadow-[#e1b11b]/20 flex justify-center items-center
-                         ${isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:scale-[1.01] active:scale-[0.99]'}
-                `}
+                className={`w-full py-4 bg-[#e1b11b] hover:bg-[#cda218] text-black font-bold tracking-wide rounded-xl transform transition-all duration-300 shadow-lg hover:shadow-[#e1b11b]/20 flex justify-center items-center ${
+                  isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:scale-[1.01] active:scale-[0.99]'
+                }`}
               >
                 {isSubmitting ? 'SENDING...' : 'SEND REQUEST'}
               </button>
