@@ -41,6 +41,22 @@ const ServicesPage = () => {
     },
   ];
 
+  // map stage key to route
+  const getServicePath = (stage) => {
+    switch (stage) {
+      case 'stage1':
+        return '/services/mobile-detailing';
+      case 'stage2':
+        return '/services/ceramic-coating';
+      case 'paintcorrection':
+        return '/services/paint-correction';
+      case 'commercial':
+        return '/services/fleet-detailing'; // 🔼 matches App.js route
+      default:
+        return '/services';
+    }
+  };
+
   // Subtle parallax for hero
   const headerY = useTransform(scrollYProgress, [0, 0.4], [0, -60]);
   const headerOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.85]);
@@ -134,7 +150,15 @@ const ServicesPage = () => {
               {service.description}
             </motion.p>
 
-
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              onClick={() => navigate(getServicePath(service.stage))}
+              className="inline-flex items-center px-4 py-2.5 rounded-lg bg-[#e1b11b] text-black text-xs md:text-sm font-semibold tracking-wide hover:bg-yellow-400 transition"
+            >
+              Learn more
+            </motion.button>
           </div>
         </div>
       </motion.div>

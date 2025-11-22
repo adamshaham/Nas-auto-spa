@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { BlogPost } from '../data/BlogData';
 
-
 const BlogPostPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -60,8 +59,9 @@ const BlogPostPage = () => {
               <span>Back to Blog</span>
             </button>
 
+            {/* 🔥 Book a Detail → pricing on home */}
             <Link
-              to="/services"
+              to="/#pricing"
               className="hidden sm:inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#e1b11b] text-black text-xs font-semibold hover:bg-[#e1b11b]/90 transition"
             >
               Book a Detail
@@ -91,7 +91,7 @@ const BlogPostPage = () => {
             )}
           </header>
 
-          {/* Content – renders HTML from BlogData */}
+          {/* Content */}
           <article className="text-[15px] md:text-base leading-relaxed">
             {typeof post.content === 'string' ? (
               <div
@@ -115,14 +115,15 @@ const BlogPostPage = () => {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <a
-                href="#pricing"
+              {/* 🔥 View Packages → pricing on home */}
+              <Link
+                to="/#pricing"
                 className="px-5 py-2 rounded-full bg-[#e1b11b] text-black text-sm font-semibold hover:bg-[#e1b11b]/90 transition"
               >
                 View Packages
-              </a>
+              </Link>
               <a
-                href="tel:19293076986"
+                href="tel:+19293076986"
                 className="px-5 py-2 rounded-full border border-zinc-600 text-sm text-zinc-200 hover:border-[#e1b11b] hover:text-[#e1b11b] transition"
               >
                 Call / Text (929) 307-6986

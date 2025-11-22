@@ -41,7 +41,7 @@ const BlogPage = () => {
 
             <div className="flex flex-col items-start md:items-end gap-3">
               <Link
-                to="/services"
+                to="/#pricing"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#e1b11b] text-black text-sm md:text-base font-semibold hover:bg-[#e1b11b]/90 transition"
               >
                 View Detailing Services

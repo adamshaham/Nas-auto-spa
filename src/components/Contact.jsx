@@ -18,7 +18,6 @@ const Contact = () => {
   useEffect(() => {
     const handlePackageSelect = (event) => {
       const key = event.detail; // e.g. 'STAGE 1', 'QUICK WASH', 'ENHANCEMENTS'
-
       let selected = [];
 
       switch (key) {
@@ -35,12 +34,7 @@ const Contact = () => {
           selected = ['Stage 3'];
           break;
         case 'ENHANCEMENTS':
-          // preselect all enhancements; they can uncheck what they don’t want
-          selected = [
-            'Paint Correction',
-            'Ceramic Coating',
-            'Engine Bay cleaning',
-          ];
+          selected = ['Paint Correction', 'Ceramic Coating', 'Engine Bay cleaning'];
           break;
         default:
           return;
@@ -63,11 +57,7 @@ const Contact = () => {
     },
     {
       title: 'Enhancements & Add-ons',
-      options: [
-        'Paint Correction',
-        'Ceramic Coating',
-        'Engine Bay cleaning',
-      ],
+      options: ['Paint Correction', 'Ceramic Coating', 'Engine Bay cleaning'],
     },
   ];
 
@@ -160,7 +150,10 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="relative py-24 bg-black text-white overflow-hidden">
+    <section
+      id="contact"
+      className="relative py-24 bg-black text-white overflow-hidden"
+    >
       {/* Ambient Background Effects */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#e1b11b] opacity-5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-900 opacity-5 blur-[120px] rounded-full pointer-events-none" />
@@ -168,21 +161,34 @@ const Contact = () => {
       <div className="relative z-10 px-4 max-w-7xl mx-auto">
         <div className="max-w-5xl mx-auto">
           <div className="bg-[#0a0a0a] p-8 md:p-12 rounded-2xl border border-gray-800 shadow-2xl relative">
-            {/* Header Section */}
+            {/* SEO-OPTIMIZED HEADER */}
             <div className="text-center mb-10">
               <h2 className="text-[#e1b11b] text-sm font-bold tracking-[0.2em] uppercase mb-3">
-                Get in Touch
+                Contact NAS Auto Spa
               </h2>
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Ready for a Transformation?
+                Book Mobile Detailing in Fairfield County, CT
               </h3>
-              <p className="text-gray-400 max-w-2xl mx-auto">
-                Select your desired services below and fill out your details. We'll get back to you
-                to confirm your appointment.
+              <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                Tell us about your vehicle and the services you&apos;re interested in – whether it&apos;s a
+                maintenance wash, full interior &amp; exterior detail, paint correction, ceramic coating,
+                or fleet detailing. We serve drivers and businesses across Fairfield County, Connecticut.
+              </p>
+              <p className="text-xs text-zinc-500 mt-3">
+                Prefer to talk? Call or text us at{' '}
+                <a href="tel:+19293076986" className="text-[#e1b11b] underline underline-offset-4">
+                  (929) 307-6986
+                </a>
+                .
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+            {/* FORM */}
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-8 relative z-10"
+              name="contact-form"
+            >
               {/* Hidden: selected services */}
               <input
                 type="hidden"
@@ -200,8 +206,6 @@ const Contact = () => {
               )}
 
               {/* Personal Details */}
-              {/* ... (rest of your Contact form unchanged) ... */}
-
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="group">
                   <label className="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-[#e1b11b] transition-colors">
@@ -210,6 +214,7 @@ const Contact = () => {
                   <input
                     type="text"
                     name="firstName"
+                    autoComplete="given-name"
                     required
                     value={formData.firstName}
                     onChange={handleInputChange}
@@ -224,6 +229,7 @@ const Contact = () => {
                   <input
                     type="text"
                     name="lastName"
+                    autoComplete="family-name"
                     required
                     value={formData.lastName}
                     onChange={handleInputChange}
@@ -241,6 +247,7 @@ const Contact = () => {
                   <input
                     type="email"
                     name="email"
+                    autoComplete="email"
                     required
                     value={formData.email}
                     onChange={handleInputChange}
@@ -255,6 +262,7 @@ const Contact = () => {
                   <input
                     type="tel"
                     name="phone"
+                    autoComplete="tel"
                     required
                     value={formData.phone}
                     onChange={handleInputChange}
@@ -282,7 +290,7 @@ const Contact = () => {
                             className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 border flex-grow md:flex-grow-0 text-center ${
                               isSelected
                                 ? 'bg-[#e1b11b] border-[#e1b11b] text-black shadow-[0_0_15px_rgba(225,177,27,0.3)] scale-105'
-                                : 'bg-black/40 border-white/10 text-gray-300 hover:border-[#e1b11b]/50 hover:bg-white/5'
+                                : 'bg-black/40 border-white/10 text-gray-300 hover:border-[#e1b11b]/50 hover:bg:white/5'
                             }`}
                           >
                             {option}
@@ -304,8 +312,8 @@ const Contact = () => {
                   rows="4"
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300 resize-none"
-                  placeholder="Year, Make, Model and any specific concerns..."
+                  className="w-full bg-white/5 border border:white/10 rounded-lg p-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300 resize-none"
+                  placeholder="Year, make, model, condition, and any specific concerns (e.g. pet hair, stains, paint defects, winter prep)..."
                 />
               </div>
 
@@ -324,6 +332,30 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      {/* CONTACT PAGE SCHEMA FOR SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
+            'name': 'Contact NAS Auto Spa',
+            'url': 'https://www.nasautospa.com/#contact',
+            'about': {
+              '@type': 'AutoDetailing',
+              'name': 'NAS Auto Spa LLC',
+            },
+            'contactPoint': {
+              '@type': 'ContactPoint',
+              'telephone': '+19293076986',
+              'contactType': 'customer service',
+              'areaServed': 'Fairfield County CT',
+              'availableLanguage': ['English'],
+            },
+          }),
+        }}
+      />
     </section>
   );
 };
