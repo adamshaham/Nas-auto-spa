@@ -40,7 +40,6 @@ const Contact = () => {
             'Paint Correction',
             'Ceramic Coating',
             'Engine Bay cleaning',
-            'Headlight Restoration',
           ];
           break;
         default:
@@ -68,7 +67,6 @@ const Contact = () => {
         'Paint Correction',
         'Ceramic Coating',
         'Engine Bay cleaning',
-        'Headlight Restoration',
       ],
     },
   ];

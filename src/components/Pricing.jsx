@@ -36,6 +36,7 @@ const Pricing = () => {
     {
       title: 'STAGE 2',
       price: '$299',
+      priceNote: 'STARTING AT',
       subtitle: 'EXTERIOR + INTERIOR',
       features: [
         { text: 'HAND WASH (2 STAGE)', included: true },
@@ -55,6 +56,7 @@ const Pricing = () => {
     {
       title: 'STAGE 3',
       price: '$399',
+      priceNote: 'STARTING AT',
       subtitle: 'PAINT CORRECTION + CERAMIC COATING',
       features: [
         { text: 'HAND WASH (2 STAGE)', included: true },
@@ -80,7 +82,6 @@ const Pricing = () => {
       { text: 'PAINT CORRECTION', included: true },
       { text: 'CERAMIC COATING', included: true },
       { text: 'ENGINE BAY CLEANING', included: true },
-      { text: 'HEADLIGHT RESTORATION', included: true },
       { text: '', included: false },
       { text: '', included: false },
       { text: '', included: false },
@@ -97,17 +98,14 @@ const Pricing = () => {
   // 🔥 When a package is clicked: fire event + scroll to form
   const handlePackageClick = (key) => {
     if (typeof window !== 'undefined') {
-      // send selected package to Contact component
       window.dispatchEvent(
         new CustomEvent('nasPackageSelect', { detail: key })
       );
 
-      // scroll to contact section (if on same page)
       const contactSection = document.getElementById('contact');
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        // fallback if you're on another route
         window.location.href = '/#contact';
       }
     }
@@ -164,7 +162,6 @@ const Pricing = () => {
         )}
       </ul>
 
-      {/* Book Now → triggers package selection */}
       <button
         type="button"
         onClick={() => handlePackageClick(pkg.title)}
@@ -188,10 +185,25 @@ const Pricing = () => {
               <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">
                 {pkg.title}
               </h3>
-              <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-2">
+              <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-1">
                 {pkg.subtitle}
               </p>
+
+              {/* 🔥 Show price here if it exists (Quick Wash will show $30 on mobile & desktop) */}
+              {pkg.price && (
+                <div className="flex items-baseline gap-2 mt-1">
+                  <span className="text-lg md:text-2xl font-bold text-white">
+                    {pkg.price}
+                  </span>
+                  {pkg.priceNote && (
+                    <span className="text-gray-400 text-xs md:text-sm">
+                      {pkg.priceNote}
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
+
             <ul className="flex flex-col md:flex-row gap-3 md:gap-6">
               {pkg.features
                 .filter((f) => f.text)
@@ -220,11 +232,10 @@ const Pricing = () => {
           </div>
         </div>
 
-        {/* Enhancements Book Now */}
         <div className="flex-shrink-0 w-full md:w-auto">
           <button
             type="button"
-            onClick={() => handlePackageClick('ENHANCEMENTS')}
+            onClick={() => handlePackageClick(pkg.title === 'ENHANCEMENTS' ? 'ENHANCEMENTS' : 'QUICK WASH')}
             className="block w-full md:w-auto px-6 md:px-8 py-2 md:py-3 text-center bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base"
           >
             Book Now
@@ -282,7 +293,9 @@ const Pricing = () => {
         </div>
 
         {/* Enhancements */}
-        <div className="w-full">{renderHorizontalEnhancementsCard(enhancementsPackage)}</div>
+        <div className="w-full">
+          {renderHorizontalEnhancementsCard(enhancementsPackage)}
+        </div>
       </div>
     </section>
   );
