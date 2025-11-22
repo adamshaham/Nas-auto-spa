@@ -91,10 +91,10 @@ const Hero = () => {
             EXPLORE SERVICES
           </button>
           <button
-            onClick={handleSmoothScroll('contact')}
+            onClick={handleSmoothScroll('pricing')}
             className="w-full py-4 border-2 border-yellow-400 text-yellow-400 text-lg font-bold tracking-wider rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-300 text-center"
           >
-            BOOK NOW
+            PRICING
           </button>
         </div>
       </div>
