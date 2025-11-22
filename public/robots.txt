@@ -1,16 +1,4 @@
 User-agent: *
-Allow: /
+Disallow:
 
-# Block internal React build files
-Disallow: /static/
-Disallow: /assets/
-
-# Block duplicate hash URLs (React routing sometimes creates these)
-Disallow: /*?*
-Disallow: /*#*
-
-# Your XML Sitemap
-Sitemap: https://www.nasautospa.com/sitemap.xml
-
-# Clean crawling instructions
-Crawl-delay: 2
+Sitemap: https://www.nasautospa.com/sitemap_index.xml
