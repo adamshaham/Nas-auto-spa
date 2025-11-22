@@ -1,13 +1,21 @@
 // src/pages/BlogPost.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { BlogPost } from '../data/BlogData';
 
+
 const BlogPostPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth" // change to "auto" if you want instant jump
+    });
+  }, [slug]);
 
   const posts = Array.isArray(BlogPost) ? BlogPost : [];
   const post = posts.find((p) => p.slug === slug);
