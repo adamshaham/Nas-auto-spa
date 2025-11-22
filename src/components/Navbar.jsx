@@ -71,8 +71,8 @@ const Navbar = () => {
                 {/* CHANGED: Added font-bold to mobile links */}
                 <Link to="/services" onClick={() => setIsMenuOpen(false)} className="text-[#e1b11b] text-lg font-bold hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-md">Services</Link>
                 <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="text-[#e1b11b] text-lg font-bold hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-md">Blog</Link>
-                <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="text-[#e1b11b] text-lg font-bold hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-md">Pricing</a>
-                <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-[#e1b11b] text-lg font-bold hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-md">Contact</a>
+                <a href="/#pricing" onClick={() => setIsMenuOpen(false)} className="text-[#e1b11b] text-lg font-bold hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-md">Pricing</a>
+                <a href="/#contact" onClick={() => setIsMenuOpen(false)} className="text-[#e1b11b] text-lg font-bold hover:text-[#e1b11b]/80 transition-colors duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-md">Contact</a>
                 
                 <div className="flex flex-col items-center">
                   {/* CHANGED: Added font-bold to mobile button */}

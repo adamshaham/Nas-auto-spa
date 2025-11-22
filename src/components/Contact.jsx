@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ThankYou from './ThankYou';
 
 const Contact = () => {
@@ -13,6 +13,49 @@ const Contact = () => {
   const [showThankYou, setShowThankYou] = useState(false);
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // 🔥 Listen for package selection from Pricing
+  useEffect(() => {
+    const handlePackageSelect = (event) => {
+      const key = event.detail; // e.g. 'STAGE 1', 'QUICK WASH', 'ENHANCEMENTS'
+
+      let selected = [];
+
+      switch (key) {
+        case 'QUICK WASH':
+          selected = ['QUICK WASH ($30)'];
+          break;
+        case 'STAGE 1':
+          selected = ['Stage 1'];
+          break;
+        case 'STAGE 2':
+          selected = ['Stage 2'];
+          break;
+        case 'STAGE 3':
+          selected = ['Stage 3'];
+          break;
+        case 'ENHANCEMENTS':
+          // preselect all enhancements; they can uncheck what they don’t want
+          selected = [
+            'Paint Correction',
+            'Ceramic Coating',
+            'Engine Bay cleaning',
+            'Headlight Restoration',
+          ];
+          break;
+        default:
+          return;
+      }
+
+      setFormData((prev) => ({
+        ...prev,
+        selectedServices: selected,
+      }));
+    };
+
+    window.addEventListener('nasPackageSelect', handlePackageSelect);
+    return () => window.removeEventListener('nasPackageSelect', handlePackageSelect);
+  }, []);
 
   const serviceCategories = [
     {
@@ -63,13 +106,11 @@ const Contact = () => {
       const formElement = e.target;
       const submissionData = new FormData(formElement);
 
-      // custom subject line for the email
       submissionData.append(
         '_subject',
         `New Inquiry: ${formData.firstName} ${formData.lastName}`
       );
 
-      // extra field with nice label for services
       if (formData.selectedServices.length > 0) {
         submissionData.append(
           'Services_Interested_In',
@@ -94,10 +135,8 @@ const Contact = () => {
         throw new Error(result.message || 'Failed to submit form. Please try again.');
       }
 
-      // success – show thank you screen + then redirect
       setShowThankYou(true);
 
-      // optional: clear form state
       setFormData({
         firstName: '',
         lastName: '',
@@ -152,13 +191,9 @@ const Contact = () => {
                 name="services_list"
                 value={formData.selectedServices.join(', ')}
               />
-              {/* FormSubmit bot & config fields */}
               <input type="text" name="_honey" style={{ display: 'none' }} />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
-              {/* You can also add a redirect if you ever use non-AJAX:
-                  <input type="hidden" name="_next" value="https://your-site.com/thank-you" />
-              */}
 
               {error && (
                 <div className="bg-red-500/10 border border-red-500/50 text-red-200 p-4 rounded-lg text-center text-sm">
@@ -167,6 +202,8 @@ const Contact = () => {
               )}
 
               {/* Personal Details */}
+              {/* ... (rest of your Contact form unchanged) ... */}
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="group">
                   <label className="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-[#e1b11b] transition-colors">
@@ -231,7 +268,7 @@ const Contact = () => {
 
               {/* Services */}
               <div className="space-y-6 bg-white/5 p-6 rounded-xl border border-white/5">
-                {serviceCategories.map((category, idx) => (
+                {serviceCategories.map((category) => (
                   <div key={category.title}>
                     <label className="block text-xs font-medium text-[#e1b11b] uppercase tracking-wider mb-3">
                       {category.title}
@@ -278,7 +315,9 @@ const Contact = () => {
                 type="submit"
                 disabled={isSubmitting}
                 className={`w-full py-4 bg-[#e1b11b] hover:bg-[#cda218] text-black font-bold tracking-wide rounded-xl transform transition-all duration-300 shadow-lg hover:shadow-[#e1b11b]/20 flex justify-center items-center ${
-                  isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:scale-[1.01] active:scale-[0.99]'
+                  isSubmitting
+                    ? 'opacity-75 cursor-not-allowed'
+                    : 'hover:scale-[1.01] active:scale-[0.99]'
                 }`}
               >
                 {isSubmitting ? 'SENDING...' : 'SEND REQUEST'}

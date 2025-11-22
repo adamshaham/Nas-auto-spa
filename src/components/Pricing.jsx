@@ -27,9 +27,9 @@ const Pricing = () => {
         { text: 'ENGINE BAY CLEANING', included: true },
         { text: 'INTERIOR STEAM CLEANING', included: true },
         { text: 'SHAMPOO EXTRACTION', included: true },
-        { text: '', included: false }, // Spacer
-        { text: '', included: false }, // Spacer
-        { text: '', included: false }, // Spacer
+        { text: '', included: false },
+        { text: '', included: false },
+        { text: '', included: false },
       ],
       popular: true,
     },
@@ -48,7 +48,7 @@ const Pricing = () => {
         { text: 'SHAMPOO EXTRACTION', included: true },
         { text: '1 STEP PAINT CORRECTION', included: true },
         { text: 'CLAY BAR', included: true },
-        { text: '', included: false }, // Spacer
+        { text: '', included: false },
       ],
       popular: true,
     },
@@ -81,111 +81,181 @@ const Pricing = () => {
       { text: 'CERAMIC COATING', included: true },
       { text: 'ENGINE BAY CLEANING', included: true },
       { text: 'HEADLIGHT RESTORATION', included: true },
-      { text: '', included: false }, // Spacer
-      { text: '', included: false }, // Spacer
-      { text: '', included: false }, // Spacer
-      { text: '', included: false }, // Spacer
-      { text: '', included: false }, // Spacer
-      { text: '', included: false }, // Spacer
-      { text: '', included: false }, // Spacer
-      { text: '', included: false }, // Spacer
-      { text: '', included: false }, // Spacer
+      { text: '', included: false },
+      { text: '', included: false },
+      { text: '', included: false },
+      { text: '', included: false },
+      { text: '', included: false },
+      { text: '', included: false },
+      { text: '', included: false },
+      { text: '', included: false },
+      { text: '', included: false },
     ],
     popular: false,
   };
 
-  const renderPackageCard = (pkg) => (
-    // CHANGED: Updated background gradients to warmer blacks (zinc-950) and subtle gold borders instead of gray.
-    <div className={`relative ${pkg.popular ? 'bg-gradient-to-br from-zinc-950/90 to-black/95 border-2 border-yellow-400/60' : 'bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20'} backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.02] hover:border-yellow-400/80 transition-all duration-300 flex flex-col h-full w-full`}>
+  // 🔥 When a package is clicked: fire event + scroll to form
+  const handlePackageClick = (key) => {
+    if (typeof window !== 'undefined') {
+      // send selected package to Contact component
+      window.dispatchEvent(
+        new CustomEvent('nasPackageSelect', { detail: key })
+      );
 
+      // scroll to contact section (if on same page)
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // fallback if you're on another route
+        window.location.href = '/#contact';
+      }
+    }
+  };
+
+  const renderPackageCard = (pkg) => (
+    <div
+      className={`relative ${
+        pkg.popular
+          ? 'bg-gradient-to-br from-zinc-950/90 to-black/95 border-2 border-yellow-400/60'
+          : 'bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20'
+      } backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.02] hover:border-yellow-400/80 transition-all duration-300 flex flex-col h-full w-full`}
+    >
       <div className="relative mb-4 md:mb-6">
-        <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{pkg.title}</h3>
-        <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-3 md:mb-4">{pkg.subtitle}</p>
+        <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+          {pkg.title}
+        </h3>
+        <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-3 md:mb-4">
+          {pkg.subtitle}
+        </p>
         <div className="flex items-baseline gap-2">
-          <span className="text-2xl md:text-3xl font-bold text-white">{pkg.price}</span>
+          <span className="text-2xl md:text-3xl font-bold text-white">
+            {pkg.price}
+          </span>
           {pkg.priceNote && (
-            <span className="text-gray-400 text-xs md:text-sm">{pkg.priceNote}</span>
+            <span className="text-gray-400 text-xs md:text-sm">
+              {pkg.priceNote}
+            </span>
           )}
         </div>
       </div>
       <ul className="space-y-2 md:space-y-2.5 mb-4 md:mb-6 flex-grow">
-        {pkg.features.map((feature, idx) => (
+        {pkg.features.map((feature, idx) =>
           feature.text ? (
             <li key={idx} className="flex items-start text-white/90 text-xs">
-              <svg className="w-4 h-4 text-yellow-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <svg
+                className="w-4 h-4 text-yellow-400 mr-2 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
               <span className="break-words">{feature.text}</span>
             </li>
           ) : (
             <li key={idx} className="h-4 md:h-5"></li>
           )
-        ))}
+        )}
       </ul>
-      <a href="#contact" className={`block w-full py-2 md:py-3 text-center mt-auto ${pkg.popular ? 'bg-yellow-400 text-black hover:bg-yellow-300' : 'bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10'} font-semibold rounded-lg transition-all duration-300 text-sm md:text-base`}>
+
+      {/* Book Now → triggers package selection */}
+      <button
+        type="button"
+        onClick={() => handlePackageClick(pkg.title)}
+        className={`block w-full py-2 md:py-3 text-center mt-auto ${
+          pkg.popular
+            ? 'bg-yellow-400 text-black hover:bg-yellow-300'
+            : 'bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10'
+        } font-semibold rounded-lg transition-all duration-300 text-sm md:text-base`}
+      >
         Book Now
-      </a>
+      </button>
     </div>
   );
 
   const renderHorizontalEnhancementsCard = (pkg) => (
-    // CHANGED: Updated background to warm black gradient and subtle gold border.
-    <div className={`relative bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20 backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.01] hover:border-yellow-400/80 transition-all duration-300 overflow-hidden`}>
+    <div className="relative bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20 backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.01] hover:border-yellow-400/80 transition-all duration-300 overflow-hidden">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
-        {/* Left side: Title, Subtitle, Price, and Features aligned horizontally */}
         <div className="flex-shrink-0 text-left w-full md:w-auto">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-8">
             <div className="flex-shrink-0">
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">{pkg.title}</h3>
-              <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-2">{pkg.subtitle}</p>
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl md:text-3xl font-bold text-white">{pkg.price}</span>
-              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">
+                {pkg.title}
+              </h3>
+              <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-2">
+                {pkg.subtitle}
+              </p>
             </div>
-            {/* Features aligned with title on same horizontal line */}
             <ul className="flex flex-col md:flex-row gap-3 md:gap-6">
-              {pkg.features.filter(f => f.text).map((feature, idx) => (
-                <li key={idx} className="flex items-center text-white/90 text-xs">
-                  <svg className="w-4 h-4 text-yellow-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="break-words">{feature.text}</span>
-                </li>
-              ))}
+              {pkg.features
+                .filter((f) => f.text)
+                .map((feature, idx) => (
+                  <li
+                    key={idx}
+                    className="flex items-center text-white/90 text-xs"
+                  >
+                    <svg
+                      className="w-4 h-4 text-yellow-400 mr-2 flex-shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <span className="break-words">{feature.text}</span>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
 
-        {/* Right side: Button */}
+        {/* Enhancements Book Now */}
         <div className="flex-shrink-0 w-full md:w-auto">
-          <a href="#contact" className="block w-full md:w-auto px-6 md:px-8 py-2 md:py-3 text-center bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base">
+          <button
+            type="button"
+            onClick={() => handlePackageClick('ENHANCEMENTS')}
+            className="block w-full md:w-auto px-6 md:px-8 py-2 md:py-3 text-center bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base"
+          >
             Book Now
-          </a>
+          </button>
         </div>
       </div>
     </div>
   );
 
   return (
-    <section id="pricing" className="relative py-12 md:py-24 bg-black overflow-hidden">
-      
+    <section
+      id="pricing"
+      className="relative py-12 md:py-24 bg-black overflow-hidden"
+    >
       {/* BACKGROUND BLOBS */}
       <div className="pointer-events-none absolute inset-0">
-          <motion.div
-            animate={{ y: [0, -18, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-0 right-0 w-64 h-64 bg-[#e1b11b]/10 rounded-full blur-3xl opacity-60"
-          />
-          <motion.div
-            animate={{ y: [0, 18, 0] }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: 1,
-            }}
-            className="absolute bottom-0 left-0 w-72 h-72 bg-yellow-400/10 rounded-full blur-3xl opacity-60"
-          />
+        <motion.div
+          animate={{ y: [0, -18, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-0 right-0 w-64 h-64 bg-[#e1b11b]/10 rounded-full blur-3xl opacity-60"
+        />
+        <motion.div
+          animate={{ y: [0, 18, 0] }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 1,
+          }}
+          className="absolute bottom-0 left-0 w-72 h-72 bg-yellow-400/10 rounded-full blur-3xl opacity-60"
+        />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
@@ -197,12 +267,12 @@ const Pricing = () => {
           </h2>
         </div>
 
-        {/* Quick Wash Row: Spans horizontally */}
+        {/* Quick Wash */}
         <div className="w-full mb-4 md:mb-6">
           {renderHorizontalEnhancementsCard(quickWashPackage)}
         </div>
 
-        {/* Main Packages Row: Stages */}
+        {/* Main Packages */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
           {mainPackages.map((pkg, i) => (
             <div key={i} className="w-full">
@@ -211,10 +281,8 @@ const Pricing = () => {
           ))}
         </div>
 
-        {/* Enhancements Row: Spans horizontally */}
-        <div className="w-full">
-          {renderHorizontalEnhancementsCard(enhancementsPackage)}
-        </div>
+        {/* Enhancements */}
+        <div className="w-full">{renderHorizontalEnhancementsCard(enhancementsPackage)}</div>
       </div>
     </section>
   );
