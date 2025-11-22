@@ -19,35 +19,43 @@ const HomePage = () => {
   const contactInView = useInView(contactRef, { once: true, amount: 0.2 });
   const testimonialsInView = useInView(testimonialsRef, { once: true, amount: 0.2 });
 
-  // Use smaller animation distances to prevent overflow
+  // Smoother, softer slide animations
   const slideInFromLeft = {
-    hidden: { opacity: 0, x: -30 },
-    visible: { 
-      opacity: 1, 
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
       x: 0,
-      transition: { duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }
-    }
+      transition: {
+        type: 'tween',
+        duration: 0.9,
+        ease: [0.22, 1, 0.36, 1], // smooth ease-out curve
+      },
+    },
   };
 
   const slideInFromRight = {
-    hidden: { opacity: 0, x: 30 },
-    visible: { 
-      opacity: 1, 
+    hidden: { opacity: 0, x: 20 },
+    visible: {
+      opacity: 1,
       x: 0,
-      transition: { duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }
-    }
+      transition: {
+        type: 'tween',
+        duration: 0.9,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
   };
 
   return (
     <div className="bg-gradient-to-b from-black via-gray-900 to-black min-h-screen text-white overflow-x-hidden w-full">
       <Navbar />
       <Hero />
-      
+
       <div className="overflow-x-hidden w-full">
         <motion.div
           ref={servicesRef}
           initial="hidden"
-          animate={servicesInView ? "visible" : "hidden"}
+          animate={servicesInView ? 'visible' : 'hidden'}
           variants={slideInFromLeft}
           className="w-full"
         >
@@ -59,7 +67,7 @@ const HomePage = () => {
         <motion.div
           ref={pricingRef}
           initial="hidden"
-          animate={pricingInView ? "visible" : "hidden"}
+          animate={pricingInView ? 'visible' : 'hidden'}
           variants={slideInFromRight}
           className="w-full"
         >
@@ -71,7 +79,7 @@ const HomePage = () => {
         <motion.div
           ref={contactRef}
           initial="hidden"
-          animate={contactInView ? "visible" : "hidden"}
+          animate={contactInView ? 'visible' : 'hidden'}
           variants={slideInFromLeft}
           className="w-full"
         >
@@ -83,7 +91,7 @@ const HomePage = () => {
         <motion.div
           ref={testimonialsRef}
           initial="hidden"
-          animate={testimonialsInView ? "visible" : "hidden"}
+          animate={testimonialsInView ? 'visible' : 'hidden'}
           variants={slideInFromRight}
           className="w-full"
         >
@@ -97,4 +105,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-

@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-xl md:text-3xl font-bold tracking-wider flex items-center gap-3">
-            <img src="/images/nas-logo 1 (1).png" alt="NAS Logo" className="h-10 md:h-16 w-auto" />
+            <img src="/images/front.png" alt="NAS Logo" className="h-8 md:h-14 w-auto" />
           </Link>
 
           {/* Desktop Menu - Moved to center */}
