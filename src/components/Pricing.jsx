@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Pricing = () => {
   const quickWashPackage = {
@@ -94,7 +95,8 @@ const Pricing = () => {
   };
 
   const renderPackageCard = (pkg) => (
-    <div className={`relative ${pkg.popular ? 'bg-gradient-to-br from-gray-900/80 to-black/80 border-2 border-yellow-400/50' : 'bg-gradient-to-br from-gray-900/60 to-black/60 border border-gray-700/50'} backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.02] hover:border-yellow-400/80 transition-all duration-300 flex flex-col h-full w-full`}>
+    // CHANGED: Updated background gradients to warmer blacks (zinc-950) and subtle gold borders instead of gray.
+    <div className={`relative ${pkg.popular ? 'bg-gradient-to-br from-zinc-950/90 to-black/95 border-2 border-yellow-400/60' : 'bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20'} backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.02] hover:border-yellow-400/80 transition-all duration-300 flex flex-col h-full w-full`}>
 
       <div className="relative mb-4 md:mb-6">
         <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{pkg.title}</h3>
@@ -120,14 +122,15 @@ const Pricing = () => {
           )
         ))}
       </ul>
-      <a href="#contact" className={`block w-full py-2 md:py-3 text-center mt-auto ${pkg.popular ? 'bg-yellow-400 text-black hover:bg-yellow-300' : 'bg-gray-800 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10'} font-semibold rounded-lg transition-all duration-300 text-sm md:text-base`}>
+      <a href="#contact" className={`block w-full py-2 md:py-3 text-center mt-auto ${pkg.popular ? 'bg-yellow-400 text-black hover:bg-yellow-300' : 'bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10'} font-semibold rounded-lg transition-all duration-300 text-sm md:text-base`}>
         Book Now
       </a>
     </div>
   );
 
   const renderHorizontalEnhancementsCard = (pkg) => (
-    <div className={`relative bg-gradient-to-br from-gray-900/60 to-black/60 border border-gray-700/50 backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.01] hover:border-yellow-400/80 transition-all duration-300 overflow-hidden`}>
+    // CHANGED: Updated background to warm black gradient and subtle gold border.
+    <div className={`relative bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20 backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.01] hover:border-yellow-400/80 transition-all duration-300 overflow-hidden`}>
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
         {/* Left side: Title, Subtitle, Price, and Features aligned horizontally */}
         <div className="flex-shrink-0 text-left w-full md:w-auto">
@@ -155,7 +158,7 @@ const Pricing = () => {
 
         {/* Right side: Button */}
         <div className="flex-shrink-0 w-full md:w-auto">
-          <a href="#contact" className="block w-full md:w-auto px-6 md:px-8 py-2 md:py-3 text-center bg-gray-800 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base">
+          <a href="#contact" className="block w-full md:w-auto px-6 md:px-8 py-2 md:py-3 text-center bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base">
             Book Now
           </a>
         </div>
@@ -164,8 +167,28 @@ const Pricing = () => {
   );
 
   return (
-    <section id="pricing" className="py-12 md:py-24 bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="pricing" className="relative py-12 md:py-24 bg-black overflow-hidden">
+      
+      {/* BACKGROUND BLOBS */}
+      <div className="pointer-events-none absolute inset-0">
+          <motion.div
+            animate={{ y: [0, -18, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute top-0 right-0 w-64 h-64 bg-[#e1b11b]/10 rounded-full blur-3xl opacity-60"
+          />
+          <motion.div
+            animate={{ y: [0, 18, 0] }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: 1,
+            }}
+            className="absolute bottom-0 left-0 w-72 h-72 bg-yellow-400/10 rounded-full blur-3xl opacity-60"
+          />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-left mb-8 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
@@ -197,4 +220,4 @@ const Pricing = () => {
   );
 };
 
-export default Pricing; 
+export default Pricing;
