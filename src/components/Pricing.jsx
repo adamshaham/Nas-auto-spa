@@ -1,104 +1,195 @@
 import React from 'react';
 
 const Pricing = () => {
-  const packages = [
+  const quickWashPackage = {
+    title: 'QUICK WASH',
+    price: '$30',
+    subtitle: 'EXTERIOR + INTERIOR',
+    features: [
+      { text: 'QUICK INTERIOR + EXTERIOR REFRESH', included: true },
+    ],
+    popular: false,
+  };
+
+  const mainPackages = [
     {
-      title: 'Stage 1',
-      price: '$30',
+      title: 'STAGE 1',
+      price: '$199',
+      priceNote: 'STARTING AT',
+      subtitle: 'EXTERIOR + INTERIOR',
       features: [
-        { text: 'One Step Hand Wash', included: true },
-        { text: 'Wheel and Tire Cleaning', included: true },
-        { text: 'Window Cleaning', included: true },
-        { text: 'Door Jams', included: true },
+        { text: 'HAND WASH (2 STAGE)', included: true },
+        { text: 'WHEEL AND TIRE CLEANING', included: true },
+        { text: 'WINDOW CLEANING', included: true },
+        { text: 'DOOR JAMS', included: true },
+        { text: 'FULL EXTERIOR WAX', included: true },
+        { text: 'ENGINE BAY CLEANING', included: true },
+        { text: 'INTERIOR STEAM CLEANING', included: true },
+        { text: 'SHAMPOO EXTRACTION', included: true },
+        { text: '', included: false }, // Spacer
+        { text: '', included: false }, // Spacer
+        { text: '', included: false }, // Spacer
       ],
-      popular: false,
+      popular: true,
     },
     {
-      title: 'Stage 2',
-      price: '$50',
+      title: 'STAGE 2',
+      price: '$299',
+      subtitle: 'EXTERIOR + INTERIOR',
       features: [
-        { text: 'Hand Wash (2 stage)', included: true },
-        { text: 'Wheel and Tire Cleaning', included: true },
-        { text: 'Window Cleaning', included: true },
-        { text: 'Door Jams', included: true },
-        { text: 'Interior Refresh', included: true },
+        { text: 'HAND WASH (2 STAGE)', included: true },
+        { text: 'ENGINE BAY CLEANING', included: true },
+        { text: 'WHEEL AND TIRE CLEANING', included: true },
+        { text: 'WINDOW CLEANING', included: true },
+        { text: 'DOOR JAMS', included: true },
+        { text: 'FULL EXTERIOR WAX', included: true },
+        { text: 'INTERIOR STEAM CLEANING', included: true },
+        { text: 'SHAMPOO EXTRACTION', included: true },
+        { text: '1 STEP PAINT CORRECTION', included: true },
+        { text: 'CLAY BAR', included: true },
+        { text: '', included: false }, // Spacer
       ],
-      popular: false,
+      popular: true,
     },
     {
-      title: 'Stage 3',
-      price: ' $150',
+      title: 'STAGE 3',
+      price: '$399',
+      subtitle: 'PAINT CORRECTION + CERAMIC COATING',
       features: [
-        { text: 'Hand Wash (2 stage)', included: true },
-        { text: 'Wax', included: true },
-        { text: 'Wheel and Tire Shine', included: true },
-        { text: 'Window Cleaning', included: true },
-        { text: 'Door Jams', included: true },
-        { text: 'Engine Bay Cleaning', included: true },
-        { text: 'Vacuum', included: true },
-        { text: 'Seat Cleaning', included: true },
-        { text: 'Shampoo + Extraction', included: true },
-        { text: 'Dashboard Cleaning', included: true },
-        { text: 'Full Interior Refresh', included: true },
+        { text: 'HAND WASH (2 STAGE)', included: true },
+        { text: 'ENGINE BAY CLEANING', included: true },
+        { text: 'WHEEL AND TIRE CLEANING', included: true },
+        { text: 'WINDOW CLEANING', included: true },
+        { text: 'DOOR JAMS', included: true },
+        { text: 'FULL EXTERIOR WAX', included: true },
+        { text: 'INTERIOR STEAM CLEANING', included: true },
+        { text: 'SHAMPOO EXTRACTION', included: true },
+        { text: '1 STEP PAINT CORRECTION', included: true },
+        { text: 'CLAY BAR', included: true },
+        { text: 'CERAMIC COATING', included: true },
       ],
       popular: true,
     },
   ];
 
-  // Collect all unique features from all packages
-  const allFeatureNames = Array.from(new Set(packages.flatMap(pkg => pkg.features.map(f => f.text))));
+  const enhancementsPackage = {
+    title: 'ENHANCEMENTS',
+    subtitle: 'ADDITIONAL SERVICES',
+    features: [
+      { text: 'PAINT CORRECTION', included: true },
+      { text: 'CERAMIC COATING', included: true },
+      { text: 'ENGINE BAY CLEANING', included: true },
+      { text: '', included: false }, // Spacer
+      { text: '', included: false }, // Spacer
+      { text: '', included: false }, // Spacer
+      { text: '', included: false }, // Spacer
+      { text: '', included: false }, // Spacer
+      { text: '', included: false }, // Spacer
+      { text: '', included: false }, // Spacer
+      { text: '', included: false }, // Spacer
+      { text: '', included: false }, // Spacer
+    ],
+    popular: false,
+  };
 
-  return (
-    <section id="pricing" className="py-24 bg-gradient-to-b from-black to-gold-600/20">
-      <div className="container-wrapper">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
-            OUR PACKAGES
-          </h2>
-          <p className="text-gold-400 text-sm font-semibold tracking-wider uppercase mb-2 block">
-            Choose the perfect package to protect your vehicle
-          </p>
+  const renderPackageCard = (pkg) => (
+    <div className={`relative ${pkg.popular ? 'bg-gradient-to-br from-gray-900/80 to-black/80 border-2 border-yellow-400/50' : 'bg-gradient-to-br from-gray-900/60 to-black/60 border border-gray-700/50'} backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.02] hover:border-yellow-400/80 transition-all duration-300 flex flex-col h-full w-full`}>
+
+      <div className="relative mb-4 md:mb-6">
+        <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{pkg.title}</h3>
+        <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-3 md:mb-4">{pkg.subtitle}</p>
+        <div className="flex items-baseline gap-2">
+          <span className="text-2xl md:text-3xl font-bold text-white">{pkg.price}</span>
+          {pkg.priceNote && (
+            <span className="text-gray-400 text-xs md:text-sm">{pkg.priceNote}</span>
+          )}
+        </div>
+      </div>
+      <ul className="space-y-2 md:space-y-2.5 mb-4 md:mb-6 flex-grow">
+        {pkg.features.map((feature, idx) => (
+          feature.text ? (
+            <li key={idx} className="flex items-start text-white/90 text-xs">
+              <svg className="w-4 h-4 text-yellow-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span className="break-words">{feature.text}</span>
+            </li>
+          ) : (
+            <li key={idx} className="h-4 md:h-5"></li>
+          )
+        ))}
+      </ul>
+      <a href="#contact" className={`block w-full py-2 md:py-3 text-center mt-auto ${pkg.popular ? 'bg-yellow-400 text-black hover:bg-yellow-300' : 'bg-gray-800 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10'} font-semibold rounded-lg transition-all duration-300 text-sm md:text-base`}>
+        Book Now
+      </a>
+    </div>
+  );
+
+  const renderHorizontalEnhancementsCard = (pkg) => (
+    <div className={`relative bg-gradient-to-br from-gray-900/60 to-black/60 border border-gray-700/50 backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.01] hover:border-yellow-400/80 transition-all duration-300 overflow-hidden`}>
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
+        {/* Left side: Title, Subtitle, Price, and Features aligned horizontally */}
+        <div className="flex-shrink-0 text-left w-full md:w-auto">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-8">
+            <div className="flex-shrink-0">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">{pkg.title}</h3>
+              <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-2">{pkg.subtitle}</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-2xl md:text-3xl font-bold text-white">{pkg.price}</span>
+              </div>
+            </div>
+            {/* Features aligned with title on same horizontal line */}
+            <ul className="flex flex-col md:flex-row gap-3 md:gap-6">
+              {pkg.features.filter(f => f.text).map((feature, idx) => (
+                <li key={idx} className="flex items-center text-white/90 text-xs">
+                  <svg className="w-4 h-4 text-yellow-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="break-words">{feature.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {packages.map((pkg, i) => (
-            <div key={i} className={`relative ${pkg.popular ? 'bg-black/80 border border-[#e1b11b]' : 'bg-black/50 border border-gray-800'} backdrop-blur-sm p-8 rounded-lg transform hover:scale-105 transition-all duration-300`}>
-              {pkg.popular && (
-                <>
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#e1b11b]/20 to-transparent rounded-lg blur-xl"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#e1b11b]/10 to-transparent rounded-lg"></div>
-                </>
-              )}
-              <div className="relative text-center mb-8">
-                {pkg.popular && (
-                  <div className="inline-block bg-[#e1b11b] text-black px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                    Most Popular
-                  </div>
-                )}
-                <h3 className="text-2xl font-bold text-white mb-4">{pkg.title}</h3>
-                <p className="text-white/80">{i === 0 ? 'Exterior' : i === 1 ? 'Exterior + Interior' : 'Exterior + Interior'}</p>
-              </div>
-              <div className="relative text-center mb-8">
-                <span className="text-4xl font-bold text-white">{pkg.price}{i === 2 ? <span className="text-base font-normal ml-1">starting at</span> : null}</span>
-              </div>
-              <ul className="space-y-4 mb-8">
-                {allFeatureNames.map((featureName, idx) => {
-                  const included = pkg.features.some(f => f.text === featureName);
-                  return (
-                    <li key={idx} className={`flex items-center ${included ? 'text-white/80' : 'text-gray-500 line-through'}`}>
-                      <svg className={`w-5 h-5 mr-2 ${included ? 'text-[#e1b11b]' : 'text-gray-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {featureName}
-                    </li>
-                  );
-                })}
-              </ul>
-              <a href="#contact" className={`block w-full py-3 text-center bg-[#e1b11b] text-black font-semibold rounded-lg hover:bg-[#e1b11b]/90 transition-all duration-300${pkg.popular ? ' relative' : ''}`}>
-                Book Now
-              </a>
+        {/* Right side: Button */}
+        <div className="flex-shrink-0 w-full md:w-auto">
+          <a href="#contact" className="block w-full md:w-auto px-6 md:px-8 py-2 md:py-3 text-center bg-gray-800 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base">
+            Book Now
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <section id="pricing" className="py-12 md:py-24 bg-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-left mb-8 md:mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
+            <span className="text-white">OUR</span>
+            <span className="text-yellow-400"> PACKAGES</span>
+          </h2>
+        </div>
+
+        {/* Quick Wash Row: Spans horizontally */}
+        <div className="w-full mb-4 md:mb-6">
+          {renderHorizontalEnhancementsCard(quickWashPackage)}
+        </div>
+
+        {/* Main Packages Row: Stages */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
+          {mainPackages.map((pkg, i) => (
+            <div key={i} className="w-full">
+              {renderPackageCard(pkg)}
             </div>
           ))}
+        </div>
+
+        {/* Enhancements Row: Spans horizontally */}
+        <div className="w-full">
+          {renderHorizontalEnhancementsCard(enhancementsPackage)}
         </div>
       </div>
     </section>

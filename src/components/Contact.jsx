@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ThankYou from './ThankYou';
 
 const Contact = () => {
@@ -12,43 +12,19 @@ const Contact = () => {
   });
   const [showThankYou, setShowThankYou] = useState(false);
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    // Check URL for package selection
-    const hash = window.location.hash;
-    if (hash.includes('?package=')) {
-      const packageType = hash.split('?package=')[1];
-      let checkboxValue = '';
-      
-      // Map the package type to the corresponding checkbox value
-      switch(packageType) {
-        case 'stage1':
-          checkboxValue = 'Stage 1 - Basic Exterior Detail (From $30)';
-          break;
-        case 'stage2':
-          checkboxValue = 'Stage 2 - Interior Refresh (From $50)';
-          break;
-        case 'stage3':
-          checkboxValue = 'Stage 3 - Complete Detail (Starting at $150)';
-          break;
-      }
-
-      // Find and check the corresponding checkbox
-      const checkbox = document.querySelector(`input[value="${checkboxValue}"]`);
-      if (checkbox) {
-        checkbox.checked = true;
-        setFormData(prev => ({
-          ...prev,
-          selectedServices: [...prev.selectedServices, checkboxValue]
-        }));
-
-        // Scroll the checkbox into view with some offset
-        setTimeout(() => {
-          checkbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
-      }
+  // Define available services
+  const serviceCategories = [
+    {
+      title: "Wash & Detailing Packages",
+      options: ["Quick Wash ($30)", "Stage 1 Detail ($200)", "Stage 2 Detail ($300+)"]
+    },
+    {
+      title: "Enhancements & Add-ons",
+      options: ["Paint Correction", "Ceramic Coating", "Interior Deep Clean", "Headlight Restoration"]
     }
-  }, []);
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -58,38 +34,55 @@ const Contact = () => {
     }));
   };
 
-  const handleServiceChange = (e) => {
-    const { value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      selectedServices: [value] // Only store the selected value in an array
-    }));
+  const toggleService = (service) => {
+    setFormData(prev => {
+      const exists = prev.selectedServices.includes(service);
+      if (exists) {
+        return { ...prev, selectedServices: prev.selectedServices.filter(s => s !== service) };
+      } else {
+        return { ...prev, selectedServices: [...prev.selectedServices, service] };
+      }
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setIsSubmitting(true);
+
     try {
       const formElement = e.target;
-      const formData = new FormData(formElement);
-      formData.append('_subject', 'New Detail Request');
+      const submissionData = new FormData(formElement);
+      
+      submissionData.append('_subject', `New Inquiry: ${formData.firstName} ${formData.lastName}`);
+      
+      if (formData.selectedServices.length > 0) {
+        submissionData.append('Services_Interested_In', formData.selectedServices.join(', '));
+      }
 
       const response = await fetch("https://formsubmit.co/ajax/contactnasworks@gmail.com", {
         method: "POST",
-        body: formData
+        headers: { 
+            'Accept': 'application/json' 
+        },
+        body: submissionData
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to submit form. Please try again.');
+        throw new Error(result.message || 'Failed to submit form. Please try again.');
       }
 
       setShowThankYou(true);
       setTimeout(() => {
         window.location.href = '/';
-      }, 3000);
+      }, 4000);
     } catch (error) {
-      setError(error.message || 'Error submitting form.');
+      setError('Something went wrong. Please call us directly at (929) 307-6986.');
       console.error('Error submitting form:', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -98,164 +91,157 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="py-24 bg-black text-white">
-      <div className="container-wrapper">
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Left Column - Contact Information */}
-          <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-lg border border-gray-800 flex flex-col justify-center min-h-[600px]">
-            <div className="text-center space-y-12">
-              <div>
-                <h2 className="text-white text-lg font-semibold tracking-wider mb-2">CONTACT US</h2>
-                <h3 className="text-4xl font-bold text-white">Let's connect!</h3>
-              </div>
-              
-              <div className="space-y-8">
-                <div className="flex items-center justify-center space-x-4">
-                  <div>
-                    <p className="text-white/80 text-sm">Phone</p>
-                    <p className="text-xl font-semibold text-white">(929)-307-6986</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-center space-x-4">
-                  <div>
-                    <p className="text-white/80 text-sm">Email</p>
-                    <p className="text-xl text-white">contactnasworks@gmail.com</p>
-                  </div>
-                </div>
-              </div>
+    <section id="contact" className="relative py-24 bg-black text-white overflow-hidden">
+      {/* Ambient Background Effects */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#e1b11b] opacity-5 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-900 opacity-5 blur-[120px] rounded-full pointer-events-none"></div>
 
-              <div className="flex justify-center">
-                <img src="/images/nas-logo 1 (1).png" alt="NAS Logo" className="h-10 md:h-16 w-auto" />
-              </div>
+      <div className="container-wrapper relative z-10 px-4 max-w-7xl mx-auto">
+        
+        {/* Centered Form Container - Changed max-w-3xl to max-w-5xl for wider form */}
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-[#0a0a0a] p-8 md:p-12 rounded-2xl border border-gray-800 shadow-2xl relative">
+            
+            {/* Header Section */}
+            <div className="text-center mb-10">
+              <h2 className="text-[#e1b11b] text-sm font-bold tracking-[0.2em] uppercase mb-3">Get in Touch</h2>
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready for a Transformation?</h3>
+              <p className="text-gray-400 max-w-2xl mx-auto">Select your desired services below and fill out your details. We'll get back to you immediately to confirm your appointment.</p>
             </div>
-          </div>
 
-          {/* Right Column - Contact Form */}
-          <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-lg border border-gray-800 flex flex-col justify-center min-h-[600px]">
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+              
+              {/* Hidden Input to pass selected services to FormSubmit */}
+              <input type="hidden" name="services_list" value={formData.selectedServices.join(', ')} />
+              <input type="text" name="_honey" style={{ display: 'none' }} />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+
               {error && (
-                <div className="bg-red-700 text-white p-3 rounded mb-4 text-center">
+                <div className="bg-red-500/10 border border-red-500/50 text-red-200 p-4 rounded-lg text-center text-sm">
                   {error}
                 </div>
               )}
+
+              {/* Personal Details */}
               <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-white/80 mb-2">
-                    First Name <span className="text-[#e1b11b]">*</span>
+                <div className="group">
+                  <label className="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-[#e1b11b] transition-colors">
+                    First Name
                   </label>
                   <input
                     type="text"
                     name="firstName"
                     required
-                    className="w-full p-3 bg-black/50 border border-gray-700 rounded-lg focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300 text-white"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300"
                     placeholder="John"
                   />
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-white/80 mb-2">
-                    Last Name <span className="text-[#e1b11b]">*</span>
+                <div className="group">
+                  <label className="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-[#e1b11b] transition-colors">
+                    Last Name
                   </label>
                   <input
                     type="text"
                     name="lastName"
                     required
-                    className="w-full p-3 bg-black/50 border border-gray-700 rounded-lg focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300 text-white"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300"
                     placeholder="Doe"
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">
-                  Email <span className="text-[#e1b11b]">*</span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full p-3 bg-black/50 border border-gray-700 rounded-lg focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300 text-white"
-                  placeholder="john@example.com"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">
-                  Phone Number <span className="text-[#e1b11b]">*</span>
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  className="w-full p-3 bg-black/50 border border-gray-700 rounded-lg focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300 text-white"
-                  placeholder="(123) 456-7890"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-white/80 mb-4">
-                  Select Service Package <span className="text-[#e1b11b]">*</span>
-                </label>
-                <div className="space-y-4">
-                  <label className="flex items-center space-x-3 cursor-pointer group">
-                    <input
-                      type="radio"
-                      name="services"
-                      value="Stage 1 - Basic Exterior Detail (From $30)"
-                      className="w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-[#e1b11b] checked:border-[#e1b11b] focus:ring-[#e1b11b]"
-                      onChange={handleServiceChange}
-                      required
-                    />
-                    <span className="text-white group-hover:text-white/80 transition-colors">
-                      Stage 1 - Basic Exterior Detail (From $30)
-                    </span>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="group">
+                  <label className="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-[#e1b11b] transition-colors">
+                    Email Address
                   </label>
-                  
-                  <label className="flex items-center space-x-3 cursor-pointer group">
-                    <input
-                      type="radio"
-                      name="services"
-                      value="Stage 2 - Interior Refresh (From $50)"
-                      className="w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-[#e1b11b] checked:border-[#e1b11b] focus:ring-[#e1b11b]"
-                      onChange={handleServiceChange}
-                    />
-                    <span className="text-white group-hover:text-white/80 transition-colors">
-                      Stage 2 - Interior Refresh (From $50)
-                    </span>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300"
+                    placeholder="john@example.com"
+                  />
+                </div>
+                <div className="group">
+                  <label className="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-[#e1b11b] transition-colors">
+                    Phone Number
                   </label>
-                  
-                  <label className="flex items-center space-x-3 cursor-pointer group">
-                    <input
-                      type="radio"
-                      name="services"
-                      value="Stage 3 - Complete Detail (Starting at $150)"
-                      className="w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-[#e1b11b] checked:border-[#e1b11b] focus:ring-[#e1b11b]"
-                      onChange={handleServiceChange}
-                    />
-                    <span className="text-white group-hover:text-white/80 transition-colors">
-                      Stage 3 - Complete Detail (Starting at $150)
-                    </span>
-                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300"
+                    placeholder="(123) 456-7890"
+                  />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">Additional Information</label>
+              {/* --- SERVICE SELECTION SECTION --- */}
+              <div className="space-y-6 bg-white/5 p-6 rounded-xl border border-white/5">
+                {serviceCategories.map((category, idx) => (
+                  <div key={idx}>
+                    <label className="block text-xs font-medium text-[#e1b11b] uppercase tracking-wider mb-3">
+                      {category.title}
+                    </label>
+                    <div className="flex flex-wrap gap-3">
+                      {category.options.map((option) => {
+                        const isSelected = formData.selectedServices.includes(option);
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            onClick={() => toggleService(option)}
+                            className={`
+                              px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 border flex-grow md:flex-grow-0 text-center
+                              ${isSelected 
+                                ? 'bg-[#e1b11b] border-[#e1b11b] text-black shadow-[0_0_15px_rgba(225,177,27,0.3)] scale-105' 
+                                : 'bg-black/40 border-white/10 text-gray-300 hover:border-[#e1b11b]/50 hover:bg-white/5'}
+                            `}
+                          >
+                            {option}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* --------------------------------- */}
+
+              {/* Message */}
+              <div className="group">
+                <label className="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-[#e1b11b] transition-colors">
+                  Tell us about your vehicle
+                </label>
                 <textarea
                   name="message"
                   rows="4"
-                  className="w-full p-3 bg-black/50 border border-gray-700 rounded-lg focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300 text-white"
-                  placeholder="Tell us about your vehicle and service needs..."
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b] transition-all duration-300 resize-none"
+                  placeholder="Year, Make, Model and any specific concerns..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 bg-[#e1b11b] text-black font-semibold rounded-lg 
-                         hover:bg-[#e1b11b]/90 transform hover:scale-[1.02] transition-all duration-300"
+                disabled={isSubmitting}
+                className={`w-full py-4 bg-[#e1b11b] hover:bg-[#cda218] text-black font-bold tracking-wide rounded-xl 
+                         transform transition-all duration-300 shadow-lg hover:shadow-[#e1b11b]/20 flex justify-center items-center
+                         ${isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:scale-[1.01] active:scale-[0.99]'}
+                `}
               >
-                Send Message
+                {isSubmitting ? 'SENDING...' : 'SEND REQUEST'}
               </button>
             </form>
           </div>
@@ -265,4 +251,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

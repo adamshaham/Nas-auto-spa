@@ -25,6 +25,14 @@ const Hero = () => {
       {/* Dark Overlay with gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90"></div>
 
+      {/* Cinematic Left Shadow Overlay - fades by end of subheader */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 15%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.1) 45%, transparent 60%)'
+        }}
+      ></div>
+
       {/* Main Content */}
       <div className="relative container mx-auto px-4 h-screen flex flex-col justify-center items-start text-left max-w-7xl">
 
@@ -40,8 +48,7 @@ const Hero = () => {
 
         {/* Description */}
         <p className="text-white/90 text-xl max-w-2xl mb-8 leading-relaxed">
-          The best attention to detail. Luxury mobile car detailing service that comes to your driveway, office, or any location.
-        </p>
+        Leading Mobile Car Detailing in Fairfield County. Unmatched attention to detail brought right to your home or workplace for superior results.        </p>
 
         {/* CTA Buttons */}
         <div className="flex flex-col md:flex-row gap-4 w-full max-w-md">

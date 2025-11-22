@@ -1,19 +1,16 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import Testimonials from './components/Testimonials';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ServicesPage from './pages/ServicesPage';
 
 function App() {
   return (
-    <div className="bg-black min-h-screen text-white">
-      <Navbar />
-      <Hero />
-      <Services />
-      <Testimonials />
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/services" element={<ServicesPage />} />
+      </Routes>
+    </Router>
   );
 }
 
