@@ -11,6 +11,8 @@ import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
 import BlogPage from './pages/BlogPage';
 import BlogPost from './pages/BlogPost';
+import AboutPage from './pages/AboutPage';
+import GalleryPage from './pages/GalleryPage';
 
 import MobileDetailingPage from './pages/services/MobileDetailingPage';
 import PaintCorrectionPage from './pages/services/PaintCorrectionPage';
@@ -40,7 +42,7 @@ const ScrollToTop = () => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'instant',
+      behavior: 'auto',
     });
   }, [pathname, hash]);
 
@@ -62,11 +64,14 @@ function App() {
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
 
-          {/* SERVICE DETAIL PAGES */}
-          <Route path="/services/mobile-detailing" element={<MobileDetailingPage />} />
-          <Route path="/services/paint-correction" element={<PaintCorrectionPage />} />
-          <Route path="/services/ceramic-coating" element={<CeramicCoatingPage />} />
-          <Route path="/services/fleet-detailing" element={<CommercialWashPage />} />
+          {/* SERVICE DETAIL PAGES – match Navbar paths */}
+          <Route path="/mobile-detailing" element={<MobileDetailingPage />} />
+          <Route path="/paint-correction" element={<PaintCorrectionPage />} />
+          <Route path="/ceramic-coating" element={<CeramicCoatingPage />} />
+          <Route path="/fleet-detailing" element={<CommercialWashPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+
         </Routes>
       </Router>
     </HelmetProvider>

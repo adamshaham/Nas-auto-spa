@@ -18,18 +18,16 @@ const Navbar = () => {
   return (
     <nav
       className={`
-        fixed top-0 left-0 right-0 z-50 
+        fixed top-0 left-0 right-0 z-50
         transition-all duration-300
-        ${hasScrolled ? 'backdrop-blur-xl bg-black/75 shadow-[0_10px_40px_rgba(0,0,0,0.7)] border-b border-white/5' : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent'}
+        ${hasScrolled ? 'shadow-xl border-b border-zinc-200/40 backdrop-blur-lg' : ''}
       `}
+      style={{ background: 'transparent' }}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link
-            to="/"
-            className="flex items-center gap-3"
-          >
+          <Link to="/" className="flex items-center gap-3">
             <img
               src="/images/navbarlogo.png"
               alt="NAS Auto Spa Logo"
@@ -38,45 +36,70 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8 lg:gap-10">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             <Link
-              to="/services"
-              className="text-sm md:text-base font-medium text-zinc-200 hover:text-[#e1b11b] transition-colors tracking-wide"
+              to="/mobile-detailing"
+              className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
             >
-              Services
+              Detail Packages
+            </Link>
+
+            <Link
+              to="/paint-correction"
+              className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+            >
+              Paint Correction
+            </Link>
+
+            <Link
+              to="/ceramic-coating"
+              className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+            >
+              Ceramic Coating
+            </Link>
+
+            <Link
+              to="/fleet-detailing"
+              className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+            >
+              Commercial
             </Link>
 
             <Link
               to="/blog"
-              className="text-sm md:text-base font-medium text-zinc-200 hover:text-[#e1b11b] transition-colors tracking-wide"
+              className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
             >
               Blog
             </Link>
 
-            <a
-              href="#pricing"
-              className="text-sm md:text-base font-medium text-zinc-200 hover:text-[#e1b11b] transition-colors tracking-wide"
+            <Link
+              to="/about"
+              className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
             >
-              Pricing
-            </a>
+              About
+            </Link>
+
+            <Link
+               to="/gallery"
+              className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+              >
+              Portfolio
+            </Link>
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex flex-col items-end gap-1">
+          {/* Desktop Phone */}
+          <div className="hidden md:flex items-center">
             <a
-              href="#pricing"
-              className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-[#e1b11b] text-black text-sm md:text-base font-semibold tracking-wide hover:bg-yellow-400 transition-colors duration-200"
+              href="tel:19293076986"
+              className="text-sm md:text-base font-semibold text-[#e1b11b] hover:text-yellow-400 tracking-wide"
             >
-              Book Now
+              (929) 307-6986
             </a>
-            <p className="text-[10px] md:text-xs text-zinc-400 uppercase tracking-[0.2em]">
-              Your cars, our passion
-            </p>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-zinc-100 focus:outline-none"
+            className="md:hidden text-white focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle navigation menu"
           >
@@ -95,40 +118,70 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden pb-4">
-            <div className="mt-3 rounded-2xl bg-black/95 border border-zinc-800 backdrop-blur-xl px-5 py-5 space-y-4">
+            <div className="mt-3 rounded-xl bg-white/80 backdrop-blur-xl border border-zinc-200 px-5 py-4 space-y-3">
               <Link
-                to="/services"
+                to="/mobile-detailing"
                 onClick={() => setIsMenuOpen(false)}
-                className="block text-sm font-medium text-zinc-200 hover:text-[#e1b11b] transition-colors"
+                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
               >
-                Services
+                Detail Packages
               </Link>
+
+              <Link
+                to="/paint-correction"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
+              >
+                Paint Correction
+              </Link>
+
+              <Link
+                to="/ceramic-coating"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
+              >
+                Ceramic Coating
+              </Link>
+
+              <Link
+                to="/commercial-wash"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
+              >
+                Commercial
+              </Link>
+
               <Link
                 to="/blog"
                 onClick={() => setIsMenuOpen(false)}
-                className="block text-sm font-medium text-zinc-200 hover:text-[#e1b11b] transition-colors"
+                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
               >
                 Blog
               </Link>
-              <a
-                href="#pricing"
+
+              <Link
+                to="/about"
                 onClick={() => setIsMenuOpen(false)}
-                className="block text-sm font-medium text-zinc-200 hover:text-[#e1b11b] transition-colors"
+                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
               >
-                Pricing
+                About
+              </Link>
+
+              <a
+                href="#contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
+              >
+                Contact
               </a>
 
-              <div className="pt-3 border-t border-zinc-800 mt-2">
+              <div className="pt-3 border-t border-zinc-300 mt-2">
                 <a
-                  href="#pricing"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-[#e1b11b] text-black text-sm font-semibold tracking-wide hover:bg-yellow-400 transition-colors"
+                  href="tel:19293076986"
+                  className="px-5 py-2 rounded-md bg-[#1a1a1a] text-white text-sm md:text-base font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 transition-all"
                 >
-                  Book Now
+                  Call (929) 307-6986
                 </a>
-                <p className="mt-2 text-[10px] text-center text-zinc-500 uppercase tracking-[0.2em]">
-                  Your cars, our passion
-                </p>
               </div>
             </div>
           </div>

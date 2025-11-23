@@ -71,7 +71,7 @@ const CommercialWashPage = () => {
               variants={fadeUpItem}
               className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight"
             >
-              Reliable mobile detailing for{' '}
+              Commercial washes for{' '}
               <span className="bg-gradient-to-r from-[#e1b11b] via-amber-300 to-yellow-500 bg-clip-text text-transparent">
                 work trucks, vans, and fleets.
               </span>
