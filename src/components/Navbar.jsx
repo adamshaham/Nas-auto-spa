@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,18 +11,20 @@ const Navbar = () => {
     };
 
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <nav
       className={`
         fixed top-0 left-0 right-0 z-50
         transition-all duration-300
-        ${hasScrolled ? 'shadow-xl border-b border-zinc-200/40 backdrop-blur-lg' : ''}
+        ${hasScrolled ? "shadow-xl border-b border-zinc-200/20 backdrop-blur-lg" : ""}
       `}
-      style={{ background: 'transparent' }}
+      style={{ background: "transparent" }}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -66,6 +68,13 @@ const Navbar = () => {
             </Link>
 
             <Link
+              to="/gallery"
+              className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+            >
+              Gallery
+            </Link>
+
+            <Link
               to="/blog"
               className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
             >
@@ -79,19 +88,20 @@ const Navbar = () => {
               About
             </Link>
 
+            {/* Contact goes to Home #contact using hash (works with your ScrollToTop) */}
             <Link
-               to="/gallery"
+              to="/#contact"
               className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
-              >
-              Portfolio
+            >
+              Contact
             </Link>
           </div>
 
-          {/* Desktop Phone */}
+          {/* Desktop Phone Button */}
           <div className="hidden md:flex items-center">
             <a
               href="tel:19293076986"
-              className="text-sm md:text-base font-semibold text-[#e1b11b] hover:text-yellow-400 tracking-wide"
+              className="px-3 py-2 rounded-md bg-[#dcab18] text-black text-sm md:text-base font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 transition-all"
             >
               (929) 307-6986
             </a>
@@ -100,16 +110,36 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             className="md:hidden text-white focus:outline-none"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMenuOpen((prev) => !prev)}
             aria-label="Toggle navigation menu"
           >
             {isMenuOpen ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             )}
           </button>
@@ -118,10 +148,10 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden pb-4">
-            <div className="mt-3 rounded-xl bg-white/80 backdrop-blur-xl border border-zinc-200 px-5 py-4 space-y-3">
+            <div className="mt-3 rounded-xl bg-white/90 backdrop-blur-xl border border-zinc-200 px-5 py-4 space-y-3">
               <Link
                 to="/mobile-detailing"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeMenu}
                 className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
               >
                 Detail Packages
@@ -129,7 +159,7 @@ const Navbar = () => {
 
               <Link
                 to="/paint-correction"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeMenu}
                 className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
               >
                 Paint Correction
@@ -137,23 +167,31 @@ const Navbar = () => {
 
               <Link
                 to="/ceramic-coating"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeMenu}
                 className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
               >
                 Ceramic Coating
               </Link>
 
               <Link
-                to="/commercial-wash"
-                onClick={() => setIsMenuOpen(false)}
+                to="/fleet-detailing"
+                onClick={closeMenu}
                 className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
               >
                 Commercial
               </Link>
 
               <Link
+                to="/gallery"
+                onClick={closeMenu}
+                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
+              >
+                Gallery
+              </Link>
+
+              <Link
                 to="/blog"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeMenu}
                 className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
               >
                 Blog
@@ -161,24 +199,25 @@ const Navbar = () => {
 
               <Link
                 to="/about"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeMenu}
                 className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
               >
                 About
               </Link>
 
-              <a
-                href="#contact"
-                onClick={() => setIsMenuOpen(false)}
+              <Link
+                to="/#contact"
+                onClick={closeMenu}
                 className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
               >
                 Contact
-              </a>
+              </Link>
 
-              <div className="pt-3 border-t border-zinc-300 mt-2">
+              <div className="pt-3 border-t bg-[#dcab18] border-zinc-300 mt-2">
                 <a
                   href="tel:19293076986"
-                  className="px-5 py-2 rounded-md bg-[#1a1a1a] text-white text-sm md:text-base font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 transition-all"
+                  className="block w-full text-center px-4 py-2.5 rounded-md bg-[#dcab18] text-white text-sm font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 transition-all"
+                  onClick={closeMenu}
                 >
                   Call (929) 307-6986
                 </a>

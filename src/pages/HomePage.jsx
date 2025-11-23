@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Navbar from '../components/Navbar';
+import HolidayPopup from "../components/HolidayPopup";
+
 import Hero from '../components/Hero';
 import ServicesList from '../components/ServicesList';
 import Pricing from '../components/Pricing';
@@ -49,6 +51,7 @@ const HomePage = () => {
   return (
     <div className="bg-gradient-to-b from-black via-gray-900 to-black min-h-screen text-white overflow-x-hidden w-full">
       <Navbar />
+      <HolidayPopup />
       <Hero />
 
       <div className="overflow-x-hidden w-full">

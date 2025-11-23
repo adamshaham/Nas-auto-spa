@@ -72,34 +72,7 @@ const MobileDetailingPage = () => {
       <section className="bg-black pb-20 md:pb-24">
         <div className="max-w-5xl mx-auto px-6 space-y-12">
 
-          {/* What’s included */}
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-4">
-              <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
-                What’s included in our mobile detailing
-              </h2>
-              <p className="text-sm md:text-base text-zinc-300">
-                Every vehicle gets the same level of care and attention to detail. We use
-                high-quality, pH-safe products, proper wash techniques, and professional tools to
-                safely clean and protect every surface.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-200">
-              <ul className="space-y-2">
-                <li>• Pre-rinse & foam bath</li>
-                <li>• Two-bucket hand wash</li>
-                <li>• Wheel, tire & barrel cleaning</li>
-                <li>• Door jamb cleaning</li>
-              </ul>
-              <ul className="space-y-2">
-                <li>• Interior vacuum & wipe-down</li>
-                <li>• Interior glass cleaned</li>
-                <li>• Tire shine & light exterior protection</li>
-                <li>• Final inspection walkaround</li>
-              </ul>
-            </div>
-          </div>
-
+          
           {/* Who it's for */}
           <div className="grid gap-8 md:grid-cols-2">
             <div className="space-y-4">
