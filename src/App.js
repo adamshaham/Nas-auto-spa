@@ -65,10 +65,10 @@ function App() {
           <Route path="/blog/:slug" element={<BlogPost />} />
 
           {/* SERVICE DETAIL PAGES – match Navbar paths */}
-          <Route path="/mobile-detailing" element={<MobileDetailingPage />} />
-          <Route path="/paint-correction" element={<PaintCorrectionPage />} />
-          <Route path="/ceramic-coating" element={<CeramicCoatingPage />} />
-          <Route path="/fleet-detailing" element={<CommercialWashPage />} />
+          <Route path="services/mobile-detailing" element={<MobileDetailingPage />} />
+          <Route path="services/paint-correction" element={<PaintCorrectionPage />} />
+          <Route path="services/ceramic-coating" element={<CeramicCoatingPage />} />
+          <Route path="services/fleet-detailing" element={<CommercialWashPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
 
