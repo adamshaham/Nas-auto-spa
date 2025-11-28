@@ -5,22 +5,22 @@ const services = [
   {
     title: "CAR DETAILING",
     image: "/images/gallery/car-detailing.jpg",
-    link: "/mobile-detailing"
+    link: "/services/mobile-detailing"
   },
   {
     title: "PAINT CORRECTION",
     image: "/images/gallery/paint-correction.jpg",
-    link: "/paint-correction"
+    link: "/services/paint-correction"
   },
   {
     title: "CERAMIC COATING",
     image: "/images/gallery/ceramic-coating.jpg",
-    link: "/ceramic-coating"
+    link: "/services/ceramic-coating"
   },
   {
     title: "COMMERCIAL",
     image: "/images/gallery/commercial-contracts.jpg",
-    link: "/fleet-detailing",
+    link: "/services/fleet-detailing",
     allowWrap: true
   }
 ];
