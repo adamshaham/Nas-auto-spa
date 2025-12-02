@@ -62,25 +62,25 @@ const Navbar = () => {
                 <div className="absolute left-0 mt-3 w-60 rounded-xl bg-black/90 border border-zinc-700 shadow-xl backdrop-blur-xl">
                   <div className="py-2">
                     <Link
-                      to="/mobile-detailing"
+                      to="/services/mobile-detailing"
                       className="block px-4 py-2.5 text-sm text-white hover:text-[#e1b11b] hover:bg-white/5 uppercase"
                     >
                       Detail Packages
                     </Link>
                     <Link
-                      to="/paint-correction"
+                      to="/services/paint-correction"
                       className="block px-4 py-2.5 text-sm text-white hover:text-[#e1b11b] hover:bg-white/5 uppercase"
                     >
                       Paint Correction
                     </Link>
                     <Link
-                      to="/ceramic-coating"
+                      to="/services/ceramic-coating"
                       className="block px-4 py-2.5 text-sm text-white hover:text-[#e1b11b] hover:bg-white/5 uppercase"
                     >
                       Ceramic Coating
                     </Link>
                     <Link
-                      to="/fleet-detailing"
+                      to="/services/fleet-detailing"
                       className="block px-4 py-2.5 text-sm text-white hover:text-[#e1b11b] hover:bg-white/5 uppercase"
                     >
                       Commercial / Fleet Detailing
