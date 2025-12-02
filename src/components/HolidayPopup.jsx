@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
+import ThankYou from "./ThankYou";
+
+const DISMISS_KEY = "nas_holiday_popup_dismissed_v2"; // 👈 new key so it shows again
 
 const HolidayPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
+  // Show popup after 5 seconds (unless dismissed before)
   useEffect(() => {
-    // Don't show again if dismissed before
     if (typeof window === "undefined") return;
-    const dismissed = localStorage.getItem("nas_holiday_popup_dismissed");
-    if (dismissed === "true") return;
+
+    const dismissed = localStorage.getItem(DISMISS_KEY);
+    if (dismissed === "true") {
+      return;
+    }
 
     const timer = setTimeout(() => {
       setIsOpen(true);
-    }, 20000); // 20 seconds
+    }, 5000); // 5 seconds
 
     return () => clearTimeout(timer);
   }, []);
@@ -19,9 +28,62 @@ const HolidayPopup = () => {
   const handleClose = () => {
     setIsOpen(false);
     if (typeof window !== "undefined") {
-      localStorage.setItem("nas_holiday_popup_dismissed", "true");
+      localStorage.setItem(DISMISS_KEY, "true");
     }
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setIsSubmitting(true);
+
+    try {
+      const formElement = e.target;
+      const submissionData = new FormData(formElement);
+
+      submissionData.set(
+        "_subject",
+        "Holiday 20% Off Wash Lead - NAS Auto Spa (Popup)"
+      );
+
+      const response = await fetch(
+        "https://formsubmit.co/ajax/contact@nasautospa.com",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+          },
+          body: submissionData,
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to submit form. Please try again.");
+      }
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem(DISMISS_KEY, "true");
+      }
+
+      setIsOpen(false);
+      setShowThankYou(true);
+      formElement.reset();
+    } catch (err) {
+      console.error("Error submitting popup form:", err);
+      setError(
+        "Something went wrong. Please call or text us directly at (929) 307-6986."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Same pattern as Contact: swap UI to ThankYou overlay
+  if (showThankYou) {
+    return <ThankYou />;
+  }
 
   if (!isOpen) return null;
 
@@ -46,9 +108,12 @@ const HolidayPopup = () => {
         </h2>
 
         <p className="text-sm md:text-base text-zinc-300 mb-4">
-          Lock in a <span className="text-[#e1b11b] font-semibold">holiday wash discount</span> on
-          any detailing package. Drop your info below and we&apos;ll reach out to confirm your
-          booking.
+          Lock in a{" "}
+          <span className="text-[#e1b11b] font-semibold">
+            holiday wash discount
+          </span>{" "}
+          on any detailing package. Drop your info below and we&apos;ll reach out
+          to confirm your booking.
         </p>
 
         {/* 20% OFF TAG */}
@@ -61,15 +126,21 @@ const HolidayPopup = () => {
           </button>
         </div>
 
-        {/* FORM – FormSubmit */}
-        <form
-          action="https://formsubmit.co/contact@nasautospa.com"
-          method="POST"
-          className="space-y-4"
-        >
-          {/* Replace the URL above with the same FormSubmit endpoint you use in your Contact form */}
+        {/* Error banner */}
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/50 text-red-200 p-2 rounded-lg text-xs mb-3 text-center">
+            {error}
+          </div>
+        )}
 
-          {/* Optional: email routing / subject */}
+        {/* FORM – handled via fetch like Contact page */}
+        <form onSubmit={handleSubmit} className="space-y-4" name="holiday-popup-form">
+          {/* Honeypot & config */}
+          <input type="text" name="_honey" style={{ display: "none" }} />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+
+          {/* Subject & meta */}
           <input
             type="hidden"
             name="_subject"
@@ -80,8 +151,6 @@ const HolidayPopup = () => {
             name="form_name"
             value="Holiday 20% Off Popup"
           />
-
-          {/* Discount meta field */}
           <input
             type="hidden"
             name="discount"
@@ -132,13 +201,20 @@ const HolidayPopup = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-[#e1b11b] text-black text-sm font-semibold tracking-wide hover:bg-yellow-400 transition-colors"
+            disabled={isSubmitting}
+            className={`w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-[#e1b11b] text-black text-sm font-semibold tracking-wide transition-colors
+              ${
+                isSubmitting
+                  ? "opacity-60 cursor-not-allowed"
+                  : "hover:bg-yellow-400"
+              }`}
           >
-            Claim 20% Off
+            {isSubmitting ? "Sending..." : "Claim 20% Off"}
           </button>
 
           <p className="text-[10px] text-zinc-500 mt-1">
-            By submitting, you agree to be contacted by NAS Auto Spa about this holiday offer.
+            By submitting, you agree to be contacted by NAS Auto Spa about this
+            holiday offer.
           </p>
         </form>
       </div>
