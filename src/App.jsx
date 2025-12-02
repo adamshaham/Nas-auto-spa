@@ -12,8 +12,7 @@ import ServicesPage from './pages/ServicesPage';
 import BlogPage from './pages/BlogPage';
 import BlogPost from './pages/BlogPost';
 import AboutPage from './pages/AboutPage';
-
-
+import ServiceAreas from "./pages/ServiceAreas";
 import MobileDetailingPage from './pages/services/MobileDetailingPage';
 import PaintCorrectionPage from './pages/services/PaintCorrectionPage';
 import CeramicCoatingPage from './pages/services/CeramicCoatingPage';
@@ -70,7 +69,8 @@ function App() {
           <Route path="/ceramic-coating" element={<CeramicCoatingPage />} />
           <Route path="/fleet-detailing" element={<CommercialWashPage />} />
           <Route path="/about" element={<AboutPage />} />
-          
+          <Route path="/service-areas" element={<ServiceAreas />} />
+
 
 
 

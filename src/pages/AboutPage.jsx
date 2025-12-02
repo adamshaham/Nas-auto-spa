@@ -1,7 +1,10 @@
+// src/pages/AboutPage.jsx
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Testimonials from "../components/Testimonials";
+import Contact from "../components/Contact"; // ✅ import contact
 
 const AboutPage = () => {
   return (
@@ -155,6 +158,16 @@ const AboutPage = () => {
             </div>
           </div>
         </section>
+
+        {/* ✅ TESTIMONIALS */}
+        <div className="mt-16 md:mt-20">
+          <Testimonials />
+        </div>
+
+        {/* ✅ CONTACT UNDER TESTIMONIALS */}
+        <div className="mt-12 md:mt-16">
+          <Contact />
+        </div>
       </main>
 
       {/* FOOTER */}

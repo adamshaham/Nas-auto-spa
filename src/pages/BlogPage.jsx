@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { BlogPost } from '../data/BlogData';
+import Testimonials from '../components/Testimonials';
+import Contact from '../components/Contact'; // ✅ add contact
 
 const BlogPage = () => {
   const posts = Array.isArray(BlogPost) ? BlogPost : [];
@@ -178,6 +180,16 @@ const BlogPage = () => {
               </div>
             </section>
           )}
+        </div>
+
+        {/* ✅ Testimonials block below blog content */}
+        <div className="mt-16 md:mt-20">
+          <Testimonials />
+        </div>
+
+        {/* ✅ Contact block under testimonials */}
+        <div className="mt-12 md:mt-16">
+          <Contact />
         </div>
       </main>
 

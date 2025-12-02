@@ -17,7 +17,7 @@ const Pricing = () => {
       title: 'STAGE 1',
       price: '$199',
       priceNote: 'STARTING AT',
-      subtitle: 'EXTERIOR + INTERIOR',
+      subtitle: 'Full interior + exterior detail — perfect base reset for most vehicles.',
       features: [
         { text: 'HAND WASH (2 STAGE)', included: true },
         { text: 'WHEEL AND TIRE CLEANING', included: true },
@@ -37,7 +37,7 @@ const Pricing = () => {
       title: 'STAGE 2',
       price: '$299',
       priceNote: 'STARTING AT',
-      subtitle: 'EXTERIOR + INTERIOR',
+      subtitle: 'Everything in Stage 1, plus clay bar and a 1-step polish to remove light swirls and boost gloss.',
       features: [
         { text: 'HAND WASH (2 STAGE)', included: true },
         { text: 'ENGINE BAY CLEANING', included: true },
@@ -57,7 +57,7 @@ const Pricing = () => {
       title: 'STAGE 3',
       price: '$399',
       priceNote: 'STARTING AT',
-      subtitle: 'PAINT CORRECTION + CERAMIC COATING',
+      subtitle: 'Full detail, 1-step correction, and 6 year ceramic coating protection for long-term shine.',
       features: [
         { text: 'HAND WASH (2 STAGE)', included: true },
         { text: 'ENGINE BAY CLEANING', included: true },
@@ -69,7 +69,7 @@ const Pricing = () => {
         { text: 'SHAMPOO EXTRACTION', included: true },
         { text: '1 STEP PAINT CORRECTION', included: true },
         { text: 'CLAY BAR', included: true },
-        { text: 'CERAMIC COATING', included: true },
+        { text: '6 YEAR CERAMIC COATING', included: true },
       ],
       popular: true,
     },

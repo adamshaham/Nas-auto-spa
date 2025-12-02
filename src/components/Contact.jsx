@@ -559,7 +559,7 @@ const Contact = () => {
                 rows="4"
                 value={formData.message}
                 onChange={handleInputChange}
-                className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm text-white focus:outline-none focus:border-[#facc16] focus:ring-1 focus:ring-[#facc16] resize-none"
+                className="w-full rounded-lg bg:white/5 border border-white/10 px-3 py-2 text-sm text-white focus:outline-none focus:border-[#facc16] focus:ring-1 focus:ring-[#facc16] resize-none"
                 placeholder="Parking situation, gate codes, extreme conditions, special requests, etc."
               />
             </div>
@@ -598,9 +598,7 @@ const Contact = () => {
       id="contact"
       className="relative py-20 bg-black text-white overflow-hidden"
     >
-      {/* Ambient Background */}
-      <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-[#facc16] opacity-5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-blue-900 opacity-5 blur-[120px] rounded-full pointer-events-none" />
+      {/* 🔥 Removed ambient color blobs to keep background pure black */}
 
       <div className="relative z-10 px-4 max-w-3xl mx-auto">
         {/* Header */}
@@ -630,7 +628,8 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="bg-[#0a0a0a] border border-gray-800 rounded-3xl shadow-2xl p-5 sm:p-7">
+        {/* Form card – now pure black */}
+        <div className="bg-black border border-gray-800 rounded-3xl shadow-2xl p-5 sm:p-7">
           {error && (
             <div className="bg-red-500/10 border border-red-500/50 text-red-200 p-3 rounded-lg text-center text-xs mb-4">
               {error}

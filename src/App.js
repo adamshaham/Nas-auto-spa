@@ -18,6 +18,8 @@ import MobileDetailingPage from './pages/services/MobileDetailingPage';
 import PaintCorrectionPage from './pages/services/PaintCorrectionPage';
 import CeramicCoatingPage from './pages/services/CeramicCoatingPage';
 import CommercialWashPage from './pages/services/CommercialWashPage';
+import ServiceAreas from './pages/ServiceAreas';
+
 
 // 🔹 Scroll handler that supports hashes (#pricing)
 const ScrollToTop = () => {
@@ -71,6 +73,7 @@ function App() {
           <Route path="services/fleet-detailing" element={<CommercialWashPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
+         <Route path="/service-areas" element={<ServiceAreas />} />
 
         </Routes>
       </Router>

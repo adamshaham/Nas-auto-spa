@@ -113,6 +113,13 @@ const Navbar = () => {
             </Link>
 
             <Link
+              to="/service-areas"
+              className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+            >
+              Service Areas
+            </Link>
+
+            <Link
               to="/#contact"
               className="text-sm md:text-[15px] font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
             >
@@ -239,7 +246,7 @@ const Navbar = () => {
               <div className="pt-3 border-t bg-[#dcab18] border-zinc-300 mt-2">
                 <a
                   href="tel:19293076986"
-                  className="block w-full text-center px-4 py-2.5 rounded-md bg-[#dcab18] text-white text-sm font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 transition-all"
+                  className="block w-full text-center px-4 py-2.5 rounded-md bg-[#f5cf13] text-white text-sm font-semibold  transition-all"
                   onClick={closeMenu}
                 >
                   Call (929) 307-6986
