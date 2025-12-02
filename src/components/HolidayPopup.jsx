@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ThankYou from "./ThankYou";
 
-const DISMISS_KEY = "nas_holiday_popup_dismissed_v2"; // 👈 new key so it shows again
+const DISMISS_KEY = "nas_holiday_popup_dismissed_v2";
 
 const HolidayPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,9 +14,7 @@ const HolidayPopup = () => {
     if (typeof window === "undefined") return;
 
     const dismissed = localStorage.getItem(DISMISS_KEY);
-    if (dismissed === "true") {
-      return;
-    }
+    if (dismissed === "true") return;
 
     const timer = setTimeout(() => {
       setIsOpen(true);
@@ -44,6 +42,15 @@ const HolidayPopup = () => {
       submissionData.set(
         "_subject",
         "Holiday 20% Off Wash Lead - NAS Auto Spa (Popup)"
+      );
+
+      // Optional: add a simple summary string for easier reading in email
+      const vehicle = submissionData.get("Popup_Vehicle_Type") || "Not specified";
+      const service = submissionData.get("Popup_Service_Type") || "Not specified";
+      const method = submissionData.get("Popup_Service_Method") || "Not specified";
+      submissionData.append(
+        "Popup_Summary",
+        `Vehicle: ${vehicle} | Service: ${service} | Method: ${method}`
       );
 
       const response = await fetch(
@@ -80,7 +87,6 @@ const HolidayPopup = () => {
     }
   };
 
-  // Same pattern as Contact: swap UI to ThankYou overlay
   if (showThankYou) {
     return <ThankYou />;
   }
@@ -112,8 +118,8 @@ const HolidayPopup = () => {
           <span className="text-[#e1b11b] font-semibold">
             holiday wash discount
           </span>{" "}
-          on any detailing package. Drop your info below and we&apos;ll reach out
-          to confirm your booking.
+          on any detailing package. Answer a few quick questions and we&apos;ll
+          reach out to confirm your booking.
         </p>
 
         {/* 20% OFF TAG */}
@@ -133,8 +139,12 @@ const HolidayPopup = () => {
           </div>
         )}
 
-        {/* FORM – handled via fetch like Contact page */}
-        <form onSubmit={handleSubmit} className="space-y-4" name="holiday-popup-form">
+        {/* FORM */}
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4"
+          name="holiday-popup-form"
+        >
           {/* Honeypot & config */}
           <input type="text" name="_honey" style={{ display: "none" }} />
           <input type="hidden" name="_captcha" value="false" />
@@ -146,11 +156,7 @@ const HolidayPopup = () => {
             name="_subject"
             value="Holiday 20% Off Wash Lead - NAS Auto Spa"
           />
-          <input
-            type="hidden"
-            name="form_name"
-            value="Holiday 20% Off Popup"
-          />
+          <input type="hidden" name="form_name" value="Holiday 20% Off Popup" />
           <input
             type="hidden"
             name="discount"
@@ -185,17 +191,79 @@ const HolidayPopup = () => {
             />
           </div>
 
-          {/* Optional note */}
+          {/* Vehicle type dropdown */}
           <div>
             <label className="block text-xs font-medium text-zinc-300 mb-1">
-              Vehicle / Notes (Optional)
+              What type of vehicle do you have?
             </label>
-            <textarea
-              name="message"
-              rows={3}
+            <select
+              name="Popup_Vehicle_Type"
+              required
               className="w-full rounded-lg bg-zinc-900 border border-zinc-700 px-3 py-2 text-sm text-white outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b]"
-              placeholder="Year, make, model or anything we should know."
-            />
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select vehicle type
+              </option>
+              <option value="Sedan / Coupe">Sedan / Coupe</option>
+              <option value="SUV / Truck">SUV / Truck</option>
+              <option value="Luxury / Exotic / Sports">
+                Luxury / Exotic / Sports
+              </option>
+              <option value="Van / Other">Van / Other</option>
+            </select>
+          </div>
+
+          {/* Service type dropdown */}
+          <div>
+            <label className="block text-xs font-medium text-zinc-300 mb-1">
+              What service are you looking for?
+            </label>
+            <select
+              name="Popup_Service_Type"
+              required
+              className="w-full rounded-lg bg-zinc-900 border border-zinc-700 px-3 py-2 text-sm text-white outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b]"
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select service
+              </option>
+              <option value="Quick Wash">Quick Wash</option>
+              <option value="Stage 1 Detail">Stage 1 Detail</option>
+              <option value="Stage 2 Detail">Stage 2 Detail</option>
+              <option value="Stage 3 Detail">Stage 3 Detail</option>
+              <option value="Paint Correction">Paint Correction</option>
+              <option value="Ceramic Coating">Ceramic Coating</option>
+              <option value="Not Sure / Recommend One">
+                Not sure – recommend a package
+              </option>
+            </select>
+          </div>
+
+          {/* Service method dropdown */}
+          <div>
+            <label className="block text-xs font-medium text-zinc-300 mb-1">
+              Do you want us to come to you or drop off?
+            </label>
+            <select
+              name="Popup_Service_Method"
+              required
+              className="w-full rounded-lg bg-zinc-900 border border-zinc-700 px-3 py-2 text-sm text-white outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b]"
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select an option
+              </option>
+              <option value="Mobile – come to me">
+                I want NAS Auto Spa to come to me (mobile service)
+              </option>
+              <option value="Drop-off">
+                I will drop off my vehicle
+              </option>
+              <option value="Not sure yet">
+                Not sure yet
+              </option>
+            </select>
           </div>
 
           {/* Submit */}
