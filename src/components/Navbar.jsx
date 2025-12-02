@@ -187,28 +187,28 @@ const Navbar = () => {
               {isServicesOpen && (
                 <div className="mt-2 ml-2 space-y-2 border-l border-zinc-800 pl-3">
                   <Link
-                    to="/mobile-detailing"
+                    to="/services/mobile-detailing"
                     onClick={closeMenu}
                     className="block text-xs font-medium text-zinc-200 hover:text-[#e1b11b] uppercase"
                   >
                     Detail Packages
                   </Link>
                   <Link
-                    to="/paint-correction"
+                    to="/services/paint-correction"
                     onClick={closeMenu}
                     className="block text-xs font-medium text-zinc-200 hover:text-[#e1b11b] uppercase"
                   >
                     Paint Correction
                   </Link>
                   <Link
-                    to="/ceramic-coating"
+                    to="/services/ceramic-coating"
                     onClick={closeMenu}
                     className="block text-xs font-medium text-zinc-200 hover:text-[#e1b11b] uppercase"
                   >
                     Ceramic Coating
                   </Link>
                   <Link
-                    to="/fleet-detailing"
+                    to="/services/fleet-detailing"
                     onClick={closeMenu}
                     className="block text-xs font-medium text-zinc-200 hover:text-[#e1b11b] uppercase"
                   >
