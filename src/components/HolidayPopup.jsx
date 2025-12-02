@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ThankYou from "./ThankYou";
 
-const DISMISS_KEY = "nas_holiday_popup_dismissed_v2";
-
 const HolidayPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
-  // Show popup after 5 seconds (unless dismissed before)
+  // Show popup after 5 seconds on EVERY page load
   useEffect(() => {
     if (typeof window === "undefined") return;
-
-    const dismissed = localStorage.getItem(DISMISS_KEY);
-    if (dismissed === "true") return;
 
     const timer = setTimeout(() => {
       setIsOpen(true);
@@ -25,9 +20,7 @@ const HolidayPopup = () => {
 
   const handleClose = () => {
     setIsOpen(false);
-    if (typeof window !== "undefined") {
-      localStorage.setItem(DISMISS_KEY, "true");
-    }
+    // ❌ removed localStorage so it shows again on refresh
   };
 
   const handleSubmit = async (e) => {
@@ -44,10 +37,10 @@ const HolidayPopup = () => {
         "Holiday 20% Off Wash Lead - NAS Auto Spa (Popup)"
       );
 
-      // Optional: add a simple summary string for easier reading in email
       const vehicle = submissionData.get("Popup_Vehicle_Type") || "Not specified";
       const service = submissionData.get("Popup_Service_Type") || "Not specified";
       const method = submissionData.get("Popup_Service_Method") || "Not specified";
+
       submissionData.append(
         "Popup_Summary",
         `Vehicle: ${vehicle} | Service: ${service} | Method: ${method}`
@@ -70,10 +63,7 @@ const HolidayPopup = () => {
         throw new Error(result.message || "Failed to submit form. Please try again.");
       }
 
-      if (typeof window !== "undefined") {
-        localStorage.setItem(DISMISS_KEY, "true");
-      }
-
+      // ❌ no localStorage here either
       setIsOpen(false);
       setShowThankYou(true);
       formElement.reset();
@@ -248,7 +238,7 @@ const HolidayPopup = () => {
             <select
               name="Popup_Service_Method"
               required
-              className="w-full rounded-lg bg-zinc-900 border border-zinc-700 px-3 py-2 text-sm text-white outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b]"
+              className="w-full rounded-lg bg-zinc-900 border border-zinc-700 px-3 py-2 text-sm text:white outline-none focus:border-[#e1b11b] focus:ring-1 focus:ring-[#e1b11b]"
               defaultValue=""
             >
               <option value="" disabled>
