@@ -24,6 +24,9 @@ const Contact = () => {
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // 🔔 New: which option is currently flashing (step-value)
+  const [highlightedOption, setHighlightedOption] = useState(null);
+
   // Helper: sync selectedServices with desiredService
   const mapServiceToSelected = (value) => {
     switch (value) {
@@ -330,22 +333,46 @@ const Contact = () => {
     return <ThankYou />;
   }
 
+  // ⭐ Helper: flash yellow + then go to next step
+  const flashAndNext = (stepIndex, valueKey, updateFn, nextStep) => {
+    const id = `${stepIndex}-${valueKey}`;
+    setHighlightedOption(id);
+    updateFn(valueKey);
+
+    setTimeout(() => {
+      setHighlightedOption(null);
+      if (typeof nextStep === 'number') {
+        setStep(nextStep);
+      }
+    }, 180); // quick but noticeable
+  };
+
   // Card component for each answer option
-  const OptionCard = ({ option, selected, onClick }) => (
+  const OptionCard = ({ option, selected, onClick, highlight }) => (
     <button
       type="button"
       onClick={onClick}
       className={`w-full text-left rounded-2xl border px-4 sm:px-6 py-4 sm:py-5 mb-3 transition-all duration-200
         ${
-          selected
+          highlight
+            ? 'bg-[#facc16] border-[#facc16] shadow-[0_0_0_1px_rgba(250,204,22,0.7)] scale-[1.01]'
+            : selected
             ? 'bg-white/10 border-[#facc16] shadow-[0_0_0_1px_rgba(250,204,22,0.4)]'
             : 'bg-white/5 border-white/10 hover:border-[#facc16]/70 hover:bg-white/10'
         }`}
     >
-      <div className="font-semibold text-sm sm:text-base text-white">
+      <div
+        className={`font-semibold text-sm sm:text-base ${
+          highlight ? 'text-black' : 'text-white'
+        }`}
+      >
         {option.title}
       </div>
-      <div className="text-xs sm:text-sm text-gray-400 mt-1">
+      <div
+        className={`text-xs sm:text-sm mt-1 ${
+          highlight ? 'text-black/80' : 'text-gray-400'
+        }`}
+      >
         {option.description}
       </div>
     </button>
@@ -368,10 +395,19 @@ const Contact = () => {
                 key={opt.value}
                 option={opt}
                 selected={formData.vehicleType === opt.value}
-                onClick={() => {
-                  setFormData((prev) => ({ ...prev, vehicleType: opt.value }));
-                  setStep(1);
-                }}
+                highlight={highlightedOption === `0-${opt.value}`}
+                onClick={() =>
+                  flashAndNext(
+                    0,
+                    opt.value,
+                    (val) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        vehicleType: val,
+                      })),
+                    1
+                  )
+                }
               />
             ))}
           </>
@@ -390,13 +426,19 @@ const Contact = () => {
                 key={opt.value}
                 option={opt}
                 selected={formData.vehicleCondition === opt.value}
-                onClick={() => {
-                  setFormData((prev) => ({
-                    ...prev,
-                    vehicleCondition: opt.value,
-                  }));
-                  setStep(2);
-                }}
+                highlight={highlightedOption === `1-${opt.value}`}
+                onClick={() =>
+                  flashAndNext(
+                    1,
+                    opt.value,
+                    (val) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        vehicleCondition: val,
+                      })),
+                    2
+                  )
+                }
               />
             ))}
           </>
@@ -415,10 +457,17 @@ const Contact = () => {
                 key={opt.value}
                 option={opt}
                 selected={formData.desiredService === opt.value}
-                onClick={() => {
-                  handleServiceSelect(opt.value);
-                  setStep(3);
-                }}
+                highlight={highlightedOption === `2-${opt.value}`}
+                onClick={() =>
+                  flashAndNext(
+                    2,
+                    opt.value,
+                    (val) => {
+                      handleServiceSelect(val);
+                    },
+                    3
+                  )
+                }
               />
             ))}
           </>
@@ -437,10 +486,19 @@ const Contact = () => {
                 key={opt.value}
                 option={opt}
                 selected={formData.timing === opt.value}
-                onClick={() => {
-                  setFormData((prev) => ({ ...prev, timing: opt.value }));
-                  setStep(4);
-                }}
+                highlight={highlightedOption === `3-${opt.value}`}
+                onClick={() =>
+                  flashAndNext(
+                    3,
+                    opt.value,
+                    (val) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        timing: val,
+                      })),
+                    4
+                  )
+                }
               />
             ))}
 
@@ -559,7 +617,7 @@ const Contact = () => {
                 rows="4"
                 value={formData.message}
                 onChange={handleInputChange}
-                className="w-full rounded-lg bg:white/5 border border-white/10 px-3 py-2 text-sm text-white focus:outline-none focus:border-[#facc16] focus:ring-1 focus:ring-[#facc16] resize-none"
+                className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm text-white focus:outline-none focus:border-[#facc16] focus:ring-1 focus:ring-[#facc16] resize-none"
                 placeholder="Parking situation, gate codes, extreme conditions, special requests, etc."
               />
             </div>
@@ -598,8 +656,6 @@ const Contact = () => {
       id="contact"
       className="relative py-20 bg-black text-white overflow-hidden"
     >
-      {/* 🔥 Removed ambient color blobs to keep background pure black */}
-
       <div className="relative z-10 px-4 max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
@@ -628,7 +684,7 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Form card – now pure black */}
+        {/* Form card */}
         <div className="bg-black border border-gray-800 rounded-3xl shadow-2xl p-5 sm:p-7">
           {error && (
             <div className="bg-red-500/10 border border-red-500/50 text-red-200 p-3 rounded-lg text-center text-xs mb-4">

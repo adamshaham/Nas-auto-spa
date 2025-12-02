@@ -5,9 +5,9 @@ const Pricing = () => {
   const quickWashPackage = {
     title: 'QUICK WASH',
     price: '$30',
-    subtitle: 'EXTERIOR + INTERIOR',
+    subtitle: 'EXTERIOR / INTERIOR',
     features: [
-      { text: 'QUICK INTERIOR + EXTERIOR REFRESH', included: true },
+      { text: 'QUICK INTERIOR / EXTERIOR REFRESH', included: true },
     ],
     popular: false,
   };

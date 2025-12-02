@@ -26,9 +26,8 @@ const Navbar = () => {
       className={`
         fixed top-0 left-0 right-0 z-50
         transition-all duration-300
-        ${hasScrolled ? "shadow-xl border-b border-zinc-200/20 backdrop-blur-lg" : ""}
+        ${hasScrolled ? "shadow-xl border-b border-zinc-200/20 backdrop-blur-lg bg-black/20" : "bg-transparent"}
       `}
-      style={{ background: "transparent" }}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -154,17 +153,24 @@ const Navbar = () => {
             )}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden pb-4">
-            <div className="mt-3 rounded-xl bg-white/90 backdrop-blur-xl border border-zinc-200 px-5 py-4 space-y-3">
-              {/* Mobile OUR SERVICES — "Our Services" text is link, arrow toggles dropdown */}
+      {/* Modern Mobile Menu (full-screen overlay) */}
+      {isMenuOpen && (
+        <div className="md:hidden fixed inset-x-0 top-16 bottom-0 bg-black/80 backdrop-blur-xl z-40">
+          <div className="max-w-7xl mx-auto px-4 pt-4">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/95 p-5 space-y-4 shadow-[0_20px_60px_rgba(0,0,0,0.7)]">
+              {/* Section label */}
+              <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500 mb-1">
+                Navigate
+              </p>
+
+              {/* Mobile OUR SERVICES — text is link, arrow toggles dropdown */}
               <div className="flex items-center justify-between">
                 <Link
                   to="/services"
                   onClick={closeMenu}
-                  className="text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
+                  className="text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
                 >
                   Our Services
                 </Link>
@@ -172,39 +178,39 @@ const Navbar = () => {
                 <button
                   type="button"
                   onClick={() => setIsServicesOpen((prev) => !prev)}
-                  className="text-xs font-medium text-black hover:text-[#e1b11b]"
+                  className="text-xs font-medium text-zinc-400 hover:text-[#e1b11b]"
                 >
                   {isServicesOpen ? "▴" : "▾"}
                 </button>
               </div>
 
               {isServicesOpen && (
-                <div className="mt-2 ml-2 space-y-2">
+                <div className="mt-2 ml-2 space-y-2 border-l border-zinc-800 pl-3">
                   <Link
                     to="/mobile-detailing"
                     onClick={closeMenu}
-                    className="block text-xs font-medium text-black/90 hover:text-[#e1b11b] uppercase"
+                    className="block text-xs font-medium text-zinc-200 hover:text-[#e1b11b] uppercase"
                   >
                     Detail Packages
                   </Link>
                   <Link
                     to="/paint-correction"
                     onClick={closeMenu}
-                    className="block text-xs font-medium text-black/90 hover:text-[#e1b11b] uppercase"
+                    className="block text-xs font-medium text-zinc-200 hover:text-[#e1b11b] uppercase"
                   >
                     Paint Correction
                   </Link>
                   <Link
                     to="/ceramic-coating"
                     onClick={closeMenu}
-                    className="block text-xs font-medium text-black/90 hover:text-[#e1b11b] uppercase"
+                    className="block text-xs font-medium text-zinc-200 hover:text-[#e1b11b] uppercase"
                   >
                     Ceramic Coating
                   </Link>
                   <Link
                     to="/fleet-detailing"
                     onClick={closeMenu}
-                    className="block text-xs font-medium text-black/90 hover:text-[#e1b11b] uppercase"
+                    className="block text-xs font-medium text-zinc-200 hover:text-[#e1b11b] uppercase"
                   >
                     Commercial / Fleet Detailing
                   </Link>
@@ -214,7 +220,7 @@ const Navbar = () => {
               <Link
                 to="/gallery"
                 onClick={closeMenu}
-                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
+                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
               >
                 Gallery
               </Link>
@@ -222,7 +228,7 @@ const Navbar = () => {
               <Link
                 to="/blog"
                 onClick={closeMenu}
-                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
+                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
               >
                 Blog
               </Link>
@@ -230,33 +236,47 @@ const Navbar = () => {
               <Link
                 to="/about"
                 onClick={closeMenu}
-                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
+                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
               >
                 About
               </Link>
 
               <Link
+                to="/service-areas"
+                onClick={closeMenu}
+                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
+              >
+                Service Areas
+              </Link>
+
+              <Link
                 to="/#contact"
                 onClick={closeMenu}
-                className="block text-sm font-medium text-black hover:text-[#e1b11b] uppercase"
+                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
               >
                 Contact
               </Link>
 
-              <div className="pt-3 border-t bg-[#dcab18] border-zinc-300 mt-2">
+              {/* Divider + CTA */}
+              <div className="pt-4 border-t border-zinc-800 mt-2">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500 mb-2">
+                  Book Now
+                </p>
                 <a
                   href="tel:19293076986"
-                  className="block w-full text-center px-4 py-2.5 rounded-md bg-[#f5cf13] text-white text-sm font-semibold  transition-all"
                   onClick={closeMenu}
+                  className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold tracking-wide
+                    bg-[#e1b11b]
+                    text-black shadow-lg shadow-yellow-500/20
+                    hover:brightness-110 transition-all"
                 >
-                  Call (929) 307-6986
+                  Call / Text (929) 307-6986
                 </a>
               </div>
             </div>
           </div>
-        )}
-
-      </div>
+        </div>
+      )}
     </nav>
   );
 };

@@ -142,7 +142,7 @@ const GoogleReviewsWidget = () => {
                 </div>
                 <div className="flex flex-col">
                   <h2 className="text-lg sm:text-xl font-semibold text-white">
-                    Hundreds of Happy Customers
+                     What our customers say
                   </h2>
                   <div className="flex items-center gap-2 text-xs text-gray-400">
                     <span>5.0 Average Rating</span>
