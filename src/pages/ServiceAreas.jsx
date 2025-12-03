@@ -38,7 +38,7 @@ const ServiceAreas = () => {
         />
         <link
           rel="canonical"
-          href="https://www.nasautospa.com/service-areas"
+          href="https://www.nasautospa.com/service-areas-fairfield-county-ct"
         />
       </Helmet>
 

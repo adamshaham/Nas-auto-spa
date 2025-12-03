@@ -45,13 +45,13 @@ const ServicesPage = () => {
   const getServicePath = (stage) => {
     switch (stage) {
       case 'stage1':
-        return '/services/mobile-detailing';
+        return '/mobile-detailing-fairfield-county-ct';
       case 'stage2':
-        return '/services/ceramic-coating';
+        return '/ceramic-coating-fairfield-county-ct';
       case 'paintcorrection':
-        return '/services/paint-correction';
+        return '/paint-correction-fairfield-county-ct';
       case 'commercial':
-        return '/services/fleet-detailing'; // 🔼 matches App.js route
+        return '/fleet-detailing-fairfield-county-ct'; // 🔼 matches App.js route
       default:
         return '/services';
     }

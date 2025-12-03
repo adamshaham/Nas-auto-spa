@@ -14,10 +14,10 @@ import BlogPost from './pages/BlogPost';
 import AboutPage from './pages/AboutPage';
 import GalleryPage from './pages/GalleryPage';
 
-import MobileDetailingPage from './pages/services/MobileDetailingPage';
-import PaintCorrectionPage from './pages/services/PaintCorrectionPage';
-import CeramicCoatingPage from './pages/services/CeramicCoatingPage';
-import CommercialWashPage from './pages/services/CommercialWashPage';
+import MobileDetailingPage from './pages/MobileDetailingPage';
+import PaintCorrectionPage from './pages/PaintCorrectionPage';
+import CeramicCoatingPage from './pages/CeramicCoatingPage';
+import CommercialWashPage from './pages/CommercialWashPage';
 import ServiceAreas from './pages/ServiceAreas';
 
 
@@ -67,13 +67,13 @@ function App() {
           <Route path="/blog/:slug" element={<BlogPost />} />
 
           {/* SERVICE DETAIL PAGES – match Navbar paths */}
-          <Route path="services/mobile-detailing" element={<MobileDetailingPage />} />
-          <Route path="services/paint-correction" element={<PaintCorrectionPage />} />
-          <Route path="services/ceramic-coating" element={<CeramicCoatingPage />} />
-          <Route path="services/fleet-detailing" element={<CommercialWashPage />} />
+          <Route path="/mobile-detailing-fairfield-county-ct" element={<MobileDetailingPage />} />
+          <Route path="/paint-correction-fairfield-county-ct" element={<PaintCorrectionPage />} />
+          <Route path="/ceramic-coating-fairfield-county-ct" element={<CeramicCoatingPage />} />
+          <Route path="/fleet-detailing-fairfield-county-ct" element={<CommercialWashPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
-         <Route path="/service-areas" element={<ServiceAreas />} />
+         <Route path="/service-areas-fairfield-county-ct" element={<ServiceAreas />} />
 
         </Routes>
       </Router>

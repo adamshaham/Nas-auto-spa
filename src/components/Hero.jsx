@@ -77,9 +77,7 @@ const Hero = () => {
 
         {/* Description */}
         <p className="text-white/90 text-xl md:text-2xl max-w-2xl mb-8 leading-relaxed">
-          Leading Mobile Car Detailing in Fairfield County. Unmatched attention
-          to detail brought right to your home or workplace for superior
-          results.
+          Leading Mobile Car Detailing in Fairfield County.
         </p>
 
         {/* CTA Buttons */}

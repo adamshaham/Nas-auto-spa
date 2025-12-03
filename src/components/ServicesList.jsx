@@ -5,22 +5,22 @@ const services = [
   {
     title: "CAR DETAILING",
     image: "/images/gallery/car-detailing.jpg",
-    link: "/services/mobile-detailing"
+    link: "/mobile-detailing-fairfield-county-ct"
   },
   {
     title: "PAINT CORRECTION",
     image: "/images/gallery/paint-correction.jpg",
-    link: "/services/paint-correction"
+    link: "/paint-correction-fairfield-county-ct"
   },
   {
     title: "CERAMIC COATING",
     image: "/images/gallery/ceramic-coating.jpg",
-    link: "/services/ceramic-coating"
+    link: "/ceramic-coating-fairfield-county-ct"
   },
   {
     title: "COMMERCIAL",
     image: "/images/gallery/commercial-contracts.jpg",
-    link: "/services/fleet-detailing",
+    link: "/fleet-detailing-fairfield-county-ct",
     allowWrap: true
   }
 ];

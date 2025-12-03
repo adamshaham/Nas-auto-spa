@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, useInView } from 'framer-motion';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const CommercialWashPage = () => {
   const headerRef = useRef(null);
