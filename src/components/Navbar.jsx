@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [isServiceOpen, setIsServiceOpen] = useState(false); // Service Areas dropdown
+
+  const serviceDropdownRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +16,26 @@ const Navbar = () => {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Click outside to close Service Areas dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        serviceDropdownRef.current &&
+        !serviceDropdownRef.current.contains(event.target)
+      ) {
+        setIsServiceOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
   }, []);
 
   const closeMenu = () => {
@@ -85,12 +108,104 @@ const Navbar = () => {
               About
             </Link>
 
-            <Link
-              to="/service-areas-fairfield-county-ct"
-              className="text-xs md:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
-            >
-              Service Areas
-            </Link>
+            {/* SERVICE AREAS CLICK DROPDOWN */}
+            <div className="relative" ref={serviceDropdownRef}>
+              <button
+                type="button"
+                onClick={() => setIsServiceOpen((prev) => !prev)}
+                className="flex items-center gap-1 text-xs md:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+              >
+                <span>Service Areas</span>
+                <svg
+                  className={`w-3 h-3 mt-[1px] transition-transform duration-150 ${
+                    isServiceOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 9l6 6 6-6"
+                  />
+                </svg>
+              </button>
+
+              {/* Dropdown menu */}
+              <div
+                className={`
+                  absolute left-0 mt-2 min-w-[220px] rounded-xl border border-zinc-800 
+                  bg-zinc-950/95 py-2 shadow-xl z-50
+                  ${isServiceOpen ? "block" : "hidden"}
+                `}
+              >
+                <Link
+                  to="/fairfield-ct"
+                  onClick={() => setIsServiceOpen(false)}
+                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
+                >
+                  Fairfield, CT
+                </Link>
+                <Link
+                  to="/westport-ct"
+                  onClick={() => setIsServiceOpen(false)}
+                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
+                >
+                  Westport, CT
+                </Link>
+                <Link
+                  to="/southport-ct"
+                  onClick={() => setIsServiceOpen(false)}
+                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
+                >
+                  Southport, CT
+                </Link>
+                <Link
+                  to="/stamford-ct"
+                  onClick={() => setIsServiceOpen(false)}
+                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
+                >
+                  Stamford, CT
+                </Link>
+                <Link
+                  to="/greenwich-ct"
+                  onClick={() => setIsServiceOpen(false)}
+                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
+                >
+                  Greenwich, CT
+                </Link>
+                <Link
+                  to="/norwalk-ct"
+                  onClick={() => setIsServiceOpen(false)}
+                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
+                >
+                  Norwalk, CT
+                </Link>
+                <Link
+                  to="/trumbull-ct"
+                  onClick={() => setIsServiceOpen(false)}
+                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
+                >
+                  Trumbull, CT
+                </Link>
+                <Link
+                  to="/stratford-ct"
+                  onClick={() => setIsServiceOpen(false)}
+                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
+                >
+                  Stratford, CT
+                </Link>
+                <Link
+                  to="/milford-ct"
+                  onClick={() => setIsServiceOpen(false)}
+                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
+                >
+                  Milford, CT
+                </Link>
+              </div>
+            </div>
 
             <Link
               to="/#contact"
@@ -211,8 +326,9 @@ const Navbar = () => {
                 About
               </Link>
 
+              {/* Service areas link in mobile (you can change this to a hub page if you create one) */}
               <Link
-                to="/service-areas-fairfield-county-ct"
+                to="/fairfield-ct"
                 onClick={closeMenu}
                 className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
               >

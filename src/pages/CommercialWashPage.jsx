@@ -1,44 +1,56 @@
-import React, { useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { motion, useInView } from 'framer-motion';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import React, { useRef } from "react";
+import { Helmet } from "react-helmet-async";
+import { motion, useInView } from "framer-motion";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
+const fadeUpContainer = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 0.61, 0.36, 1],
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const fadeUpItem = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] },
+  },
+};
+
+const sectionFade = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] },
+  },
+};
 
 const CommercialWashPage = () => {
   const headerRef = useRef(null);
   const headerInView = useInView(headerRef, { once: true, amount: 0.4 });
 
-  const fadeUpContainer = {
-    hidden: { opacity: 0, y: 24 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.22, 0.61, 0.36, 1],
-        staggerChildren: 0.12,
-      },
-    },
-  };
-
-  const fadeUpItem = {
-    hidden: { opacity: 0, y: 18 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] },
-    },
-  };
-
   return (
     <div className="bg-black min-h-screen text-white overflow-x-hidden w-full">
       <Helmet>
-        <title>Commercial Maintainence | NAS Auto Spa Fairfield County</title>
+        <title>Fleet Washing & Commercial Detailing in Fairfield County, CT | NAS Auto Spa</title>
         <meta
           name="description"
-          content="Keep your work trucks, vans, and service vehicles clean with mobile fleet detailing in Fairfield County, CT. Reliable schedules and professional image for your business."
+          content="Keep your work trucks, vans, and service vehicles clean with mobile fleet washing and commercial detailing in Fairfield County, CT. Reliable schedules and a professional image for your business."
         />
-        <link rel="canonical" href="https://www.nasautospa.com/services/fleet-detailing" />
+        <link
+          rel="canonical"
+          href="https://www.nasautospa.com/fleet-detailing-fairfield-county-ct"
+        />
       </Helmet>
 
       <Navbar />
@@ -46,23 +58,35 @@ const CommercialWashPage = () => {
       {/* HERO */}
       <section
         ref={headerRef}
-        className="relative pt-40 pb-20 bg-gradient-to-b from-black via-zinc-950 to-black overflow-hidden"
+        className="relative pt-40 pb-24 overflow-hidden"
       >
-        <div className="pointer-events-none absolute inset-0 opacity-60">
-          <div className="absolute -top-32 -left-10 h-72 w-72 bg-[#e1b11b]/15 rounded-full blur-3xl" />
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/gallery/commercial-contracts.jpg"
+            alt="Commercial fleet washing and detailing in Fairfield County CT"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+
+        {/* Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/80 to-black/95" />
+        <div className="pointer-events-none absolute inset-0 opacity-70">
+          <div className="absolute -top-32 -left-10 h-72 w-72 bg-[#e1b11b]/20 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 right-0 h-80 w-80 bg-zinc-700/30 rounded-full blur-3xl" />
         </div>
 
+        {/* Hero content */}
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <motion.div
             initial="hidden"
-            animate={headerInView ? 'visible' : 'hidden'}
+            animate={headerInView ? "visible" : "hidden"}
             variants={fadeUpContainer}
             className="space-y-6"
           >
             <motion.p
               variants={fadeUpItem}
-              className="text-[11px] uppercase tracking-[0.35em] text-zinc-500"
+              className="text-[11px] uppercase tracking-[0.35em] text-zinc-400"
             >
               NAS AUTO SPA • COMMERCIAL FLEETS
             </motion.p>
@@ -71,7 +95,7 @@ const CommercialWashPage = () => {
               variants={fadeUpItem}
               className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight"
             >
-              Commercial washes for{' '}
+              Commercial washes for{" "}
               <span className="bg-gradient-to-r from-[#e1b11b] via-amber-300 to-yellow-500 bg-clip-text text-transparent">
                 work trucks, vans, and fleets.
               </span>
@@ -79,11 +103,11 @@ const CommercialWashPage = () => {
 
             <motion.p
               variants={fadeUpItem}
-              className="text-sm md:text-base text-zinc-300 max-w-2xl"
+              className="text-sm md:text-base text-zinc-200 max-w-2xl"
             >
-              Your vehicles represent your brand on every job. We help you keep them clean, presentable,
-              and protected with scheduled on-site washing and detailing for fleets across Fairfield
-              County, CT.
+              Your vehicles represent your brand on every job. We help you keep them clean,
+              presentable, and protected with scheduled on-site washing and detailing for fleets
+              across Fairfield County, CT.
             </motion.p>
 
             <motion.div
@@ -108,10 +132,17 @@ const CommercialWashPage = () => {
       </section>
 
       {/* CONTENT */}
-      <section className="relative bg-black pb-20 md:pb-24">
-        <div className="max-w-6xl mx-auto px-6 space-y-14 md:space-y-20">
-          {/* Overview */}
-          <div className="grid gap-10 md:grid-cols-2">
+      <section className="relative bg-black pb-24 md:pb-28">
+        <div className="max-w-6xl mx-auto px-6 space-y-14 md:space-y-18">
+
+          {/* Overview + Ideal for */}
+          <motion.div
+            className="grid gap-10 md:grid-cols-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+            variants={sectionFade}
+          >
             <div className="space-y-5">
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
                 Built around how your business operates.
@@ -119,7 +150,7 @@ const CommercialWashPage = () => {
               <p className="text-sm md:text-base text-zinc-300 leading-relaxed">
                 We partner with landscaping companies, contractors, delivery services, and other
                 local businesses to keep their vehicles clean and presentable. Our mobile setup
-                means we can service your fleet at your yard, shop, or job site—without pulling
+                means we can service your fleet at your yard, shop, or job site — without pulling
                 multiple vehicles off the road at once.
               </p>
               <p className="text-sm md:text-base text-zinc-300 leading-relaxed">
@@ -141,10 +172,16 @@ const CommercialWashPage = () => {
                 <li>• Any business that relies on a clean, professional image</li>
               </ul>
             </div>
-          </div>
+          </motion.div>
 
-          {/* What we offer */}
-          <div className="rounded-3xl border border-zinc-800/70 bg-zinc-950/70 backdrop-blur-xl p-6 md:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.65)]">
+          {/* Fleet options */}
+          <motion.div
+            className="rounded-3xl border border-zinc-800/70 bg-zinc-950/70 backdrop-blur-xl p-6 md:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.65)]"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+            variants={sectionFade}
+          >
             <h2 className="text-xl md:text-2xl font-semibold mb-4">
               Fleet detailing options
             </h2>
@@ -181,10 +218,187 @@ const CommercialWashPage = () => {
               We can invoice per visit, per vehicle, or on a monthly basis depending on your fleet
               size and frequency.
             </p>
-          </div>
+          </motion.div>
 
-          {/* CTA */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-t border-zinc-900 pt-8">
+          {/* How it works – process */}
+          <motion.div
+            className="border border-zinc-800 rounded-3xl bg-zinc-950/70 p-6 md:p-8 space-y-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+            variants={sectionFade}
+          >
+            <div className="space-y-2">
+              <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-500">
+                HOW FLEET SERVICE WORKS
+              </p>
+            </div>
+            <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
+              Simple, predictable, and built for busy routes
+            </h2>
+
+            <ol className="space-y-4 text-sm md:text-base text-zinc-300">
+              {[
+                {
+                  title: "Quick consultation",
+                  body: "You tell us how many vehicles you run, where they park, and how often you’d like them serviced.",
+                },
+                {
+                  title: "Custom service plan",
+                  body: "We build a schedule and service mix that fits your routes — anything from weekly washes to monthly deep details.",
+                },
+                {
+                  title: "On-site service",
+                  body: "We show up with our own water and power, take care of the vehicles on-site, and get out of your way.",
+                },
+                {
+                  title: "Simple billing",
+                  body: "We can bill per visit, per vehicle, or on a recurring monthly basis depending on what works best for your books.",
+                },
+              ].map((step, i) => (
+                <li key={step.title} className="flex gap-3">
+                  <div className="flex flex-col items-center mt-1">
+                    <div className="h-6 w-6 rounded-full bg-[#e1b11b] text-black text-[11px] flex items-center justify-center font-semibold">
+                      {i + 1}
+                    </div>
+                    {i < 3 && (
+                      <div className="flex-1 w-px bg-zinc-700/70 mt-1" />
+                    )}
+                  </div>
+                  <div>
+                    <p className="font-medium text-zinc-50">{step.title}</p>
+                    <p className="text-zinc-300 mt-1">{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </motion.div>
+
+          {/* Scheduling & billing cards */}
+          <motion.div
+            className="grid gap-6 md:grid-cols-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+            variants={sectionFade}
+          >
+            {[
+              {
+                title: "Set schedules",
+                text: "Weekly, bi-weekly, or monthly routes that keep your fleet looking consistent without you having to think about it.",
+              },
+              {
+                title: "On-call add-ons",
+                text: "Need extra service after a muddy week or big storm? We can layer on additional visits as needed.",
+              },
+              {
+                title: "Flexible billing",
+                text: "Invoice by unit, by visit, or on a flat monthly retainer — we’ll match what works best for your accounting.",
+              },
+            ].map((card) => (
+              <div
+                key={card.title}
+                className="rounded-2xl border border-zinc-800 bg-black/70 p-5 flex flex-col gap-2"
+              >
+                <p className="text-sm md:text-base font-semibold text-zinc-50">
+                  {card.title}
+                </p>
+                <p className="text-sm md:text-base text-zinc-300">{card.text}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Types of vehicles */}
+          <motion.div
+            className="grid gap-8 md:grid-cols-2 items-start"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+            variants={sectionFade}
+          >
+            <div className="space-y-4">
+              <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
+                Vehicles we work with
+              </h2>
+              <p className="text-sm md:text-base text-zinc-300">
+                From single work trucks to mixed fleets, we can handle a variety of vehicle
+                types as long as there’s safe access and a place to park.
+              </p>
+            </div>
+            <div className="space-y-2 text-sm md:text-base text-zinc-200">
+              <ul className="space-y-1.5">
+                <li>• Pickup trucks and work trucks</li>
+                <li>• Enclosed trailers and utility trailers</li>
+                <li>• Cargo vans and service vans</li>
+                <li>• Small box trucks (local delivery)</li>
+                <li>• Company cars and real estate vehicles</li>
+              </ul>
+              <p className="mt-3 text-xs md:text-sm text-zinc-500">
+                Have something larger or more specialized? Reach out with details and we&apos;ll
+                let you know what&apos;s realistic.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* FAQ */}
+          <motion.div
+            className="border border-zinc-800 rounded-3xl bg-zinc-950/70 p-6 md:p-8 space-y-5"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={sectionFade}
+          >
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-500">
+                FAQ
+              </p>
+              <h2 className="text-xl md:text-2xl font-semibold tracking-tight mt-1">
+                Common questions about fleet washing
+              </h2>
+            </div>
+
+            <div className="space-y-4 text-sm md:text-base">
+              <div>
+                <p className="font-medium text-zinc-50">
+                  Do you bring your own water and power?
+                </p>
+                <p className="text-zinc-300">
+                  Yes. We&apos;re fully mobile and self-contained. As long as we have safe access
+                  to your vehicles, we can handle the rest.
+                </p>
+              </div>
+
+              <div>
+                <p className="font-medium text-zinc-50">
+                  How many vehicles can you do in one visit?
+                </p>
+                <p className="text-zinc-300">
+                  It depends on the service level and condition, but we can plan routes for
+                  anything from a few units to larger fleets. We&apos;ll give you realistic
+                  numbers once we know your setup.
+                </p>
+              </div>
+
+              <div>
+                <p className="font-medium text-zinc-50">
+                  Can you work early mornings or evenings?
+                </p>
+                <p className="text-zinc-300">
+                  In many cases, yes. We know fleets are busy during the day, so we can explore
+                  off-peak windows to minimize disruption to your routes.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Final CTA */}
+          <motion.div
+            className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-t border-zinc-900 pt-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={sectionFade}
+          >
             <div>
               <h2 className="text-lg md:text-xl font-semibold">
                 Want a consistent, professional look for your fleet?
@@ -209,7 +423,7 @@ const CommercialWashPage = () => {
                 Call or Text (929) 307-6986
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 

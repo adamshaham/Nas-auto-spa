@@ -17,7 +17,15 @@ import MobileDetailingPage from './pages/MobileDetailingPage';
 import PaintCorrectionPage from './pages/PaintCorrectionPage';
 import CeramicCoatingPage from './pages/CeramicCoatingPage';
 import CommercialWashPage from './pages/CommercialWashPage';
-
+import StamfordCTPage from './pages/StamfordCTPage';
+import WestportCTPage from './pages/WestportCTPage';
+import GreenwichTPage from './pages/GreenwichTPage';
+import NorwalkCTPage from './pages/NorwalkCTPage';
+import SouthportCTPage from './pages/SouthportCTPage';
+import StratfordPage from './pages/StratfordPage';
+import MilfordCTPage from './pages/MilfordCTPage';
+import TrumbullCTPage from './pages/TrumbullCTPage';
+import FairfieldCTPage from './pages/FairfieldCTPage';
 // 🔹 Scroll handler that supports hashes (#pricing)
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -70,7 +78,15 @@ function App() {
           <Route path="/fleet-detailing-fairfield-county-ct" element={<CommercialWashPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/service-areas-fairfield-county-ct" element={<ServiceAreas />} />
-
+          <Route path="/stamford-ct" element={<StamfordCTPage />} />
+         <Route path="/westport-ct" element={<WestportCTPage />} />
+         <Route path="/greenwich-ct" element={<GreenwichTPage />} />
+        <Route path="/norwalk-ct" element={<NorwalkCTPage />} />
+         <Route path="/southport-ct" element={<SouthportCTPage />} />
+         <Route path="/stratford-ct" element={<StratfordPage />} />
+         <Route path="/milford-ct" element={<MilfordCTPage />} />
+         <Route path="/trumbull-ct" element={<TrumbullCTPage />} />
+         <Route path="/fairfield-ct" element={<FairfieldCTPage />} />
 
 
 
