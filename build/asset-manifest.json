@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.edc7b3f0.css",
-    "main.js": "/static/js/main.71527ae7.js",
+    "main.css": "/static/css/main.61f48a26.css",
+    "main.js": "/static/js/main.788988ce.js",
     "static/media/porsche-gt3rs.jpg": "/static/media/porsche-gt3rs.62c611849131c075a549.jpg",
     "index.html": "/index.html",
-    "main.edc7b3f0.css.map": "/static/css/main.edc7b3f0.css.map",
-    "main.71527ae7.js.map": "/static/js/main.71527ae7.js.map"
+    "main.61f48a26.css.map": "/static/css/main.61f48a26.css.map",
+    "main.788988ce.js.map": "/static/js/main.788988ce.js.map"
   },
   "entrypoints": [
-    "static/css/main.edc7b3f0.css",
-    "static/js/main.71527ae7.js"
+    "static/css/main.61f48a26.css",
+    "static/js/main.788988ce.js"
   ]
 }

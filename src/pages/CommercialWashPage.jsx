@@ -49,7 +49,7 @@ const CommercialWashPage = () => {
         />
         <meta
           name="keywords"
-          content="fleet washing Fairfield County CT, commercial vehicle detailing Connecticut, fleet detailing near me CT, truck washing Stamford CT, van detailing Norwalk CT, commercial detailing Fairfield CT, fleet wash service Connecticut, mobile fleet washing CT, business vehicle detailing Fairfield County, work truck cleaning CT, landscaping fleet washing Connecticut"
+          content="fleet washing near me, fleet detailing near me, commercial vehicle detailing near me, truck washing near me CT, fleet washing near me Connecticut, van detailing near me, fleet washing Fairfield County CT, truck washing Stamford CT, van detailing Norwalk CT, commercial detailing near me Fairfield CT, fleet wash service near me Connecticut, mobile fleet washing near me CT, work truck cleaning near me, landscaping fleet washing near me"
         />
         <link
           rel="canonical"
@@ -478,6 +478,44 @@ const CommercialWashPage = () => {
               </a>
             </div>
           </motion.div>
+
+          {/* Service areas internal links */}
+          <section className="mt-14 border border-zinc-800 rounded-3xl bg-zinc-950/60 p-6 md:p-8">
+            <h2 className="text-lg md:text-xl font-semibold mb-1">
+              Fleet washing available near you
+            </h2>
+            <p className="text-sm text-zinc-400 mb-4">
+              We provide mobile fleet washing across all of Fairfield County, CT. Find your town below.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-sm">
+              {[
+                { name: "Stamford", href: "/stamford-ct" },
+                { name: "Greenwich", href: "/greenwich-ct" },
+                { name: "Westport", href: "/westport-ct" },
+                { name: "Norwalk", href: "/norwalk-ct" },
+                { name: "Fairfield", href: "/fairfield-ct" },
+                { name: "Trumbull", href: "/trumbull-ct" },
+                { name: "Stratford", href: "/stratford-ct" },
+                { name: "Milford", href: "/milford-ct" },
+                { name: "Southport", href: "/southport-ct" },
+              ].map((town) => (
+                <a
+                  key={town.name}
+                  href={town.href}
+                  className="flex items-center gap-2 text-zinc-300 hover:text-[#e1b11b] transition-colors"
+                >
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#e1b11b]" />
+                  {town.name}, CT
+                </a>
+              ))}
+            </div>
+            <p className="text-xs text-zinc-500 mt-4">
+              <a href="/service-areas-fairfield-county-ct" className="text-[#e1b11b] hover:underline">
+                View all service areas
+              </a>{" "}
+              — including Bridgeport, Darien, Shelton, Monroe, New Canaan, Wilton, Weston, Easton &amp; Ridgefield.
+            </p>
+          </section>
         </div>
       </section>
 

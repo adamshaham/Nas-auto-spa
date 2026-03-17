@@ -185,6 +185,37 @@ const FairfieldCTPage = () => {
           <div className="mt-12 md:mt-16">
             <Contact />
           </div>
+
+          {/* Services available in Fairfield */}
+          <section className="mt-10 border border-zinc-800 rounded-3xl bg-zinc-950/60 p-6 md:p-8">
+            <h2 className="text-lg md:text-xl font-semibold mb-1">
+              Services available near you in Fairfield, CT
+            </h2>
+            <p className="text-sm text-zinc-400 mb-4">
+              All of our Fairfield County detailing services are available in Fairfield and surrounding areas.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <a href="/mobile-detailing-fairfield-county-ct" className="flex items-center gap-2 text-zinc-300 hover:text-[#e1b11b] transition-colors">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#e1b11b]" />
+                Mobile Car Detailing
+              </a>
+              <a href="/paint-correction-fairfield-county-ct" className="flex items-center gap-2 text-zinc-300 hover:text-[#e1b11b] transition-colors">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#e1b11b]" />
+                Paint Correction
+              </a>
+              <a href="/ceramic-coating-fairfield-county-ct" className="flex items-center gap-2 text-zinc-300 hover:text-[#e1b11b] transition-colors">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#e1b11b]" />
+                Ceramic Coating
+              </a>
+              <a href="/fleet-detailing-fairfield-county-ct" className="flex items-center gap-2 text-zinc-300 hover:text-[#e1b11b] transition-colors">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#e1b11b]" />
+                Fleet &amp; Commercial Detailing
+              </a>
+            </div>
+            <p className="text-xs text-zinc-500 mt-4">
+              <a href="/service-areas-fairfield-county-ct" className="text-[#e1b11b] hover:underline">View all service areas</a> across Fairfield County, CT.
+            </p>
+          </section>
         </div>
       </main>
 

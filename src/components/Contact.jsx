@@ -259,41 +259,33 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const formElement = e.target;
-      const submissionData = new FormData(formElement);
+      const payload = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        vehicleType: formData.vehicleType,
+        vehicleCondition: formData.vehicleCondition,
+        desiredService: formData.desiredService,
+        timing: formData.timing,
+        preferredDate: formData.preferredDate || 'Not specified',
+        message: formData.message,
+        selectedServices: formData.selectedServices,
+      };
 
-      submissionData.append(
-        '_subject',
-        `New Detailing Inquiry: ${formData.firstName} ${formData.lastName}`
-      );
-
-      if (formData.selectedServices.length > 0) {
-        submissionData.append(
-          'Services_Interested_In',
-          formData.selectedServices.join(', ')
-        );
-      }
-
-      submissionData.append('Vehicle_Type', formData.vehicleType);
-      submissionData.append('Vehicle_Condition', formData.vehicleCondition);
-      submissionData.append('Timing', formData.timing);
-      submissionData.append('Preferred_Date', formData.preferredDate || 'Not specified');
-
-      const response = await fetch(
-        'https://formsubmit.co/ajax/contact@nasautospa.com',
-        {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-          },
-          body: submissionData,
-        }
-      );
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
 
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || 'Failed to submit form. Please try again.');
+        throw new Error(result.error || 'Failed to submit form. Please try again.');
       }
 
       setShowThankYou(true);
@@ -693,32 +685,6 @@ const Contact = () => {
           )}
 
           <form onSubmit={handleSubmit} name="contact-form">
-            {/* Hidden formsubmit config */}
-            <input type="text" name="_honey" style={{ display: 'none' }} />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_template" value="table" />
-            <input
-              type="hidden"
-              name="services_list"
-              value={formData.selectedServices.join(', ')}
-            />
-            <input type="hidden" name="Vehicle_Type" value={formData.vehicleType} />
-            <input
-              type="hidden"
-              name="Vehicle_Condition"
-              value={formData.vehicleCondition}
-            />
-            <input
-              type="hidden"
-              name="Desired_Service"
-              value={formData.desiredService}
-            />
-            <input type="hidden" name="Timing" value={formData.timing} />
-            <input
-              type="hidden"
-              name="Preferred_Date"
-              value={formData.preferredDate || 'Not specified'}
-            />
 
             {/* Visible step content */}
             {renderStepContent()}

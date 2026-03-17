@@ -6,23 +6,24 @@ import Contact from "../components/Contact"; // 🔁 adjust path/name if needed
 import { Helmet } from "react-helmet-async";
 
 const towns = [
-  "Fairfield",
-  "Westport",
-  "Norwalk",
-  "Stamford",
-  "Bridgeport",
-  "Trumbull",
-  "Stratford",
-  "Shelton",
-  "Monroe",
-  "Milford",
-  "Darien",
-  "Greenwich",
-  "New Canaan",
-  "Wilton",
-  "Weston",
-  "Easton",
-  "Ridgefield",
+  { name: "Fairfield", slug: "/fairfield-ct", zip: "06824" },
+  { name: "Westport", slug: "/westport-ct", zip: "06880" },
+  { name: "Norwalk", slug: "/norwalk-ct", zip: "06850" },
+  { name: "Stamford", slug: "/stamford-ct", zip: "06901" },
+  { name: "Bridgeport", slug: null, zip: "06604" },
+  { name: "Trumbull", slug: "/trumbull-ct", zip: "06611" },
+  { name: "Stratford", slug: "/stratford-ct", zip: "06614" },
+  { name: "Shelton", slug: null, zip: "06484" },
+  { name: "Monroe", slug: null, zip: "06468" },
+  { name: "Milford", slug: "/milford-ct", zip: "06460" },
+  { name: "Darien", slug: null, zip: "06820" },
+  { name: "Greenwich", slug: "/greenwich-ct", zip: "06830" },
+  { name: "New Canaan", slug: null, zip: "06840" },
+  { name: "Wilton", slug: null, zip: "06897" },
+  { name: "Weston", slug: null, zip: "06883" },
+  { name: "Easton", slug: null, zip: "06612" },
+  { name: "Ridgefield", slug: null, zip: "06877" },
+  { name: "Southport", slug: "/southport-ct", zip: "06890" },
 ];
 
 const ServiceAreas = () => {
@@ -44,6 +45,54 @@ const ServiceAreas = () => {
           rel="canonical"
           href="https://www.nasautospa.com/service-areas-fairfield-county-ct"
         />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How do I find the best mobile car detailing near me in Connecticut?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "NAS Auto Spa is a top-rated mobile detailing company serving all of Fairfield County, CT. We come directly to your home, office, or parking spot in Stamford, Greenwich, Westport, Norwalk, Fairfield, Trumbull, Stratford, Milford, and surrounding towns with our own water and power."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is there a ceramic coating service near me in Fairfield County?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. NAS Auto Spa provides professional ceramic coating throughout Fairfield County. We prep, correct, and coat your vehicle on-site with proper equipment. Our ceramic coating service is available in every town we serve across the county."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I get paint correction near me without going to a shop?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Absolutely. Our mobile setup includes professional-grade polishers, lighting, and products. We perform enhancement polishing, single-stage, and multi-stage paint correction at your location anywhere in Fairfield County, CT."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you offer fleet washing near me for businesses in Connecticut?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. We work with landscaping companies, contractors, delivery services, and other businesses across Fairfield County. We come to your yard, lot, or job site on a scheduled basis to keep your fleet clean and presentable."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What towns near me does NAS Auto Spa serve?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We serve Fairfield, Stamford, Greenwich, Westport, Norwalk, Trumbull, Stratford, Milford, Southport, Bridgeport, Shelton, Monroe, Darien, New Canaan, Wilton, Weston, Easton, Ridgefield, and surrounding areas in Fairfield County, Connecticut."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <div className="bg-black text-white min-h-screen flex flex-col">
@@ -123,11 +172,20 @@ const ServiceAreas = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm">
                     {towns.map((town) => (
                       <div
-                        key={town}
+                        key={town.name}
                         className="flex items-center gap-2 text-gray-200"
                       >
                         <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#e1b11b]" />
-                        <span>{town}</span>
+                        {town.slug ? (
+                          <a
+                            href={town.slug}
+                            className="hover:text-[#e1b11b] transition-colors"
+                          >
+                            {town.name}, CT
+                          </a>
+                        ) : (
+                          <span>{town.name}, CT</span>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -187,6 +245,73 @@ const ServiceAreas = () => {
               </div>
 
               {/* 🔻 Add Testimonials + Contact under “Why We Focus...” */}
+              {/* Near me FAQ */}
+              <div className="max-w-4xl border border-zinc-800 rounded-3xl p-6 bg-zinc-950/80 mb-16">
+                <h3 className="text-xl font-semibold mb-5">
+                  Frequently asked questions about mobile detailing near you
+                </h3>
+                <div className="space-y-5 text-sm">
+                  <div>
+                    <p className="font-medium text-zinc-50 mb-1">
+                      How do I find the best mobile car detailing near me in Connecticut?
+                    </p>
+                    <p className="text-gray-300">
+                      NAS Auto Spa is a top-rated mobile detailing company serving all of
+                      Fairfield County, CT. We come directly to your home, office, or parking
+                      spot in Stamford, Greenwich, Westport, Norwalk, Fairfield, Trumbull,
+                      Stratford, Milford, and surrounding towns with our own water and power.
+                      No drop-off needed.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-zinc-50 mb-1">
+                      Is there a ceramic coating service near me in Fairfield County?
+                    </p>
+                    <p className="text-gray-300">
+                      Yes. NAS Auto Spa provides professional{" "}
+                      <a href="/ceramic-coating-fairfield-county-ct" className="text-[#e1b11b] underline underline-offset-2">ceramic coating</a>{" "}
+                      throughout Fairfield County. We prep, correct, and coat your vehicle
+                      on-site with proper equipment. Our ceramic coating service is available
+                      in every town we serve across the county.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-zinc-50 mb-1">
+                      Can I get paint correction near me without going to a shop?
+                    </p>
+                    <p className="text-gray-300">
+                      Absolutely. Our mobile setup includes professional-grade polishers,
+                      lighting, and products. We perform{" "}
+                      <a href="/paint-correction-fairfield-county-ct" className="text-[#e1b11b] underline underline-offset-2">paint correction</a>{" "}
+                      at your location anywhere in Fairfield County, CT.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-zinc-50 mb-1">
+                      Do you offer fleet washing near me for businesses in Connecticut?
+                    </p>
+                    <p className="text-gray-300">
+                      Yes. We provide{" "}
+                      <a href="/fleet-detailing-fairfield-county-ct" className="text-[#e1b11b] underline underline-offset-2">fleet washing</a>{" "}
+                      for landscaping companies, contractors, delivery services, and other
+                      businesses across Fairfield County. We come to your yard, lot, or job
+                      site on a scheduled basis.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-zinc-50 mb-1">
+                      What towns near me does NAS Auto Spa serve?
+                    </p>
+                    <p className="text-gray-300">
+                      We serve Fairfield, Stamford, Greenwich, Westport, Norwalk, Trumbull,
+                      Stratford, Milford, Southport, Bridgeport, Shelton, Monroe, Darien,
+                      New Canaan, Wilton, Weston, Easton, Ridgefield, and surrounding areas
+                      in Fairfield County, Connecticut.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <div className="space-y-16">
                 <section>
                   <Testimonials />

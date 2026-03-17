@@ -28,7 +28,7 @@ const MobileDetailingPage = () => {
         />
         <meta
           name="keywords"
-          content="mobile car detailing Fairfield County CT, mobile detailing near me Connecticut, car detailing Stamford CT, auto detailing Greenwich CT, mobile car wash Westport CT, car cleaning Norwalk CT, mobile detailer Fairfield CT, interior detailing Fairfield County, exterior detailing CT, car detail Trumbull CT, mobile car wash near me, hand car wash Fairfield County, SUV detailing CT, luxury car detailing Connecticut, mobile auto detail Stratford CT"
+          content="mobile car detailing near me, mobile detailing near me, car detailing near me Connecticut, auto detailing near me Fairfield County, mobile car wash near me CT, car detailing Stamford CT, auto detailing Greenwich CT, mobile car wash Westport CT, car cleaning Norwalk CT, mobile detailer Fairfield CT, interior detailing near me CT, exterior detailing near me, car detail Trumbull CT, hand car wash near me Fairfield County, SUV detailing near me CT, luxury car detailing near me Connecticut, mobile auto detail Stratford CT, best car detailing near me, mobile detailing Fairfield County CT"
         />
         <link rel="canonical" href="https://www.nasautospa.com/mobile-detailing-fairfield-county-ct" />
         <script type="application/ld+json">
@@ -489,6 +489,43 @@ const MobileDetailingPage = () => {
               </a>
             </div>
           </motion.div>
+          {/* Service areas internal links */}
+          <section className="mt-14 border border-zinc-800 rounded-3xl bg-zinc-950/60 p-6 md:p-8">
+            <h2 className="text-lg md:text-xl font-semibold mb-1">
+              Mobile detailing available near you
+            </h2>
+            <p className="text-sm text-zinc-400 mb-4">
+              We provide mobile car detailing across all of Fairfield County, CT. Find your town below.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-sm">
+              {[
+                { name: "Stamford", href: "/stamford-ct" },
+                { name: "Greenwich", href: "/greenwich-ct" },
+                { name: "Westport", href: "/westport-ct" },
+                { name: "Norwalk", href: "/norwalk-ct" },
+                { name: "Fairfield", href: "/fairfield-ct" },
+                { name: "Trumbull", href: "/trumbull-ct" },
+                { name: "Stratford", href: "/stratford-ct" },
+                { name: "Milford", href: "/milford-ct" },
+                { name: "Southport", href: "/southport-ct" },
+              ].map((town) => (
+                <a
+                  key={town.name}
+                  href={town.href}
+                  className="flex items-center gap-2 text-zinc-300 hover:text-[#e1b11b] transition-colors"
+                >
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#e1b11b]" />
+                  {town.name}, CT
+                </a>
+              ))}
+            </div>
+            <p className="text-xs text-zinc-500 mt-4">
+              <a href="/service-areas-fairfield-county-ct" className="text-[#e1b11b] hover:underline">
+                View all service areas
+              </a>{" "}
+              — including Bridgeport, Darien, Shelton, Monroe, New Canaan, Wilton, Weston, Easton &amp; Ridgefield.
+            </p>
+          </section>
         </div>
       </section>
 

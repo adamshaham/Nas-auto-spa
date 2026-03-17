@@ -28,7 +28,7 @@ const PaintCorrectionPage = () => {
         />
         <meta
           name="keywords"
-          content="paint correction Fairfield County CT, swirl mark removal Connecticut, paint polishing Stamford CT, scratch removal Greenwich CT, machine polishing Westport CT, paint correction near me CT, auto polishing Norwalk CT, paint refinement Fairfield CT, car paint restoration CT, paint correction Trumbull CT, buffer mark removal Connecticut, paint enhancement Fairfield County"
+          content="paint correction near me, paint correction near me CT, paint correction near me Connecticut, swirl mark removal near me, scratch removal near me CT, paint polishing near me, paint correction Fairfield County CT, paint polishing Stamford CT, scratch removal Greenwich CT, machine polishing Westport CT, auto polishing Norwalk CT, paint refinement Fairfield CT, car paint restoration near me CT, paint correction Trumbull CT, best paint correction near me Connecticut"
         />
         <link rel="canonical" href="https://www.nasautospa.com/paint-correction-fairfield-county-ct" />
         <script type="application/ld+json">
@@ -489,6 +489,44 @@ const PaintCorrectionPage = () => {
               </a>
             </div>
           </motion.div>
+
+          {/* Service areas internal links */}
+          <section className="mt-14 border border-zinc-800 rounded-3xl bg-zinc-950/60 p-6 md:p-8">
+            <h2 className="text-lg md:text-xl font-semibold mb-1">
+              Paint correction available near you
+            </h2>
+            <p className="text-sm text-zinc-400 mb-4">
+              We perform professional paint correction across all of Fairfield County, CT. Find your town below.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-sm">
+              {[
+                { name: "Stamford", href: "/stamford-ct" },
+                { name: "Greenwich", href: "/greenwich-ct" },
+                { name: "Westport", href: "/westport-ct" },
+                { name: "Norwalk", href: "/norwalk-ct" },
+                { name: "Fairfield", href: "/fairfield-ct" },
+                { name: "Trumbull", href: "/trumbull-ct" },
+                { name: "Stratford", href: "/stratford-ct" },
+                { name: "Milford", href: "/milford-ct" },
+                { name: "Southport", href: "/southport-ct" },
+              ].map((town) => (
+                <a
+                  key={town.name}
+                  href={town.href}
+                  className="flex items-center gap-2 text-zinc-300 hover:text-[#e1b11b] transition-colors"
+                >
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#e1b11b]" />
+                  {town.name}, CT
+                </a>
+              ))}
+            </div>
+            <p className="text-xs text-zinc-500 mt-4">
+              <a href="/service-areas-fairfield-county-ct" className="text-[#e1b11b] hover:underline">
+                View all service areas
+              </a>{" "}
+              — including Bridgeport, Darien, Shelton, Monroe, New Canaan, Wilton, Weston, Easton &amp; Ridgefield.
+            </p>
+          </section>
         </div>
       </section>
 
