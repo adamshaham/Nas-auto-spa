@@ -274,25 +274,29 @@ const Contact = () => {
         selectedServices: formData.selectedServices,
       };
 
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+      let response;
+      try {
+        response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+      } catch (networkErr) {
+        throw new Error('Network error: ' + networkErr.message);
+      }
 
       let result;
-      const contentType = response.headers.get('content-type') || '';
-      if (contentType.includes('application/json')) {
-        result = await response.json();
-      } else {
-        const text = await response.text();
-        throw new Error(`Unexpected response: ${response.status}`);
+      const responseText = await response.text();
+      try {
+        result = JSON.parse(responseText);
+      } catch {
+        throw new Error('Non-JSON response (status ' + response.status + '): ' + responseText.substring(0, 200));
       }
 
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit form. Please try again.');
+        throw new Error('API error ' + response.status + ': ' + (result.error || 'Unknown') + (result.detail ? ' - ' + result.detail : ''));
       }
 
       setShowThankYou(true);
@@ -321,7 +325,7 @@ const Contact = () => {
     } catch (err) {
       console.error('Error submitting form:', err);
       setError(
-        'Something went wrong. Please call or text us directly at (203) 362-8259.'
+        err.message || 'Something went wrong. Please call or text us directly at (203) 362-8259.'
       );
     } finally {
       setIsSubmitting(false);
