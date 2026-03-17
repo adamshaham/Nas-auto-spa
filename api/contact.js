@@ -44,7 +44,7 @@ module.exports = async function handler(req, res) {
 
   const gmailUser = process.env.GMAIL_USER;
   const gmailPass = process.env.GMAIL_APP_PASSWORD;
-  const ownerPhone = process.env.OWNER_PHONE_NUMBER || "2033628259";
+  const ownerPhone = process.env.OWNER_PHONE_NUMBER || "9293076986";
   const carrierGateway = "@vtext.com";
 
   if (!gmailUser || !gmailPass) {
