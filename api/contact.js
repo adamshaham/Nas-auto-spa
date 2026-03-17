@@ -45,7 +45,7 @@ module.exports = async function handler(req, res) {
   const gmailUser = process.env.GMAIL_USER;
   const gmailPass = process.env.GMAIL_APP_PASSWORD;
   const ownerPhone = process.env.OWNER_PHONE_NUMBER || "9293076986";
-  const carrierGateway = "@vtext.com";
+  const carrierGateway = "@txt.att.net";
 
   if (!gmailUser || !gmailPass) {
     console.error("Missing GMAIL_USER or GMAIL_APP_PASSWORD environment variables");
