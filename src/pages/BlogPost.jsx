@@ -1,6 +1,7 @@
 // src/pages/BlogPost.jsx
 import React, { useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { BlogPost } from '../data/BlogData';
@@ -39,6 +40,38 @@ const BlogPostPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <Helmet>
+        <title>{post.title} | NAS Auto Spa Blog</title>
+        <meta name="description" content={post.excerpt} />
+        <link rel="canonical" href={`https://www.nasautospa.com/blog/${post.slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={`${post.title} | NAS Auto Spa`} />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:url" content={`https://www.nasautospa.com/blog/${post.slug}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": post.title,
+            "description": post.excerpt,
+            "datePublished": post.date,
+            "url": `https://www.nasautospa.com/blog/${post.slug}`,
+            "author": {
+              "@type": "Organization",
+              "name": "NAS Auto Spa LLC",
+              "url": "https://www.nasautospa.com"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "NAS Auto Spa LLC",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.nasautospa.com/logo.png"
+              }
+            }
+          })}
+        </script>
+      </Helmet>
       <Navbar />
 
       <main className="pt-28 pb-20 relative overflow-hidden">

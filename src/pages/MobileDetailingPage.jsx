@@ -24,8 +24,54 @@ const MobileDetailingPage = () => {
         <title>Mobile Car Detailing in Fairfield County, CT | NAS Auto Spa</title>
         <meta
           name="description"
-          content="NAS Auto Spa provides luxury mobile car detailing in Fairfield County, CT. We bring our own water and power for premium interior and exterior details at your home or office — with Stage 1, Stage 2, and Stage 3 packages."
+          content="Premium mobile car detailing in Fairfield County, CT by NAS Auto Spa. We come to your home or office with our own water & power for full interior & exterior details. Stage 1 ($199), Stage 2 ($299), Stage 3 ($399) packages. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County."
         />
+        <meta
+          name="keywords"
+          content="mobile car detailing Fairfield County CT, mobile detailing near me Connecticut, car detailing Stamford CT, auto detailing Greenwich CT, mobile car wash Westport CT, car cleaning Norwalk CT, mobile detailer Fairfield CT, interior detailing Fairfield County, exterior detailing CT, car detail Trumbull CT, mobile car wash near me, hand car wash Fairfield County, SUV detailing CT, luxury car detailing Connecticut, mobile auto detail Stratford CT"
+        />
+        <link rel="canonical" href="https://www.nasautospa.com/mobile-detailing-fairfield-county-ct" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Mobile Car Detailing in Fairfield County, CT",
+            "description": "Full interior & exterior mobile detailing packages. Stage 1 (Exterior + Interior Reset), Stage 2 (Detail + Paint Correction), and Stage 3 (Paint Correction + Ceramic Coating). We bring our own water and power.",
+            "provider": {
+              "@type": "AutoDetailing",
+              "@id": "https://www.nasautospa.com/#business",
+              "name": "NAS Auto Spa LLC"
+            },
+            "areaServed": {
+              "@type": "County",
+              "name": "Fairfield County, Connecticut"
+            },
+            "url": "https://www.nasautospa.com/mobile-detailing-fairfield-county-ct",
+            "offers": [
+              {
+                "@type": "Offer",
+                "name": "Stage 1 – Exterior + Interior Reset",
+                "priceCurrency": "USD",
+                "price": "199",
+                "description": "Full interior + exterior detail — hand wash, wheel cleaning, wax, steam cleaning, shampoo extraction."
+              },
+              {
+                "@type": "Offer",
+                "name": "Stage 2 – Detail + Paint Correction",
+                "priceCurrency": "USD",
+                "price": "299",
+                "description": "Everything in Stage 1 plus clay bar treatment and 1-step paint correction polish."
+              },
+              {
+                "@type": "Offer",
+                "name": "Stage 3 – Paint Correction + Ceramic Coating",
+                "priceCurrency": "USD",
+                "price": "399",
+                "description": "Full detail, 1-step correction, and ceramic coating protection for long-term shine."
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Navbar />

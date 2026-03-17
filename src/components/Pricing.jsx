@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 const Pricing = () => {
   const quickWashPackage = {
-    title: 'QUICK WASH',
-    price: '$30',
+    title: 'QUICK HAND WASH',
+    price: '$60',
     subtitle: 'EXTERIOR / INTERIOR',
     features: [
       { text: 'QUICK INTERIOR / EXTERIOR REFRESH', included: true },

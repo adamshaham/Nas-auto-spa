@@ -9,14 +9,36 @@ const StratfordPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
       <Helmet>
-        <title>
-          Mobile Auto Detailing in Stratford, CT
-        </title>
+        <title>Mobile Auto Detailing in Stratford, CT | NAS Auto Spa</title>
         <meta
           name="description"
-          content="Stratford, CT based mobile car detailing company serving Fairfield County. We bring our own water and power for full interior & exterior detailing, paint correction, ceramic coating, and fleet detailing."
+          content="NAS Auto Spa is based in Stratford, CT and provides premium mobile car detailing across Fairfield County. Full interior & exterior detailing, paint correction, ceramic coating & fleet detailing. We bring our own water & power to your home, office, or lot."
+        />
+        <meta
+          name="keywords"
+          content="mobile detailing Stratford CT, car detailing Stratford CT, auto detailing Stratford Connecticut, car wash Stratford CT, paint correction Stratford CT, ceramic coating Stratford CT, mobile car wash Stratford, fleet detailing Stratford CT, interior detailing Stratford, mobile detailer near me Stratford"
         />
         <link rel="canonical" href="https://www.nasautospa.com/stratford-ct" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Mobile Auto Detailing in Stratford, CT",
+            "description": "NAS Auto Spa is based in Stratford, CT. Premium mobile car detailing, paint correction, ceramic coating, and fleet detailing services.",
+            "provider": {
+              "@type": "AutoDetailing",
+              "@id": "https://www.nasautospa.com/#business",
+              "name": "NAS Auto Spa LLC",
+              "telephone": "+1-929-307-6986"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Stratford",
+              "containedInPlace": { "@type": "State", "name": "Connecticut" }
+            },
+            "url": "https://www.nasautospa.com/stratford-ct"
+          })}
+        </script>
       </Helmet>
 
       <Navbar />

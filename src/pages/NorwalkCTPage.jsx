@@ -9,14 +9,36 @@ const NorwalkCTPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
       <Helmet>
-        <title>
-          Mobile Auto Detailing in Norwalk, CT 
-        </title>
+        <title>Mobile Auto Detailing in Norwalk, CT | NAS Auto Spa</title>
         <meta
           name="description"
-          content="mobile detailing in Norwalk, CT. We bring our own water and power for full interior & exterior details, paint correction, ceramic coating, and small fleet services."
+          content="Professional mobile car detailing in Norwalk, CT by NAS Auto Spa. Full interior & exterior details, paint correction, ceramic coating & small fleet services. We bring our own water & power to your home, apartment, or office in Norwalk."
+        />
+        <meta
+          name="keywords"
+          content="mobile detailing Norwalk CT, car detailing Norwalk CT, auto detailing Norwalk Connecticut, car wash Norwalk CT, paint correction Norwalk CT, ceramic coating Norwalk CT, mobile car wash Norwalk, interior detailing Norwalk, fleet detailing Norwalk CT, mobile detailer near me Norwalk"
         />
         <link rel="canonical" href="https://www.nasautospa.com/norwalk-ct" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Mobile Auto Detailing in Norwalk, CT",
+            "description": "Professional mobile car detailing, paint correction, ceramic coating, and small fleet services in Norwalk, CT. We come to your location with our own water and power.",
+            "provider": {
+              "@type": "AutoDetailing",
+              "@id": "https://www.nasautospa.com/#business",
+              "name": "NAS Auto Spa LLC",
+              "telephone": "+1-929-307-6986"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Norwalk",
+              "containedInPlace": { "@type": "State", "name": "Connecticut" }
+            },
+            "url": "https://www.nasautospa.com/norwalk-ct"
+          })}
+        </script>
       </Helmet>
 
       <Navbar />

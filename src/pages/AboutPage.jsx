@@ -10,11 +10,16 @@ const AboutPage = () => {
   return (
     <>
       <Helmet>
-        <title>About Us | NAS Auto Spa</title>
+        <title>About NAS Auto Spa | Fairfield County's Premier Mobile Detailing Service</title>
         <meta
           name="description"
-          content="Learn more about NAS Auto Spa – Fairfield County’s top mobile detailing service for premium detailing, paint correction, ceramic coating, and commercial fleets."
+          content="NAS Auto Spa is Fairfield County's premier mobile auto detailing company based in Stratford, CT. Learn about our story, our commitment to quality, and why CT drivers trust us for premium detailing, paint correction, ceramic coating and fleet washing."
         />
+        <meta
+          name="keywords"
+          content="about NAS Auto Spa, mobile detailing company Fairfield County CT, auto detailing Stratford CT, who is NAS Auto Spa, best mobile detailer Connecticut, car detailing company Fairfield County"
+        />
+        <link rel="canonical" href="https://www.nasautospa.com/about" />
       </Helmet>
 
       {/* NAVBAR */}

@@ -24,8 +24,63 @@ const PaintCorrectionPage = () => {
         <title>Paint Correction in Fairfield County, CT | NAS Auto Spa</title>
         <meta
           name="description"
-          content="NAS Auto Spa provides professional paint correction in Fairfield County, CT. Remove swirl marks, light scratches, and haziness with proper machine polishing — a perfect base on its own or before ceramic coating."
+          content="Professional paint correction in Fairfield County, CT by NAS Auto Spa. Remove swirl marks, scratches & haziness with expert machine polishing. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County. The perfect prep before ceramic coating."
         />
+        <meta
+          name="keywords"
+          content="paint correction Fairfield County CT, swirl mark removal Connecticut, paint polishing Stamford CT, scratch removal Greenwich CT, machine polishing Westport CT, paint correction near me CT, auto polishing Norwalk CT, paint refinement Fairfield CT, car paint restoration CT, paint correction Trumbull CT, buffer mark removal Connecticut, paint enhancement Fairfield County"
+        />
+        <link rel="canonical" href="https://www.nasautospa.com/paint-correction-fairfield-county-ct" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Will paint correction remove every single scratch?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Not every scratch is safely removable. If a scratch has gone through the clear coat, we can often make it less noticeable, but fully removing it may require repainting. The goal is maximum improvement while keeping your clear coat healthy."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does a paint correction job take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most single-stage corrections take about a day. Multi-stage or darker vehicles can take longer depending on size, condition, and the level of finish you're aiming for."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Will the swirls come back right away after paint correction?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "If you wash the car properly, no. Swirls come from bad wash techniques and dirty media, not from the polishing itself. We're happy to walk you through safe wash methods so you keep the finish we just created."
+                }
+              }
+            ]
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Paint Correction in Fairfield County, CT",
+            "description": "Professional machine polishing to remove swirl marks, light scratches, and haziness from your vehicle's paint. Enhancement polish, correction & refinement, and advanced multi-stage options available.",
+            "provider": {
+              "@type": "AutoDetailing",
+              "@id": "https://www.nasautospa.com/#business",
+              "name": "NAS Auto Spa LLC"
+            },
+            "areaServed": {
+              "@type": "County",
+              "name": "Fairfield County, Connecticut"
+            },
+            "url": "https://www.nasautospa.com/paint-correction-fairfield-county-ct"
+          })}
+        </script>
       </Helmet>
 
       <Navbar />

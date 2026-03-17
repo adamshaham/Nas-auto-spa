@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -167,6 +168,18 @@ const ServicesPage = () => {
 
   return (
     <div className="bg-black min-h-screen text-white overflow-x-hidden w-full">
+      <Helmet>
+        <title>Auto Detailing Services in Fairfield County, CT | NAS Auto Spa</title>
+        <meta
+          name="description"
+          content="Explore NAS Auto Spa's full range of mobile auto detailing services in Fairfield County, CT. From detail packages and paint correction to ceramic coating and commercial fleet washing. We come to you with our own water & power."
+        />
+        <meta
+          name="keywords"
+          content="auto detailing services Fairfield County CT, mobile detailing services Connecticut, car detailing services near me, paint correction services CT, ceramic coating services Fairfield County, fleet washing services Connecticut, car care services Fairfield County CT"
+        />
+        <link rel="canonical" href="https://www.nasautospa.com/services" />
+      </Helmet>
       <Navbar />
 
       {/* HERO */}

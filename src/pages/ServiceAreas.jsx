@@ -30,11 +30,15 @@ const ServiceAreas = () => {
     <>
       <Helmet>
         <title>
-          Service Areas | NAS Auto Spa – Fairfield County CT Mobile Detailing
+          Service Areas – Fairfield County CT Mobile Detailing | NAS Auto Spa
         </title>
         <meta
           name="description"
-          content="NAS Auto Spa provides premium mobile detailing, paint correction, and ceramic coating throughout Fairfield County, CT. View our service area map and towns we cover."
+          content="NAS Auto Spa serves all of Fairfield County, CT with premium mobile detailing, paint correction, ceramic coating & fleet washing. We come to Stamford, Greenwich, Westport, Norwalk, Fairfield, Trumbull, Stratford, Milford, Bridgeport, Darien, New Canaan, Shelton, Monroe & more."
+        />
+        <meta
+          name="keywords"
+          content="mobile detailing Fairfield County CT, car detailing near me Connecticut, auto detailing service areas CT, mobile detailer Stamford Greenwich Westport Norwalk, car detailing Fairfield Trumbull Stratford Milford CT, ceramic coating service area Connecticut, paint correction service area Fairfield County"
         />
         <link
           rel="canonical"
@@ -201,16 +205,36 @@ const ServiceAreas = () => {
                 __html: JSON.stringify({
                   "@context": "https://schema.org",
                   "@type": "Service",
-                  name: "Mobile Auto Detailing in Fairfield County, CT",
-                  provider: {
-                    "@type": "LocalBusiness",
-                    name: "NAS Auto Spa LLC",
-                    areaServed: "Fairfield County, Connecticut",
+                  "name": "Mobile Auto Detailing in Fairfield County, CT",
+                  "description": "Premium mobile car detailing, paint correction, ceramic coating, and fleet washing throughout Fairfield County, Connecticut.",
+                  "url": "https://www.nasautospa.com/service-areas-fairfield-county-ct",
+                  "provider": {
+                    "@type": "AutoDetailing",
+                    "@id": "https://www.nasautospa.com/#business",
+                    "name": "NAS Auto Spa LLC",
+                    "telephone": "+1-929-307-6986",
                   },
-                  serviceArea: {
-                    "@type": "AdministrativeArea",
-                    name: "Fairfield County, Connecticut",
-                  },
+                  "areaServed": [
+                    { "@type": "County", "name": "Fairfield County, Connecticut" },
+                    { "@type": "City", "name": "Fairfield, CT" },
+                    { "@type": "City", "name": "Westport, CT" },
+                    { "@type": "City", "name": "Norwalk, CT" },
+                    { "@type": "City", "name": "Stamford, CT" },
+                    { "@type": "City", "name": "Bridgeport, CT" },
+                    { "@type": "City", "name": "Trumbull, CT" },
+                    { "@type": "City", "name": "Stratford, CT" },
+                    { "@type": "City", "name": "Shelton, CT" },
+                    { "@type": "City", "name": "Monroe, CT" },
+                    { "@type": "City", "name": "Milford, CT" },
+                    { "@type": "City", "name": "Darien, CT" },
+                    { "@type": "City", "name": "Greenwich, CT" },
+                    { "@type": "City", "name": "New Canaan, CT" },
+                    { "@type": "City", "name": "Wilton, CT" },
+                    { "@type": "City", "name": "Weston, CT" },
+                    { "@type": "City", "name": "Easton, CT" },
+                    { "@type": "City", "name": "Ridgefield, CT" },
+                    { "@type": "City", "name": "Southport, CT" },
+                  ],
                 }),
               }}
             />

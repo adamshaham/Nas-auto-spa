@@ -9,14 +9,36 @@ const MilfordCTPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
       <Helmet>
-        <title>
-          Mobile Car Detailing in Milford, CT 
-        </title>
+        <title>Mobile Car Detailing in Milford, CT | NAS Auto Spa</title>
         <meta
           name="description"
-          content="Mobile Detailing in Milford, CT. We offer interior & exterior details, paint correction, and ceramic coating with a fully mobile setup including our own water and power."
+          content="Professional mobile car detailing in Milford, CT by NAS Auto Spa. Interior & exterior details, paint correction & ceramic coating with a fully mobile setup. We bring our own water & power to your home, driveway, or office in Milford."
+        />
+        <meta
+          name="keywords"
+          content="mobile detailing Milford CT, car detailing Milford CT, auto detailing Milford Connecticut, car wash Milford CT, paint correction Milford CT, ceramic coating Milford CT, mobile car wash Milford, interior detailing Milford, mobile detailer near me Milford"
         />
         <link rel="canonical" href="https://www.nasautospa.com/milford-ct" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Mobile Car Detailing in Milford, CT",
+            "description": "Professional mobile car detailing, paint correction, and ceramic coating in Milford, CT. Fully mobile setup with our own water and power.",
+            "provider": {
+              "@type": "AutoDetailing",
+              "@id": "https://www.nasautospa.com/#business",
+              "name": "NAS Auto Spa LLC",
+              "telephone": "+1-929-307-6986"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Milford",
+              "containedInPlace": { "@type": "State", "name": "Connecticut" }
+            },
+            "url": "https://www.nasautospa.com/milford-ct"
+          })}
+        </script>
       </Helmet>
 
       <Navbar />

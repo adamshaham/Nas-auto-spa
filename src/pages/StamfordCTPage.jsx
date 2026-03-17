@@ -9,14 +9,36 @@ const StamfordCTPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
       <Helmet>
-        <title>
-          Mobile Auto Detailing in Stamford, CT
-        </title>
+        <title>Mobile Auto Detailing in Stamford, CT | NAS Auto Spa</title>
         <meta
           name="description"
-          content="Mobile detailing in Stamford, CT. We bring our own water and power for luxury interior and exterior details, paint correction, and ceramic coating at your home or building."
+          content="Professional mobile car detailing in Stamford, CT by NAS Auto Spa. Premium interior & exterior details, paint correction, and ceramic coating at your home or office. We bring our own water & power. Serving Downtown Stamford, Harbor Point, North Stamford & Springdale."
+        />
+        <meta
+          name="keywords"
+          content="mobile detailing Stamford CT, car detailing Stamford CT, auto detailing Stamford Connecticut, car wash Stamford CT, mobile car wash Stamford, paint correction Stamford CT, ceramic coating Stamford CT, interior detailing Stamford, exterior detailing Stamford CT, mobile detailer near me Stamford, car cleaning Stamford Connecticut"
         />
         <link rel="canonical" href="https://www.nasautospa.com/stamford-ct" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Mobile Auto Detailing in Stamford, CT",
+            "description": "Premium mobile car detailing, paint correction, and ceramic coating in Stamford, CT. We come to your home, apartment complex, or office with our own water and power.",
+            "provider": {
+              "@type": "AutoDetailing",
+              "@id": "https://www.nasautospa.com/#business",
+              "name": "NAS Auto Spa LLC",
+              "telephone": "+1-929-307-6986"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Stamford",
+              "containedInPlace": { "@type": "State", "name": "Connecticut" }
+            },
+            "url": "https://www.nasautospa.com/stamford-ct"
+          })}
+        </script>
       </Helmet>
 
       <Navbar />

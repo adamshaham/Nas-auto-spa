@@ -9,14 +9,36 @@ const FairfieldCTPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
       <Helmet>
-        <title>
-          Mobile Car Detailing in Fairfield, CT
-        </title>
+        <title>Mobile Car Detailing in Fairfield, CT | NAS Auto Spa</title>
         <meta
           name="description"
-          content="Mobile Car Detailing in Fairfield, CT. We come to you with our own water and power for interior & exterior detailing, paint correction, and ceramic coating anywhere in Fairfield."
+          content="Professional mobile car detailing in Fairfield, CT by NAS Auto Spa. Interior & exterior detailing, paint correction & ceramic coating at your home, apartment, or office. We bring our own water & power. Serving Fairfield Beach, Black Rock Turnpike & Fairfield University area."
+        />
+        <meta
+          name="keywords"
+          content="mobile detailing Fairfield CT, car detailing Fairfield CT, auto detailing Fairfield Connecticut, car wash Fairfield CT, paint correction Fairfield CT, ceramic coating Fairfield CT, mobile car wash Fairfield, interior detailing Fairfield, mobile detailer near me Fairfield, car cleaning Fairfield Connecticut"
         />
         <link rel="canonical" href="https://www.nasautospa.com/fairfield-ct" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Mobile Car Detailing in Fairfield, CT",
+            "description": "Professional mobile car detailing, paint correction, and ceramic coating in Fairfield, CT. Serving homes, student housing, and office locations.",
+            "provider": {
+              "@type": "AutoDetailing",
+              "@id": "https://www.nasautospa.com/#business",
+              "name": "NAS Auto Spa LLC",
+              "telephone": "+1-929-307-6986"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Fairfield",
+              "containedInPlace": { "@type": "State", "name": "Connecticut" }
+            },
+            "url": "https://www.nasautospa.com/fairfield-ct"
+          })}
+        </script>
       </Helmet>
 
       <Navbar />

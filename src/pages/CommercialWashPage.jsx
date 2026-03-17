@@ -45,12 +45,66 @@ const CommercialWashPage = () => {
         <title>Fleet Washing & Commercial Detailing in Fairfield County, CT | NAS Auto Spa</title>
         <meta
           name="description"
-          content="Keep your work trucks, vans, and service vehicles clean with mobile fleet washing and commercial detailing in Fairfield County, CT. Reliable schedules and a professional image for your business."
+          content="Mobile fleet washing and commercial vehicle detailing in Fairfield County, CT by NAS Auto Spa. We keep your work trucks, vans, and service vehicles clean on-site with our own water & power. Scheduled service for landscapers, contractors & businesses across Stamford, Norwalk, Fairfield & beyond."
+        />
+        <meta
+          name="keywords"
+          content="fleet washing Fairfield County CT, commercial vehicle detailing Connecticut, fleet detailing near me CT, truck washing Stamford CT, van detailing Norwalk CT, commercial detailing Fairfield CT, fleet wash service Connecticut, mobile fleet washing CT, business vehicle detailing Fairfield County, work truck cleaning CT, landscaping fleet washing Connecticut"
         />
         <link
           rel="canonical"
           href="https://www.nasautospa.com/fleet-detailing-fairfield-county-ct"
         />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Do you bring your own water and power for fleet washing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. We're fully mobile and self-contained. As long as we have safe access to your vehicles, we can handle the rest."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How many fleet vehicles can you wash in one visit?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It depends on the service level and condition, but we can plan routes for anything from a few units to larger fleets. We'll give you realistic numbers once we know your setup."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can you work early mornings or evenings for fleet washing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "In many cases, yes. We know fleets are busy during the day, so we can explore off-peak windows to minimize disruption to your routes."
+                }
+              }
+            ]
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Fleet Washing & Commercial Detailing in Fairfield County, CT",
+            "description": "Scheduled on-site mobile fleet washing and commercial vehicle detailing for businesses across Fairfield County, CT. Maintenance washes, interior refresh, and deep cleaning options available.",
+            "provider": {
+              "@type": "AutoDetailing",
+              "@id": "https://www.nasautospa.com/#business",
+              "name": "NAS Auto Spa LLC"
+            },
+            "areaServed": {
+              "@type": "County",
+              "name": "Fairfield County, Connecticut"
+            },
+            "url": "https://www.nasautospa.com/fleet-detailing-fairfield-county-ct"
+          })}
+        </script>
       </Helmet>
 
       <Navbar />

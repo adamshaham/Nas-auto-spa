@@ -24,8 +24,73 @@ const CeramicCoatingPage = () => {
         <title>Ceramic Coating in Fairfield County, CT | NAS Auto Spa</title>
         <meta
           name="description"
-          content="Protect your investment with professional ceramic coating in Fairfield County, CT. NAS Auto Spa delivers deep gloss, hydrophobic protection, and easier maintenance washes with proper prep and application."
+          content="Professional ceramic coating in Fairfield County, CT by NAS Auto Spa. Get long-lasting hydrophobic paint protection, deep gloss, and easier maintenance washes. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County. Starting at $399."
         />
+        <meta
+          name="keywords"
+          content="ceramic coating Fairfield County CT, ceramic coating near me Connecticut, paint protection Stamford CT, ceramic coating Greenwich CT, hydrophobic coating Westport CT, ceramic coat Norwalk CT, car coating Fairfield CT, ceramic coating Trumbull CT, best ceramic coating CT, professional ceramic coating Connecticut, nano ceramic coating Fairfield County"
+        />
+        <link rel="canonical" href="https://www.nasautospa.com/ceramic-coating-fairfield-county-ct" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How long does a ceramic coating last?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It depends on the product level and how the car is cared for. With proper washing and maintenance, coatings can last years instead of months like traditional waxes. We'll walk you through realistic expectations for your package."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I still need to wash the car after ceramic coating?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Coatings make washing much easier and safer, but they don't replace regular maintenance. The upside is that dirt and grime don't bond as hard, so the car cleans up much faster."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you recommend paint correction before ceramic coating?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Almost always. Ceramic locks in whatever condition the paint is in. Doing at least a light correction first means we're locking in a glossy, refined finish instead of sealing in years of swirls."
+                }
+              }
+            ]
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Ceramic Coating in Fairfield County, CT",
+            "description": "Professional ceramic coating application with proper paint prep, correction, and long-lasting hydrophobic protection for vehicles in Fairfield County, Connecticut.",
+            "provider": {
+              "@type": "AutoDetailing",
+              "@id": "https://www.nasautospa.com/#business",
+              "name": "NAS Auto Spa LLC"
+            },
+            "areaServed": {
+              "@type": "County",
+              "name": "Fairfield County, Connecticut"
+            },
+            "url": "https://www.nasautospa.com/ceramic-coating-fairfield-county-ct",
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "USD",
+              "price": "399",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": "399",
+                "priceCurrency": "USD"
+              }
+            }
+          })}
+        </script>
       </Helmet>
 
       <Navbar />
