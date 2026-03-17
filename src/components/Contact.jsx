@@ -282,7 +282,14 @@ const Contact = () => {
         body: JSON.stringify(payload),
       });
 
-      const result = await response.json();
+      let result;
+      const contentType = response.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        result = await response.json();
+      } else {
+        const text = await response.text();
+        throw new Error(`Unexpected response: ${response.status}`);
+      }
 
       if (!response.ok) {
         throw new Error(result.error || 'Failed to submit form. Please try again.');
@@ -314,7 +321,7 @@ const Contact = () => {
     } catch (err) {
       console.error('Error submitting form:', err);
       setError(
-        'Something went wrong. Please call or text us directly at (929) 307-6986.'
+        'Something went wrong. Please call or text us directly at (203) 362-8259.'
       );
     } finally {
       setIsSubmitting(false);
