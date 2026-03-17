@@ -13,7 +13,7 @@
       "destination": "/robots.txt"
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/(.*)",
       "destination": "/"
     }
   ]
