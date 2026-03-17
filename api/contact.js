@@ -1,4 +1,43 @@
-const nodemailer = require("nodemailer");
+const https = require("https");
+
+function sendTwilioSMS(accountSid, authToken, from, to, body) {
+  return new Promise((resolve, reject) => {
+    const payload = new URLSearchParams({ To: to, From: from, Body: body }).toString();
+    const auth = Buffer.from(`${accountSid}:${authToken}`).toString("base64");
+
+    const options = {
+      hostname: "api.twilio.com",
+      path: `/2010-04-01/Accounts/${accountSid}/Messages.json`,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Length": Buffer.byteLength(payload),
+        Authorization: `Basic ${auth}`,
+      },
+    };
+
+    const req = https.request(options, (res) => {
+      let data = "";
+      res.on("data", (chunk) => (data += chunk));
+      res.on("end", () => {
+        try {
+          const parsed = JSON.parse(data);
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            resolve(parsed);
+          } else {
+            reject(new Error(parsed.message || `Twilio error ${res.statusCode}`));
+          }
+        } catch {
+          reject(new Error("Invalid response from Twilio"));
+        }
+      });
+    });
+
+    req.on("error", reject);
+    req.write(payload);
+    req.end();
+  });
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -31,7 +70,7 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  const smsText =
+  const smsBody =
     `NEW LEAD\n` +
     `${firstName} ${lastName}\n` +
     `Ph: ${phone}\n` +
@@ -42,35 +81,21 @@ module.exports = async function handler(req, res) {
     `When: ${timing || "N/A"}${preferredDate && preferredDate !== "Not specified" ? ` - ${preferredDate}` : ""}\n` +
     (message ? `Note: ${message}` : "");
 
-  const gmailUser = process.env.GMAIL_USER;
-  const gmailPass = process.env.GMAIL_APP_PASSWORD;
+  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+  const authToken = process.env.TWILIO_AUTH_TOKEN;
+  const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
   const ownerPhone = process.env.OWNER_PHONE_NUMBER || "9293076986";
-  const carrierGateway = "@txt.att.net";
 
-  if (!gmailUser || !gmailPass) {
-    console.error("Missing GMAIL_USER or GMAIL_APP_PASSWORD environment variables");
-    return res.status(500).json({ error: "Server configuration error: missing email credentials" });
+  if (!accountSid || !authToken || !twilioPhone) {
+    console.error("Missing Twilio environment variables");
+    return res.status(500).json({ error: "Server configuration error: missing Twilio credentials" });
   }
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: gmailUser,
-      pass: gmailPass,
-    },
-  });
-
   try {
-    await transporter.sendMail({
-      from: gmailUser,
-      to: `${ownerPhone}${carrierGateway}`,
-      subject: "",
-      text: smsText,
-    });
-
+    await sendTwilioSMS(accountSid, authToken, twilioPhone, `+1${ownerPhone}`, smsBody);
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error("Email-to-SMS error:", err.message);
+    console.error("SMS send error:", err.message);
     return res.status(500).json({ error: "Failed to send notification", detail: err.message });
   }
 };
