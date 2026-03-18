@@ -7,7 +7,17 @@ const Pricing = () => {
     price: '$50',
     subtitle: 'EXTERIOR / INTERIOR',
     features: [
-      { text: 'QUICK INTERIOR / EXTERIOR REFRESH', included: true },
+    ],
+    popular: false,
+  };
+
+  const monthlyWashPackage = {
+    title: 'MAINTENANCE WASH',
+    price: '$150',
+    priceNote: '/ MONTH',
+    subtitle: 'KEEP IT CLEAN ALL MONTH',
+    features: [
+ 
     ],
     popular: false,
   };
@@ -278,9 +288,52 @@ const Pricing = () => {
           </h2>
         </div>
 
-        {/* Quick Wash */}
-        <div className="w-full mb-4 md:mb-6">
-          {renderHorizontalEnhancementsCard(quickWashPackage)}
+        {/* Quick Wash + Monthly Wash */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
+          {[quickWashPackage, monthlyWashPackage].map((pkg, i) => (
+            <div
+              key={i}
+              className="relative bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20 backdrop-blur-sm p-5 md:p-6 rounded-lg hover:scale-[1.01] hover:border-yellow-400/80 transition-all duration-300 flex flex-col h-full"
+            >
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
+                {pkg.title}
+              </h3>
+              <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-3">
+                {pkg.subtitle}
+              </p>
+              {pkg.price && (
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="text-2xl md:text-3xl font-bold text-white">
+                    {pkg.price}
+                  </span>
+                  {pkg.priceNote && (
+                    <span className="text-gray-400 text-xs md:text-sm">
+                      {pkg.priceNote}
+                    </span>
+                  )}
+                </div>
+              )}
+              <ul className="space-y-2 mb-5 flex-grow">
+                {pkg.features
+                  .filter((f) => f.text)
+                  .map((feature, idx) => (
+                    <li key={idx} className="flex items-start text-white/90 text-xs">
+                      <svg className="w-4 h-4 text-yellow-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{feature.text}</span>
+                    </li>
+                  ))}
+              </ul>
+              <button
+                type="button"
+                onClick={() => handlePackageClick(pkg.title)}
+                className="block w-full py-2 md:py-3 text-center bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base mt-auto"
+              >
+                Book Now
+              </button>
+            </div>
+          ))}
         </div>
 
         {/* Main Packages */}
