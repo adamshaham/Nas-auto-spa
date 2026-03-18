@@ -58,7 +58,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
+          <Link to="/" className="flex-shrink-0 flex items-center gap-3 mr-3 lg:mr-5">
             <img
               src="/images/navbarlogo.png"
               alt="NAS Auto Spa Logo"
@@ -210,16 +210,11 @@ const Navbar = () => {
               </div>
             </div>
             <span className="text-zinc-500 text-xs select-none">|</span>
-            <Link
-              to="/#contact"
-              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
-            >
-              Contact
-            </Link>
+         
           </div>
 
           {/* Desktop Phone Button */}
-          <div className="hidden md:flex items-center flex-shrink-0">
+          <div className="hidden md:flex items-center flex-shrink-0 ml-3 lg:ml-5">
             <a
               href="tel:19293076986"
               className="px-3 lg:px-4 py-1.5 rounded-md bg-[#dcab18] text-black text-[11px] lg:text-xs xl:text-sm font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 hover:text-white transition-all shadow-md whitespace-nowrap"
