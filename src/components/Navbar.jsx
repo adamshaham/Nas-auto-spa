@@ -75,39 +75,42 @@ const Navbar = () => {
             >
               Detail Packages
             </Link>
+            <span className="text-zinc-500 text-xs select-none">|</span>
             <Link
               to="/paint-correction-fairfield-county-ct"
               className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               Paint Correction
             </Link>
+            <span className="text-zinc-500 text-xs select-none">|</span>
             <Link
               to="/ceramic-coating-fairfield-county-ct"
               className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               Ceramic Coating
             </Link>
+            <span className="text-zinc-500 text-xs select-none">|</span>
             <Link
               to="/fleet-detailing-fairfield-county-ct"
               className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               Fleet Detailing
             </Link>
-
+            <span className="text-zinc-500 text-xs select-none">|</span>
             <Link
               to="/gallery"
               className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               Gallery
             </Link>
-
+            <span className="text-zinc-500 text-xs select-none">|</span>
             <Link
               to="/about"
               className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               About
             </Link>
-
+            <span className="text-zinc-500 text-xs select-none">|</span>
             {/* SERVICE AREAS CLICK DROPDOWN */}
             <div className="relative" ref={serviceDropdownRef}>
               <button
@@ -206,7 +209,7 @@ const Navbar = () => {
                 </Link>
               </div>
             </div>
-
+            <span className="text-zinc-500 text-xs select-none">|</span>
             <Link
               to="/#contact"
               className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
