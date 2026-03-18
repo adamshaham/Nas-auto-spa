@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const Pricing = () => {
   const quickWashPackage = {
     title: 'QUICK HAND WASH',
-    price: '$60',
+    price: '$50',
     subtitle: 'EXTERIOR / INTERIOR',
     features: [
       { text: 'QUICK INTERIOR / EXTERIOR REFRESH', included: true },
@@ -15,7 +15,7 @@ const Pricing = () => {
   const mainPackages = [
     {
       title: 'STAGE 1',
-      price: '$199',
+      price: '$250',
       priceNote: 'STARTING AT',
       subtitle: 'Full interior + exterior detail — perfect base reset for most vehicles.',
       features: [
@@ -35,7 +35,7 @@ const Pricing = () => {
     },
     {
       title: 'STAGE 2',
-      price: '$299',
+      price: '$350',
       priceNote: 'STARTING AT',
       subtitle: 'Everything in Stage 1, plus clay bar and a 1-step polish to remove light swirls and boost gloss.',
       features: [
@@ -55,7 +55,7 @@ const Pricing = () => {
     },
     {
       title: 'STAGE 3',
-      price: '$399',
+      price: '$500',
       priceNote: 'STARTING AT',
       subtitle: 'Full detail, 1-step correction, and 6 year ceramic coating protection for long-term shine.',
       features: [
