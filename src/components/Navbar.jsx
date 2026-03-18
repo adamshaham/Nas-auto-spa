@@ -67,43 +67,43 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-6">
+          <div className="hidden md:flex items-center gap-2 lg:gap-4 xl:gap-6">
             {/* SERVICES DIRECTLY ON NAVBAR */}
             <Link
               to="/mobile-detailing-fairfield-county-ct"
-              className="text-xs md:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               Detail Packages
             </Link>
             <Link
               to="/paint-correction-fairfield-county-ct"
-              className="text-xs md:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               Paint Correction
             </Link>
             <Link
               to="/ceramic-coating-fairfield-county-ct"
-              className="text-xs md:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               Ceramic Coating
             </Link>
             <Link
               to="/fleet-detailing-fairfield-county-ct"
-              className="text-xs md:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               Fleet Detailing
             </Link>
 
             <Link
               to="/gallery"
-              className="text-xs md:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               Gallery
             </Link>
 
             <Link
               to="/about"
-              className="text-xs md:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               About
             </Link>
@@ -113,7 +113,7 @@ const Navbar = () => {
               <button
                 type="button"
                 onClick={() => setIsServiceOpen((prev) => !prev)}
-                className="flex items-center gap-1 text-xs md:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+                className="flex items-center gap-1 text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
               >
                 <span>Service Areas</span>
                 <svg
@@ -209,17 +209,17 @@ const Navbar = () => {
 
             <Link
               to="/#contact"
-              className="text-xs md:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide"
+              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
             >
               Contact
             </Link>
           </div>
 
           {/* Desktop Phone Button */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:flex items-center flex-shrink-0">
             <a
               href="tel:19293076986"
-              className="px-3 py-1.5 rounded-md bg-[#dcab18] text-black text-xs md:text-sm font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 hover:text-white transition-all shadow-md"
+              className="px-3 lg:px-4 py-1.5 rounded-md bg-[#dcab18] text-black text-[11px] lg:text-xs xl:text-sm font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 hover:text-white transition-all shadow-md whitespace-nowrap"
             >
               (929) 307-6986
             </a>
