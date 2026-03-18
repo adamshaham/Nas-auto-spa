@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
-  const [isServiceOpen, setIsServiceOpen] = useState(false); // Service Areas dropdown
+  const [isServiceOpen, setIsServiceOpen] = useState(false);
 
   const serviceDropdownRef = useRef(null);
 
@@ -18,7 +18,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Click outside to close Service Areas dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -42,6 +41,12 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
+  const navLinkClass =
+    "text-[11px] xl:text-xs font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap";
+  const divider = (
+    <span className="text-zinc-600 text-[10px] select-none">|</span>
+  );
+
   return (
     <nav
       className={`
@@ -55,68 +60,50 @@ const Navbar = () => {
         }
       `}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between h-16 md:h-20">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0 flex items-center gap-3 mr-3 lg:mr-5">
+          <Link to="/" className="flex-shrink-0 flex items-center mr-4">
             <img
               src="/images/navbarlogo.png"
               alt="NAS Auto Spa Logo"
-              className="h-7 md:h-10 w-auto"
+              className="h-7 lg:h-10 w-auto"
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-2 lg:gap-4 xl:gap-6">
-            {/* SERVICES DIRECTLY ON NAVBAR */}
-            <Link
-              to="/mobile-detailing-fairfield-county-ct"
-              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
-            >
+          {/* Desktop Nav - only shows at lg (1024px+) */}
+          <div className="hidden lg:flex items-center gap-2 xl:gap-4">
+            <Link to="/mobile-detailing-fairfield-county-ct" className={navLinkClass}>
               Detail Packages
             </Link>
-            <span className="text-zinc-500 text-xs select-none">|</span>
-            <Link
-              to="/paint-correction-fairfield-county-ct"
-              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
-            >
+            {divider}
+            <Link to="/paint-correction-fairfield-county-ct" className={navLinkClass}>
               Paint Correction
             </Link>
-            <span className="text-zinc-500 text-xs select-none">|</span>
-            <Link
-              to="/ceramic-coating-fairfield-county-ct"
-              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
-            >
+            {divider}
+            <Link to="/ceramic-coating-fairfield-county-ct" className={navLinkClass}>
               Ceramic Coating
             </Link>
-            <span className="text-zinc-500 text-xs select-none">|</span>
-            <Link
-              to="/fleet-detailing-fairfield-county-ct"
-              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
-            >
+            {divider}
+            <Link to="/fleet-detailing-fairfield-county-ct" className={navLinkClass}>
               Fleet Detailing
             </Link>
-            <span className="text-zinc-500 text-xs select-none">|</span>
-            <Link
-              to="/gallery"
-              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
-            >
+            {divider}
+            <Link to="/gallery" className={navLinkClass}>
               Gallery
             </Link>
-            <span className="text-zinc-500 text-xs select-none">|</span>
-            <Link
-              to="/about"
-              className="text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
-            >
+            {divider}
+            <Link to="/about" className={navLinkClass}>
               About
             </Link>
-            <span className="text-zinc-500 text-xs select-none">|</span>
-            {/* SERVICE AREAS CLICK DROPDOWN */}
+            {divider}
+
+            {/* SERVICE AREAS DROPDOWN */}
             <div className="relative" ref={serviceDropdownRef}>
               <button
                 type="button"
                 onClick={() => setIsServiceOpen((prev) => !prev)}
-                className="flex items-center gap-1 text-[11px] lg:text-xs xl:text-sm font-medium text-white hover:text-[#e1b11b] uppercase tracking-wide whitespace-nowrap"
+                className={`flex items-center gap-1 ${navLinkClass}`}
               >
                 <span>Service Areas</span>
                 <svg
@@ -136,7 +123,6 @@ const Navbar = () => {
                 </svg>
               </button>
 
-              {/* Dropdown menu */}
               <div
                 className={`
                   absolute left-0 mt-2 min-w-[220px] rounded-xl border border-zinc-800 
@@ -144,204 +130,109 @@ const Navbar = () => {
                   ${isServiceOpen ? "block" : "hidden"}
                 `}
               >
-                <Link
-                  to="/fairfield-ct"
-                  onClick={() => setIsServiceOpen(false)}
-                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
-                >
-                  Fairfield, CT
-                </Link>
-                <Link
-                  to="/westport-ct"
-                  onClick={() => setIsServiceOpen(false)}
-                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
-                >
-                  Westport, CT
-                </Link>
-                <Link
-                  to="/southport-ct"
-                  onClick={() => setIsServiceOpen(false)}
-                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
-                >
-                  Southport, CT
-                </Link>
-                <Link
-                  to="/stamford-ct"
-                  onClick={() => setIsServiceOpen(false)}
-                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
-                >
-                  Stamford, CT
-                </Link>
-                <Link
-                  to="/greenwich-ct"
-                  onClick={() => setIsServiceOpen(false)}
-                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
-                >
-                  Greenwich, CT
-                </Link>
-                <Link
-                  to="/norwalk-ct"
-                  onClick={() => setIsServiceOpen(false)}
-                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
-                >
-                  Norwalk, CT
-                </Link>
-                <Link
-                  to="/trumbull-ct"
-                  onClick={() => setIsServiceOpen(false)}
-                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
-                >
-                  Trumbull, CT
-                </Link>
-                <Link
-                  to="/stratford-ct"
-                  onClick={() => setIsServiceOpen(false)}
-                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
-                >
-                  Stratford, CT
-                </Link>
-                <Link
-                  to="/milford-ct"
-                  onClick={() => setIsServiceOpen(false)}
-                  className="block px-4 py-2 text-xs md:text-sm text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
-                >
-                  Milford, CT
-                </Link>
+                {[
+                  { to: "/fairfield-ct", label: "Fairfield, CT" },
+                  { to: "/westport-ct", label: "Westport, CT" },
+                  { to: "/southport-ct", label: "Southport, CT" },
+                  { to: "/stamford-ct", label: "Stamford, CT" },
+                  { to: "/greenwich-ct", label: "Greenwich, CT" },
+                  { to: "/norwalk-ct", label: "Norwalk, CT" },
+                  { to: "/trumbull-ct", label: "Trumbull, CT" },
+                  { to: "/stratford-ct", label: "Stratford, CT" },
+                  { to: "/milford-ct", label: "Milford, CT" },
+                ].map((town) => (
+                  <Link
+                    key={town.to}
+                    to={town.to}
+                    onClick={() => setIsServiceOpen(false)}
+                    className="block px-4 py-2 text-xs text-zinc-200 hover:text-black hover:bg-[#e1b11b] uppercase tracking-wide"
+                  >
+                    {town.label}
+                  </Link>
+                ))}
               </div>
             </div>
-            <span className="text-zinc-500 text-xs select-none">|</span>
-         
+
+            {divider}
+            <Link to="/#contact" className={navLinkClass}>
+              Contact
+            </Link>
           </div>
 
           {/* Desktop Phone Button */}
-          <div className="hidden md:flex items-center flex-shrink-0 ml-3 lg:ml-5">
+          <div className="hidden lg:flex items-center flex-shrink-0 ml-4">
             <a
               href="tel:19293076986"
-              className="px-3 lg:px-4 py-1.5 rounded-md bg-[#dcab18] text-black text-[11px] lg:text-xs xl:text-sm font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 hover:text-white transition-all shadow-md whitespace-nowrap"
+              className="px-4 py-1.5 rounded-md bg-[#dcab18] text-black text-[11px] xl:text-xs font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 hover:text-white transition-all shadow-md whitespace-nowrap"
             >
               (929) 307-6986
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-white focus:outline-none"
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-            aria-label="Toggle navigation menu"
-          >
-            {isMenuOpen ? (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
-          </button>
+          {/* Mobile Menu Button - shows below lg */}
+          <div className="flex lg:hidden items-center gap-3">
+            <a
+              href="tel:19293076986"
+              className="px-3 py-1.5 rounded-md bg-[#dcab18] text-black text-xs font-semibold tracking-wide border border-zinc-700 hover:bg-zinc-800 hover:text-white transition-all shadow-md whitespace-nowrap"
+            >
+              (929) 307-6986
+            </a>
+            <button
+              className="text-white focus:outline-none"
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+              aria-label="Toggle navigation menu"
+            >
+              {isMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Modern Mobile Menu (full-screen overlay) */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-20 bottom-0 bg-black/80 backdrop-blur-xl z-40">
+        <div className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-black/80 backdrop-blur-xl z-40">
           <div className="max-w-7xl mx-auto px-4 pt-4">
             <div className="rounded-2xl border border-zinc-800 bg-zinc-950/95 p-5 space-y-4 shadow-[0_20px_60px_rgba(0,0,0,0.7)]">
-              {/* Section label */}
               <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500 mb-1">
-                Navigate
-              </p>
-
-              {/* SERVICES DIRECTLY IN MOBILE MENU */}
-              <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500 mt-1 mb-1">
                 Services
               </p>
 
-              <Link
-                to="/mobile-detailing-fairfield-county-ct"
-                onClick={closeMenu}
-                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
-              >
+              <Link to="/mobile-detailing-fairfield-county-ct" onClick={closeMenu} className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase">
                 Detail Packages
               </Link>
-              <Link
-                to="/paint-correction-fairfield-county-ct"
-                onClick={closeMenu}
-                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
-              >
+              <Link to="/paint-correction-fairfield-county-ct" onClick={closeMenu} className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase">
                 Paint Correction
               </Link>
-              <Link
-                to="/ceramic-coating-fairfield-county-ct"
-                onClick={closeMenu}
-                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
-              >
+              <Link to="/ceramic-coating-fairfield-county-ct" onClick={closeMenu} className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase">
                 Ceramic Coating
               </Link>
-              <Link
-                to="/fleet-detailing-fairfield-county-ct"
-                onClick={closeMenu}
-                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
-              >
+              <Link to="/fleet-detailing-fairfield-county-ct" onClick={closeMenu} className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase">
                 Fleet Detailing
               </Link>
 
               <div className="pt-2 border-t border-zinc-800 mt-2" />
 
-              <Link
-                to="/gallery"
-                onClick={closeMenu}
-                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
-              >
+              <Link to="/gallery" onClick={closeMenu} className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase">
                 Gallery
               </Link>
-
-              <Link
-                to="/about"
-                onClick={closeMenu}
-                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
-              >
+              <Link to="/about" onClick={closeMenu} className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase">
                 About
               </Link>
-
-              {/* Service areas link in mobile (you can change this to a hub page if you create one) */}
-              <Link
-                to="/fairfield-ct"
-                onClick={closeMenu}
-                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
-              >
+              <Link to="/fairfield-ct" onClick={closeMenu} className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase">
                 Service Areas
               </Link>
-
-              <Link
-                to="/#contact"
-                onClick={closeMenu}
-                className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase"
-              >
+              <Link to="/#contact" onClick={closeMenu} className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase">
                 Contact
               </Link>
 
-              {/* Divider + CTA */}
               <div className="pt-4 border-t border-zinc-800 mt-2">
                 <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500 mb-2">
                   Book Now
@@ -349,10 +240,7 @@ const Navbar = () => {
                 <a
                   href="tel:19293076986"
                   onClick={closeMenu}
-                  className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold tracking-wide
-                    bg-[#e1b11b]
-                    text-black shadow-lg shadow-yellow-500/20
-                    hover:brightness-110 transition-all"
+                  className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold tracking-wide bg-[#e1b11b] text-black shadow-lg shadow-yellow-500/20 hover:brightness-110 transition-all"
                 >
                   Call / Text (929) 307-6986
                 </a>

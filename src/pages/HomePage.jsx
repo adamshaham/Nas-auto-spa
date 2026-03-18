@@ -8,6 +8,7 @@ import ServicesList from '../components/ServicesList';
 import Pricing from '../components/Pricing';
 import Contact from '../components/Contact';
 import Testimonials from '../components/Testimonials';
+import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
 
 const HomePage = () => {
@@ -20,6 +21,8 @@ const HomePage = () => {
   const pricingInView = useInView(pricingRef, { once: true, amount: 0.2 });
   const contactInView = useInView(contactRef, { once: true, amount: 0.2 });
   const testimonialsInView = useInView(testimonialsRef, { once: true, amount: 0.2 });
+  const faqRef = useRef(null);
+  const faqInView = useInView(faqRef, { once: true, amount: 0.2 });
 
   // Smoother, softer slide animations
   const slideInFromLeft = {
@@ -121,6 +124,18 @@ const HomePage = () => {
           className="w-full"
         >
           <Testimonials />
+        </motion.div>
+      </div>
+
+      <div className="overflow-x-hidden w-full">
+        <motion.div
+          ref={faqRef}
+          initial="hidden"
+          animate={faqInView ? 'visible' : 'hidden'}
+          variants={slideInFromLeft}
+          className="w-full"
+        >
+          <FAQ />
         </motion.div>
       </div>
 
