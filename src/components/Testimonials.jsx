@@ -124,6 +124,10 @@ const Testimonials = () => {
     },
     review: testimonials.map((t) => ({
       '@type': 'Review',
+      itemReviewed: {
+        '@type': 'LocalBusiness',
+        name: 'NAS Auto Spa LLC',
+      },
       author: {
         '@type': 'Person',
         name: t.name,
@@ -234,6 +238,11 @@ const Testimonials = () => {
                         itemScope
                         itemType="https://schema.org/Review"
                       >
+                        {/* itemReviewed for structured data */}
+                        <div itemProp="itemReviewed" itemScope itemType="https://schema.org/LocalBusiness" className="hidden">
+                          <meta itemProp="name" content="NAS Auto Spa LLC" />
+                        </div>
+
                         {/* Google Reviews Badge inside card */}
                         <a
                           href={GOOGLE_REVIEWS_URL}
