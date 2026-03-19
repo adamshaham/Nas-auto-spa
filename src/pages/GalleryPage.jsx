@@ -26,6 +26,7 @@ const GalleryPage = () => {
     <>
       <Helmet>
         <title>Car Detailing Gallery | NAS Auto Spa | Fairfield County CT</title>
+        <link rel="canonical" href="https://www.nasautospa.com/gallery" />
 
         <meta
           name="description"
