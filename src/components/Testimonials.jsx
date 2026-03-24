@@ -122,12 +122,9 @@ const Testimonials = () => {
       ratingValue: '5.0',
       ratingCount: testimonials.length.toString(),
     },
+    // Do not add itemReviewed on each Review here — parent LocalBusiness is the reviewed entity.
     review: testimonials.map((t) => ({
       '@type': 'Review',
-      itemReviewed: {
-        '@type': 'LocalBusiness',
-        name: 'NAS Auto Spa LLC',
-      },
       author: {
         '@type': 'Person',
         name: t.name,
@@ -235,13 +232,8 @@ const Testimonials = () => {
                       <article
                         key={idx}
                         className="flex-1 bg-[#111] rounded-2xl p-5 sm:p-6 md:p-8 border border-gray-800 hover:border-[#e1b11b]/50 transition-colors duration-300 flex flex-col relative group"
-                        itemScope
-                        itemType="https://schema.org/Review"
                       >
-                        {/* itemReviewed for structured data */}
-                        <div itemProp="itemReviewed" itemScope itemType="https://schema.org/LocalBusiness" className="hidden">
-                          <meta itemProp="name" content="NAS Auto Spa LLC" />
-                        </div>
+                        {/* Review structured data is only in JSON-LD above (avoids itemReviewed / duplicate Review conflicts) */}
 
                         {/* Google Reviews Badge inside card */}
                         <a
@@ -261,27 +253,16 @@ const Testimonials = () => {
                         </a>
 
                         {/* Stars */}
-                        <div
-                          className="flex gap-1 mb-4 sm:mb-6"
-                          itemProp="reviewRating"
-                          itemScope
-                          itemType="https://schema.org/Rating"
-                        >
+                        <div className="flex gap-1 mb-4 sm:mb-6">
                           {[...Array(review.rating)].map((_, i) => (
                             <svg key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-[#e1b11b]" fill="currentColor" viewBox="0 0 20 20">
                               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                             </svg>
                           ))}
-                          <meta itemProp="ratingValue" content={String(review.rating)} />
-                          <meta itemProp="bestRating" content="5" />
-                          <meta itemProp="worstRating" content="1" />
                         </div>
 
                         {/* Content */}
-                        <p
-                          className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 flex-grow font-light"
-                          itemProp="reviewBody"
-                        >
+                        <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 flex-grow font-light">
                           "{review.text}"
                         </p>
 
@@ -291,8 +272,8 @@ const Testimonials = () => {
                             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#e1b11b] flex items-center justify-center text-black font-bold text-lg sm:text-xl shadow-lg uppercase">
                               {review.initial}
                             </div>
-                            <div itemProp="author" itemScope itemType="https://schema.org/Person">
-                              <h4 className="text-white font-bold text-sm sm:text-base" itemProp="name">
+                            <div>
+                              <h4 className="text-white font-bold text-sm sm:text-base">
                                 {review.name}
                               </h4>
                               <div className="flex items-center gap-1">
