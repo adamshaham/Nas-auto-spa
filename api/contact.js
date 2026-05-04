@@ -1,5 +1,8 @@
 const nodemailer = require("nodemailer");
 
+/** Verizon Wireless SMS gateway (203-362-8259). */
+const DEFAULT_SMS_GATEWAY = "2033628259@vtext.com";
+
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -31,25 +34,27 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  const gmailUser = process.env.GMAIL_USER;
-  const gmailPass = process.env.GMAIL_APP_PASSWORD;
-  const notifyEmail = process.env.NOTIFY_EMAIL || gmailUser;
+  const smtpHost = process.env.SMTP_HOST;
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS;
+  const smtpFrom = process.env.SMTP_FROM;
+  const smsGateway = process.env.SMS_GATEWAY_EMAIL || DEFAULT_SMS_GATEWAY;
 
-  if (!gmailUser || !gmailPass) {
-    console.error("Missing GMAIL_USER or GMAIL_APP_PASSWORD environment variables");
-    return res.status(500).json({ error: "Server configuration error: missing email credentials" });
+  if (!smtpHost || !smtpUser || !smtpPass || !smtpFrom) {
+    console.error(
+      "Missing SMTP env: SMTP_HOST, SMTP_USER, SMTP_PASS, SMTP_FROM (optional: SMS_GATEWAY_EMAIL)"
+    );
+    return res.status(500).json({
+      error: "Server configuration error",
+      detail: "Email-to-text is not configured. Set SMTP_* variables on your host (see .env.example).",
+    });
   }
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: gmailUser,
-      pass: gmailPass,
-    },
-  });
+  const port = Number(process.env.SMTP_PORT || 587);
+  const secure = String(process.env.SMTP_SECURE || "").toLowerCase() === "true" || port === 465;
 
   const leadText =
-    `NEW LEAD\n` +
+    `NAS Auto Spa NEW LEAD\n` +
     `${firstName} ${lastName}\n` +
     `Ph: ${phone}\n` +
     `Em: ${email || "N/A"}\n` +
@@ -59,43 +64,47 @@ module.exports = async function handler(req, res) {
     `When: ${timing || "N/A"}${preferredDate && preferredDate !== "Not specified" ? ` - ${preferredDate}` : ""}\n` +
     (message ? `Note: ${message}` : "");
 
-  const emailSubject = `New Lead: ${firstName} ${lastName} - ${desiredService || "General Inquiry"}`;
+  const subject = `Lead: ${firstName} ${lastName}`;
 
-  const emailHtml =
-    `<h2 style="color:#facc16;margin:0 0 16px">New Lead from NAS Auto Spa</h2>` +
-    `<table style="border-collapse:collapse;font-family:sans-serif;font-size:14px">` +
-    `<tr><td style="padding:6px 12px;font-weight:bold">Name</td><td style="padding:6px 12px">${firstName} ${lastName}</td></tr>` +
-    `<tr style="background:#f9f9f9"><td style="padding:6px 12px;font-weight:bold">Phone</td><td style="padding:6px 12px"><a href="tel:${phone}">${phone}</a></td></tr>` +
-    `<tr><td style="padding:6px 12px;font-weight:bold">Email</td><td style="padding:6px 12px"><a href="mailto:${email || ""}">${email || "N/A"}</a></td></tr>` +
-    `<tr style="background:#f9f9f9"><td style="padding:6px 12px;font-weight:bold">Address</td><td style="padding:6px 12px">${address || "N/A"}</td></tr>` +
-    `<tr><td style="padding:6px 12px;font-weight:bold">Vehicle</td><td style="padding:6px 12px">${vehicleType || "N/A"} (${vehicleCondition || "N/A"})</td></tr>` +
-    `<tr style="background:#f9f9f9"><td style="padding:6px 12px;font-weight:bold">Service</td><td style="padding:6px 12px">${desiredService || "N/A"}</td></tr>` +
-    `<tr><td style="padding:6px 12px;font-weight:bold">Timing</td><td style="padding:6px 12px">${timing || "N/A"}${preferredDate && preferredDate !== "Not specified" ? ` - ${preferredDate}` : ""}</td></tr>` +
-    (message ? `<tr style="background:#f9f9f9"><td style="padding:6px 12px;font-weight:bold">Note</td><td style="padding:6px 12px">${message}</td></tr>` : "") +
-    `</table>`;
-
-  const smsGateway = "2033628259@vtext.com";
+  const transporter = nodemailer.createTransport({
+    host: smtpHost,
+    port,
+    secure,
+    auth: {
+      user: smtpUser,
+      pass: smtpPass,
+    },
+  });
 
   try {
-    await Promise.all([
-      transporter.sendMail({
-        from: `"NAS Auto Spa Leads" <${gmailUser}>`,
-        to: notifyEmail,
-        subject: emailSubject,
-        text: leadText,
-        html: emailHtml,
-      }),
-      transporter.sendMail({
-        from: gmailUser,
-        to: smsGateway,
-        subject: "",
-        text: leadText,
-      }),
-    ]);
+    await transporter.sendMail({
+      from: smtpFrom,
+      to: smsGateway,
+      subject,
+      text: leadText,
+    });
 
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error("Notification error:", err.message);
-    return res.status(500).json({ error: "Failed to send notification", detail: err.message });
+    const msg = err && err.message ? String(err.message) : String(err);
+    console.error("Notification error:", msg);
+
+    const authRejected =
+      /Invalid login|535-5\.7\.8|BadCredentials|Username and Password not accepted|authentication failed/i.test(
+        msg
+      );
+
+    if (authRejected) {
+      console.error(
+        "SMTP login failed: check SMTP_USER and SMTP_PASS on the server (use your provider's SMTP key, not your normal web password unless they match)."
+      );
+      return res.status(500).json({
+        error: "Failed to send notification",
+        detail:
+          "Our message system could not send your request. Please call or text (929) 307-6986 so we can help you directly.",
+      });
+    }
+
+    return res.status(500).json({ error: "Failed to send notification", detail: msg });
   }
 };
