@@ -36,12 +36,12 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  const gmailUser = process.env.GMAIL_USER;
-  const gmailPass = process.env.GMAIL_APP_PASSWORD;
-  const smtpHost = process.env.SMTP_HOST || (gmailUser ? "smtp.gmail.com" : "");
-  const smtpUser = process.env.SMTP_USER || gmailUser;
-  const smtpPass = process.env.SMTP_PASS || gmailPass;
-  const smtpFrom = process.env.SMTP_FROM || (gmailUser ? `"NAS Auto Spa Leads" <${gmailUser}>` : "");
+  const gmailUser = (process.env.GMAIL_USER || "").trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || "").replace(/\s+/g, "");
+  const smtpHost = (process.env.SMTP_HOST || (gmailUser ? "smtp.gmail.com" : "")).trim();
+  const smtpUser = (process.env.SMTP_USER || gmailUser).trim();
+  const smtpPass = (process.env.SMTP_PASS || gmailPass).replace(/\s+/g, "");
+  const smtpFrom = (process.env.SMTP_FROM || (gmailUser ? `"NAS Auto Spa Leads" <${gmailUser}>` : "")).trim();
   const notifyEmail = process.env.NOTIFY_EMAIL || DEFAULT_NOTIFY_EMAIL;
   const smsGateway = process.env.SMS_GATEWAY_EMAIL || DEFAULT_SMS_GATEWAY;
 
@@ -128,8 +128,7 @@ module.exports = async function handler(req, res) {
       );
       return res.status(500).json({
         error: "Failed to send notification",
-        detail:
-          "Our message system could not send your request. Please call or text (929) 307-6986 so we can help you directly.",
+        detail: `SMTP auth rejected by ${smtpHost} as user ${smtpUser}. Re-check the App Password (16 chars, no spaces) for that exact Gmail account, then redeploy.`,
       });
     }
 
