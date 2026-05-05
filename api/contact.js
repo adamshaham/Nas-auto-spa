@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 /** Verizon Wireless SMS gateway (203-362-8259). */
 const DEFAULT_SMS_GATEWAY = "2033628259@vtext.com";
-const DEFAULT_NOTIFY_EMAIL = "adamshaham04@gmail.com";
+const DEFAULT_NOTIFY_EMAIL = "contactnasworks@gmail.com";
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
