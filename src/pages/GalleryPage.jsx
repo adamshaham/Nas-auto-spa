@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
@@ -24,37 +24,27 @@ const GalleryPage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Car Detailing Gallery | NAS Auto Spa | Fairfield County CT</title>
-        <link rel="canonical" href="https://www.nasautospa.com/gallery" />
-
-        <meta
-          name="description"
-          content="View our detailing gallery featuring BMW, Lamborghini, Range Rover, and more. Professional mobile detailing, paint correction & ceramic coatings in Fairfield County, CT."
-        />
-
-        <meta
-          name="keywords"
-          content="car detailing gallery, auto detailing portfolio, Fairfield County detailing, ceramic coating gallery, paint correction before and after, NAS Auto Spa work"
-        />
-
-        {/* JSON-LD SCHEMA FOR IMAGE GALLERY */}
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="Car Detailing Gallery | NAS Auto Spa | Fairfield County CT"
+        description="View our detailing gallery featuring BMW, Lamborghini, Range Rover, and more. Professional mobile detailing, paint correction & ceramic coatings in Fairfield County, CT."
+        path="/gallery"
+        keywords="car detailing gallery, auto detailing portfolio, Fairfield County detailing, ceramic coating gallery, paint correction before and after, NAS Auto Spa work"
+        schemas={[
+          {
             "@context": "https://schema.org",
             "@type": "ImageGallery",
             name: "NAS Auto Spa Detailing Gallery",
             description:
               "A gallery of vehicles detailed, corrected, and ceramic coated by NAS Auto Spa in Fairfield County CT.",
-            image: images.map((img) => img.src),
+            image: images.map((img) => `https://www.nasautospa.com${img.src}`),
             author: {
               "@type": "Organization",
               name: "NAS Auto Spa",
             },
             url: "https://www.nasautospa.com/gallery",
-          })}
-        </script>
-      </Helmet>
+          },
+        ]}
+      />
 
       <Navbar />
 

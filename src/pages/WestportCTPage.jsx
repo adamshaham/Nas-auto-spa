@@ -1,5 +1,6 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
+import { breadcrumbSchema, locationServiceSchema } from "../seo/schemas";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
@@ -8,38 +9,24 @@ import Contact from "../components/Contact";
 const WestportCTPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
-      <Helmet>
-        <title>Mobile Auto Detailing in Westport, CT | NAS Auto Spa</title>
-        <meta
-          name="description"
-          content="Premium mobile car detailing in Westport, CT by NAS Auto Spa. Interior & exterior details, paint correction & ceramic coating at your home or driveway. We bring our own water & power. Serving all of Westport and Fairfield County."
-        />
-        <meta
-          name="keywords"
-          content="mobile detailing Westport CT, car detailing Westport CT, auto detailing Westport Connecticut, car wash Westport CT, paint correction Westport CT, ceramic coating Westport CT, mobile car wash Westport, interior detailing Westport, mobile detailer near me Westport, luxury detailing Westport Connecticut"
-        />
-        <link rel="canonical" href="https://www.nasautospa.com/westport-ct" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Mobile Auto Detailing in Westport, CT",
-            "description": "Premium mobile car detailing, paint correction, and ceramic coating in Westport, CT. We come to your home or driveway with our own water and power.",
-            "provider": {
-              "@type": "AutoDetailing",
-              "@id": "https://www.nasautospa.com/#business",
-              "name": "NAS Auto Spa LLC",
-              "telephone": "+1-929-307-6986"
-            },
-            "areaServed": {
-              "@type": "City",
-              "name": "Westport",
-              "containedInPlace": { "@type": "State", "name": "Connecticut" }
-            },
-            "url": "https://www.nasautospa.com/westport-ct"
-          })}
-        </script>
-      </Helmet>
+      <SEO
+        title="Mobile Auto Detailing in Westport, CT | NAS Auto Spa"
+        description="Premium mobile car detailing in Westport, CT by NAS Auto Spa. Interior & exterior details, paint correction & ceramic coating at your home or driveway. We bring our own water & power. Serving all of Westport and Fairfield County."
+        path="/westport-ct"
+        keywords="mobile detailing Westport CT, car detailing Westport CT, auto detailing Westport Connecticut, car wash Westport CT, paint correction Westport CT, ceramic coating Westport CT, mobile car wash Westport, interior detailing Westport, mobile detailer near me Westport, luxury detailing Westport Connecticut"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Service Areas', path: '/service-areas-fairfield-county-ct' },
+            { name: 'Westport, CT', path: '/westport-ct' },
+          ]),
+          locationServiceSchema({
+            city: 'Westport',
+            path: '/westport-ct',
+            description: 'Premium mobile car detailing, paint correction, and ceramic coating in Westport, CT. We come to your home or driveway with our own water and power.',
+          }),
+        ]}
+      />
 
       <Navbar />
 

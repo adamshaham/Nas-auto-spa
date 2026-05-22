@@ -1,5 +1,6 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
+import { breadcrumbSchema, locationServiceSchema } from "../seo/schemas";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
@@ -8,38 +9,24 @@ import Contact from "../components/Contact";
 const SouthportCTPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
-      <Helmet>
-        <title>Mobile Auto Detailing in Southport, CT | NAS Auto Spa</title>
-        <meta
-          name="description"
-          content="Premium mobile car detailing in Southport, CT by NAS Auto Spa. Interior & exterior details, paint correction & ceramic coating at your home or driveway. We bring our own water & power to Southport and the surrounding Fairfield County area."
-        />
-        <meta
-          name="keywords"
-          content="mobile detailing Southport CT, car detailing Southport CT, auto detailing Southport Connecticut, car wash Southport CT, paint correction Southport CT, ceramic coating Southport CT, mobile car wash Southport, interior detailing Southport, mobile detailer near me Southport"
-        />
-        <link rel="canonical" href="https://www.nasautospa.com/southport-ct" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Mobile Auto Detailing in Southport, CT",
-            "description": "Premium mobile car detailing, paint correction, and ceramic coating in Southport, CT. We come to your driveway or home with our own water and power.",
-            "provider": {
-              "@type": "AutoDetailing",
-              "@id": "https://www.nasautospa.com/#business",
-              "name": "NAS Auto Spa LLC",
-              "telephone": "+1-929-307-6986"
-            },
-            "areaServed": {
-              "@type": "City",
-              "name": "Southport",
-              "containedInPlace": { "@type": "State", "name": "Connecticut" }
-            },
-            "url": "https://www.nasautospa.com/southport-ct"
-          })}
-        </script>
-      </Helmet>
+      <SEO
+        title="Mobile Auto Detailing in Southport, CT | NAS Auto Spa"
+        description="Premium mobile car detailing in Southport, CT by NAS Auto Spa. Interior & exterior details, paint correction & ceramic coating at your home or driveway. We bring our own water & power to Southport and the surrounding Fairfield County area."
+        path="/southport-ct"
+        keywords="mobile detailing Southport CT, car detailing Southport CT, auto detailing Southport Connecticut, car wash Southport CT, paint correction Southport CT, ceramic coating Southport CT, mobile car wash Southport, interior detailing Southport, mobile detailer near me Southport"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Service Areas', path: '/service-areas-fairfield-county-ct' },
+            { name: 'Southport, CT', path: '/southport-ct' },
+          ]),
+          locationServiceSchema({
+            city: 'Southport',
+            path: '/southport-ct',
+            description: 'Premium mobile car detailing, paint correction, and ceramic coating in Southport, CT. We come to your driveway or home with our own water and power.',
+          }),
+        ]}
+      />
 
       <Navbar />
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
+import { breadcrumbSchema, servicePageSchema } from "../seo/schemas";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -20,59 +21,47 @@ const fadeUp = {
 const MobileDetailingPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
-      <Helmet>
-        <title>Mobile Car Detailing in Fairfield County, CT | NAS Auto Spa</title>
-        <meta
-          name="description"
-          content="Premium mobile car detailing in Fairfield County, CT by NAS Auto Spa. We come to your home or office with our own water & power for full interior & exterior details. Stage 1 ($199), Stage 2 ($299), Stage 3 ($399) packages. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County."
-        />
-        <meta
-          name="keywords"
-          content="mobile car detailing near me, mobile detailing near me, car detailing near me Connecticut, auto detailing near me Fairfield County, mobile car wash near me CT, car detailing Stamford CT, auto detailing Greenwich CT, mobile car wash Westport CT, car cleaning Norwalk CT, mobile detailer Fairfield CT, interior detailing near me CT, exterior detailing near me, car detail Trumbull CT, hand car wash near me Fairfield County, SUV detailing near me CT, luxury car detailing near me Connecticut, mobile auto detail Stratford CT, best car detailing near me, mobile detailing Fairfield County CT"
-        />
-        <link rel="canonical" href="https://www.nasautospa.com/mobile-detailing-fairfield-county-ct" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Mobile Car Detailing in Fairfield County, CT",
-            "description": "Full interior & exterior mobile detailing packages. Stage 1 (Exterior + Interior Reset), Stage 2 (Detail + Paint Correction), and Stage 3 (Paint Correction + Ceramic Coating). We bring our own water and power.",
-            "provider": {
-              "@type": "AutoDetailing",
-              "@id": "https://www.nasautospa.com/#business",
-              "name": "NAS Auto Spa LLC"
-            },
-            "areaServed": {
-              "@type": "County",
-              "name": "Fairfield County, Connecticut"
-            },
-            "url": "https://www.nasautospa.com/mobile-detailing-fairfield-county-ct",
-            "offers": [
+      <SEO
+        title="Mobile Car Detailing in Fairfield County, CT | NAS Auto Spa"
+        description="Premium mobile car detailing in Fairfield County, CT by NAS Auto Spa. We come to your home or office with our own water & power for full interior & exterior details. Stage 1 ($199), Stage 2 ($299), Stage 3 ($399) packages. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County."
+        path="/mobile-detailing-fairfield-county-ct"
+        keywords="mobile car detailing near me, mobile detailing near me, car detailing near me Connecticut, auto detailing near me Fairfield County, mobile car wash near me CT, car detailing Stamford CT, auto detailing Greenwich CT, mobile car wash Westport CT, car cleaning Norwalk CT, mobile detailer Fairfield CT, interior detailing near me CT, exterior detailing near me, car detail Trumbull CT, hand car wash near me Fairfield County, SUV detailing near me CT, luxury car detailing near me Connecticut, mobile auto detail Stratford CT, best car detailing near me, mobile detailing Fairfield County CT"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Services', path: '/services' },
+            { name: 'Mobile Detailing', path: '/mobile-detailing-fairfield-county-ct' },
+          ]),
+          servicePageSchema({
+            name: 'Mobile Car Detailing in Fairfield County, CT',
+            description: 'Full interior & exterior mobile detailing packages. Stage 1 (Exterior + Interior Reset), Stage 2 (Detail + Paint Correction), and Stage 3 (Paint Correction + Ceramic Coating). We bring our own water and power.',
+            path: '/mobile-detailing-fairfield-county-ct',
+            offers: [
               {
-                "@type": "Offer",
-                "name": "Stage 1 – Exterior + Interior Reset",
-                "priceCurrency": "USD",
-                "price": "199",
-                "description": "Full interior + exterior detail — hand wash, wheel cleaning, wax, steam cleaning, shampoo extraction."
+                '@type': 'Offer',
+                name: 'Stage 1 – Exterior + Interior Reset',
+                priceCurrency: 'USD',
+                price: '199',
+                description: 'Full interior + exterior detail — hand wash, wheel cleaning, wax, steam cleaning, shampoo extraction.',
               },
               {
-                "@type": "Offer",
-                "name": "Stage 2 – Detail + Paint Correction",
-                "priceCurrency": "USD",
-                "price": "299",
-                "description": "Everything in Stage 1 plus clay bar treatment and 1-step paint correction polish."
+                '@type': 'Offer',
+                name: 'Stage 2 – Detail + Paint Correction',
+                priceCurrency: 'USD',
+                price: '299',
+                description: 'Everything in Stage 1 plus clay bar treatment and 1-step paint correction polish.',
               },
               {
-                "@type": "Offer",
-                "name": "Stage 3 – Paint Correction + Ceramic Coating",
-                "priceCurrency": "USD",
-                "price": "399",
-                "description": "Full detail, 1-step correction, and ceramic coating protection for long-term shine."
-              }
-            ]
-          })}
-        </script>
-      </Helmet>
+                '@type': 'Offer',
+                name: 'Stage 3 – Paint Correction + Ceramic Coating',
+                priceCurrency: 'USD',
+                price: '399',
+                description: 'Full detail, 1-step correction, and ceramic coating protection for long-term shine.',
+              },
+            ],
+          }),
+        ]}
+      />
 
       <Navbar />
 

@@ -1,7 +1,8 @@
 // src/pages/BlogPage.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
+import { breadcrumbSchema } from '../seo/schemas';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { BlogPost } from '../data/BlogData';
@@ -16,18 +17,18 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Helmet>
-        <title>Auto Detailing Blog – Tips & Guides | NAS Auto Spa | Fairfield County CT</title>
-        <meta
-          name="description"
-          content="Read expert auto detailing tips, guides, and insights from NAS Auto Spa in Fairfield County, CT. Learn about ceramic coating, paint correction, winter prep, interior cleaning, and fleet washing."
-        />
-        <meta
-          name="keywords"
-          content="car detailing blog, auto detailing tips Connecticut, ceramic coating guide Fairfield County, paint correction tips CT, winter car prep Connecticut, interior detailing guide, fleet washing tips CT"
-        />
-        <link rel="canonical" href="https://www.nasautospa.com/blog" />
-      </Helmet>
+      <SEO
+        title="Auto Detailing Blog – Tips & Guides | NAS Auto Spa | Fairfield County CT"
+        description="Read expert auto detailing tips, guides, and insights from NAS Auto Spa in Fairfield County, CT. Learn about ceramic coating, paint correction, winter prep, interior cleaning, and fleet washing."
+        path="/blog"
+        keywords="car detailing blog, auto detailing tips Connecticut, ceramic coating guide Fairfield County, paint correction tips CT, winter car prep Connecticut, interior detailing guide, fleet washing tips CT"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Blog', path: '/blog' },
+          ]),
+        ]}
+      />
       <Navbar />
 
       <main className="pt-28 pb-20 relative overflow-hidden">

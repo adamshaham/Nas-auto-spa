@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
+import { breadcrumbSchema } from '../seo/schemas';
 import { motion, useInView } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import GoogleRatingBadge from "../components/GoogleReviewsWidget";
@@ -53,28 +54,22 @@ const HomePage = () => {
 
   return (
     <div className="bg-gradient-to-b from-black via-gray-900 to-black min-h-screen text-white overflow-x-hidden w-full">
-      <Helmet>
-        <title>NAS Auto Spa LLC | Mobile Detailing, Paint Correction, Ceramic Coating & Fleet Detailing in Fairfield County CT</title>
-        <meta
-          name="description"
-          content="NAS Auto Spa is Fairfield County's top-rated mobile auto detailing company based in Stratford, CT. Premium detail packages, paint correction, ceramic coating & fleet washing. We come to you with our own water & power. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield, Trumbull & more."
-        />
-        <link rel="canonical" href="https://www.nasautospa.com/" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.nasautospa.com/" },
-              { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.nasautospa.com/services" },
-              { "@type": "ListItem", "position": 3, "name": "Service Areas", "item": "https://www.nasautospa.com/service-areas-fairfield-county-ct" },
-              { "@type": "ListItem", "position": 4, "name": "About", "item": "https://www.nasautospa.com/about" },
-              { "@type": "ListItem", "position": 5, "name": "Gallery", "item": "https://www.nasautospa.com/gallery" },
-              { "@type": "ListItem", "position": 6, "name": "Blog", "item": "https://www.nasautospa.com/blog" }
-            ]
-          })}
-        </script>
-      </Helmet>
+      <SEO
+        title="NAS Auto Spa LLC | Mobile Detailing, Paint Correction, Ceramic Coating & Fleet Detailing in Fairfield County CT"
+        description="NAS Auto Spa is Fairfield County's top-rated mobile auto detailing company based in Stratford, CT. Premium detail packages, paint correction, ceramic coating & fleet washing. We come to you with our own water & power. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield, Trumbull & more."
+        path="/"
+        keywords="car detailing near me, mobile detailing near me, auto detailing near me, car wash near me, mobile car wash near me, ceramic coating near me, paint correction near me, fleet washing near me, mobile detailer near me, best car detailing Fairfield County CT, mobile detailing Stamford CT, car detailing Greenwich CT, NAS Auto Spa"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Services', path: '/services' },
+            { name: 'Service Areas', path: '/service-areas-fairfield-county-ct' },
+            { name: 'About', path: '/about' },
+            { name: 'Gallery', path: '/gallery' },
+            { name: 'Blog', path: '/blog' },
+          ]),
+        ]}
+      />
       <Navbar />
       <GoogleRatingBadge />
       <Hero />

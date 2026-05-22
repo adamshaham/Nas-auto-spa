@@ -1,5 +1,6 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
+import { breadcrumbSchema, servicePageSchema } from "../seo/schemas";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -20,19 +21,18 @@ const fadeUp = {
 const PaintCorrectionPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
-      <Helmet>
-        <title>Paint Correction in Fairfield County, CT | NAS Auto Spa</title>
-        <meta
-          name="description"
-          content="Professional paint correction in Fairfield County, CT by NAS Auto Spa. Remove swirl marks, scratches & haziness with expert machine polishing. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County. The perfect prep before ceramic coating."
-        />
-        <meta
-          name="keywords"
-          content="paint correction near me, paint correction near me CT, paint correction near me Connecticut, swirl mark removal near me, scratch removal near me CT, paint polishing near me, paint correction Fairfield County CT, paint polishing Stamford CT, scratch removal Greenwich CT, machine polishing Westport CT, auto polishing Norwalk CT, paint refinement Fairfield CT, car paint restoration near me CT, paint correction Trumbull CT, best paint correction near me Connecticut"
-        />
-        <link rel="canonical" href="https://www.nasautospa.com/paint-correction-fairfield-county-ct" />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="Paint Correction in Fairfield County, CT | NAS Auto Spa"
+        description="Professional paint correction in Fairfield County, CT by NAS Auto Spa. Remove swirl marks, scratches & haziness with expert machine polishing. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County. The perfect prep before ceramic coating."
+        path="/paint-correction-fairfield-county-ct"
+        keywords="paint correction near me, paint correction near me CT, paint correction near me Connecticut, swirl mark removal near me, scratch removal near me CT, paint polishing near me, paint correction Fairfield County CT, paint polishing Stamford CT, scratch removal Greenwich CT, machine polishing Westport CT, auto polishing Norwalk CT, paint refinement Fairfield CT, car paint restoration near me CT, paint correction Trumbull CT, best paint correction near me Connecticut"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Services', path: '/services' },
+            { name: 'Paint Correction', path: '/paint-correction-fairfield-county-ct' },
+          ]),
+          {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
@@ -61,27 +61,14 @@ const PaintCorrectionPage = () => {
                 }
               }
             ]
-          })}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Paint Correction in Fairfield County, CT",
-            "description": "Professional machine polishing to remove swirl marks, light scratches, and haziness from your vehicle's paint. Enhancement polish, correction & refinement, and advanced multi-stage options available.",
-            "provider": {
-              "@type": "AutoDetailing",
-              "@id": "https://www.nasautospa.com/#business",
-              "name": "NAS Auto Spa LLC"
-            },
-            "areaServed": {
-              "@type": "County",
-              "name": "Fairfield County, Connecticut"
-            },
-            "url": "https://www.nasautospa.com/paint-correction-fairfield-county-ct"
-          })}
-        </script>
-      </Helmet>
+          },
+          servicePageSchema({
+            name: 'Paint Correction in Fairfield County, CT',
+            description: 'Professional machine polishing to remove swirl marks, light scratches, and haziness from your vehicle\'s paint. Enhancement polish, correction & refinement, and advanced multi-stage options available.',
+            path: '/paint-correction-fairfield-county-ct',
+          }),
+        ]}
+      />
 
       <Navbar />
 

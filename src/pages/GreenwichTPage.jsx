@@ -1,5 +1,6 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
+import { breadcrumbSchema, locationServiceSchema } from "../seo/schemas";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
@@ -8,38 +9,24 @@ import Contact from "../components/Contact";
 const GreenwichTPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
-      <Helmet>
-        <title>Mobile Car Detailing in Greenwich, CT | NAS Auto Spa</title>
-        <meta
-          name="description"
-          content="Luxury mobile car detailing in Greenwich, CT by NAS Auto Spa. Specializing in exotic cars, luxury vehicles & daily drivers. Full details, paint correction & ceramic coating at your home or estate. We bring our own water & power."
-        />
-        <meta
-          name="keywords"
-          content="mobile detailing Greenwich CT, car detailing Greenwich CT, luxury car detailing Greenwich Connecticut, exotic car detailing Greenwich, auto detailing Greenwich CT, paint correction Greenwich CT, ceramic coating Greenwich CT, mobile car wash Greenwich, car cleaning Greenwich Connecticut, mobile detailer near me Greenwich"
-        />
-        <link rel="canonical" href="https://www.nasautospa.com/greenwich-ct" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Mobile Car Detailing in Greenwich, CT",
-            "description": "Luxury mobile car detailing, paint correction, and ceramic coating in Greenwich, CT. Specializing in exotic cars, luxury vehicles, and daily drivers.",
-            "provider": {
-              "@type": "AutoDetailing",
-              "@id": "https://www.nasautospa.com/#business",
-              "name": "NAS Auto Spa LLC",
-              "telephone": "+1-929-307-6986"
-            },
-            "areaServed": {
-              "@type": "City",
-              "name": "Greenwich",
-              "containedInPlace": { "@type": "State", "name": "Connecticut" }
-            },
-            "url": "https://www.nasautospa.com/greenwich-ct"
-          })}
-        </script>
-      </Helmet>
+      <SEO
+        title="Mobile Car Detailing in Greenwich, CT | NAS Auto Spa"
+        description="Luxury mobile car detailing in Greenwich, CT by NAS Auto Spa. Specializing in exotic cars, luxury vehicles & daily drivers. Full details, paint correction & ceramic coating at your home or estate. We bring our own water & power."
+        path="/greenwich-ct"
+        keywords="mobile detailing Greenwich CT, car detailing Greenwich CT, luxury car detailing Greenwich Connecticut, exotic car detailing Greenwich, auto detailing Greenwich CT, paint correction Greenwich CT, ceramic coating Greenwich CT, mobile car wash Greenwich, car cleaning Greenwich Connecticut, mobile detailer near me Greenwich"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Service Areas', path: '/service-areas-fairfield-county-ct' },
+            { name: 'Greenwich, CT', path: '/greenwich-ct' },
+          ]),
+          locationServiceSchema({
+            city: 'Greenwich',
+            path: '/greenwich-ct',
+            description: 'Luxury mobile car detailing, paint correction, and ceramic coating in Greenwich, CT. Specializing in exotic cars, luxury vehicles, and daily drivers.',
+          }),
+        ]}
+      />
 
       <Navbar />
 

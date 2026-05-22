@@ -10,7 +10,7 @@ const Footer = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Top grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 px-4 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16 px-4 text-center md:text-left">
           {/* BRAND + ABOUT */}
           <div className="space-y-6 flex flex-col items-center md:items-start">
             <h3 className="text-2xl font-bold text-white flex items-center justify-center md:justify-start gap-2">
@@ -134,6 +134,67 @@ const Footer = () => {
                     className="text-gray-400 hover:text-gold-500"
                   >
                     Fleet & Commercial Detailing
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* SERVICE AREAS – LOCAL SEO INTERNAL LINKS */}
+          <div>
+            <div className="text-sm">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-3">
+                SERVICE AREAS
+              </p>
+              <ul className="space-y-2">
+                <li>
+                  <a href="/service-areas-fairfield-county-ct" className="text-gray-400 hover:text-gold-500">
+                    All Fairfield County
+                  </a>
+                </li>
+                <li>
+                  <a href="/stamford-ct" className="text-gray-400 hover:text-gold-500">
+                    Stamford, CT
+                  </a>
+                </li>
+                <li>
+                  <a href="/greenwich-ct" className="text-gray-400 hover:text-gold-500">
+                    Greenwich, CT
+                  </a>
+                </li>
+                <li>
+                  <a href="/westport-ct" className="text-gray-400 hover:text-gold-500">
+                    Westport, CT
+                  </a>
+                </li>
+                <li>
+                  <a href="/norwalk-ct" className="text-gray-400 hover:text-gold-500">
+                    Norwalk, CT
+                  </a>
+                </li>
+                <li>
+                  <a href="/fairfield-ct" className="text-gray-400 hover:text-gold-500">
+                    Fairfield, CT
+                  </a>
+                </li>
+                <li>
+                  <a href="/stratford-ct" className="text-gray-400 hover:text-gold-500">
+                    Stratford, CT
+                  </a>
+                </li>
+                <li>
+                  <a href="/trumbull-ct" className="text-gray-400 hover:text-gold-500">
+                    Trumbull, CT
+                  </a>
+                </li>
+                <li>
+                  <a href="/milford-ct" className="text-gray-400 hover:text-gold-500">
+                    Milford, CT
+                  </a>
+                </li>
+                <li>
+                  <a href="/southport-ct" className="text-gray-400 hover:text-gold-500">
+                    Southport, CT
                   </a>
                 </li>
               </ul>

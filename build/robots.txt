@@ -1,5 +1,18 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+Sitemap: https://www.nasautospa.com/sitemap-index.xml
 Sitemap: https://www.nasautospa.com/sitemap.xml
 Sitemap: https://www.nasautospa.com/blog-sitemap.xml

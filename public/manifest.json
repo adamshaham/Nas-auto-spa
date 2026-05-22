@@ -1,0 +1,22 @@
+{
+  "name": "NAS Auto Spa LLC",
+  "short_name": "NAS Auto Spa",
+  "description": "Mobile auto detailing, paint correction, ceramic coating, and fleet washing in Fairfield County, Connecticut.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "/images/favicon-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
+import { breadcrumbSchema, servicePageSchema } from "../seo/schemas";
 import { motion, useInView } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -41,22 +42,18 @@ const CommercialWashPage = () => {
 
   return (
     <div className="bg-black min-h-screen text-white overflow-x-hidden w-full">
-      <Helmet>
-        <title>Fleet Washing & Commercial Detailing in Fairfield County, CT | NAS Auto Spa</title>
-        <meta
-          name="description"
-          content="Mobile fleet washing and commercial vehicle detailing in Fairfield County, CT by NAS Auto Spa. We keep your work trucks, vans, and service vehicles clean on-site with our own water & power. Scheduled service for landscapers, contractors & businesses across Stamford, Norwalk, Fairfield & beyond."
-        />
-        <meta
-          name="keywords"
-          content="fleet washing near me, fleet detailing near me, commercial vehicle detailing near me, truck washing near me CT, fleet washing near me Connecticut, van detailing near me, fleet washing Fairfield County CT, truck washing Stamford CT, van detailing Norwalk CT, commercial detailing near me Fairfield CT, fleet wash service near me Connecticut, mobile fleet washing near me CT, work truck cleaning near me, landscaping fleet washing near me"
-        />
-        <link
-          rel="canonical"
-          href="https://www.nasautospa.com/fleet-detailing-fairfield-county-ct"
-        />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="Fleet Washing & Commercial Detailing in Fairfield County, CT | NAS Auto Spa"
+        description="Mobile fleet washing and commercial vehicle detailing in Fairfield County, CT by NAS Auto Spa. We keep your work trucks, vans, and service vehicles clean on-site with our own water & power. Scheduled service for landscapers, contractors & businesses across Stamford, Norwalk, Fairfield & beyond."
+        path="/fleet-detailing-fairfield-county-ct"
+        keywords="fleet washing near me, fleet detailing near me, commercial vehicle detailing near me, truck washing near me CT, fleet washing near me Connecticut, van detailing near me, fleet washing Fairfield County CT, truck washing Stamford CT, van detailing Norwalk CT, commercial detailing near me Fairfield CT, fleet wash service near me Connecticut, mobile fleet washing near me CT, work truck cleaning near me, landscaping fleet washing near me"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Services', path: '/services' },
+            { name: 'Fleet Washing & Commercial Detailing', path: '/fleet-detailing-fairfield-county-ct' },
+          ]),
+          {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
@@ -85,27 +82,14 @@ const CommercialWashPage = () => {
                 }
               }
             ]
-          })}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Fleet Washing & Commercial Detailing in Fairfield County, CT",
-            "description": "Scheduled on-site mobile fleet washing and commercial vehicle detailing for businesses across Fairfield County, CT. Maintenance washes, interior refresh, and deep cleaning options available.",
-            "provider": {
-              "@type": "AutoDetailing",
-              "@id": "https://www.nasautospa.com/#business",
-              "name": "NAS Auto Spa LLC"
-            },
-            "areaServed": {
-              "@type": "County",
-              "name": "Fairfield County, Connecticut"
-            },
-            "url": "https://www.nasautospa.com/fleet-detailing-fairfield-county-ct"
-          })}
-        </script>
-      </Helmet>
+          },
+          servicePageSchema({
+            name: 'Fleet Washing & Commercial Detailing in Fairfield County, CT',
+            description: 'Scheduled on-site mobile fleet washing and commercial vehicle detailing for businesses across Fairfield County, CT. Maintenance washes, interior refresh, and deep cleaning options available.',
+            path: '/fleet-detailing-fairfield-county-ct',
+          }),
+        ]}
+      />
 
       <Navbar />
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
+import { breadcrumbSchema, servicePageSchema } from "../seo/schemas";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -20,19 +21,18 @@ const fadeUp = {
 const CeramicCoatingPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
-      <Helmet>
-        <title>Ceramic Coating in Fairfield County, CT | NAS Auto Spa</title>
-        <meta
-          name="description"
-          content="Professional ceramic coating in Fairfield County, CT by NAS Auto Spa. Get long-lasting hydrophobic paint protection, deep gloss, and easier maintenance washes. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County. Starting at $399."
-        />
-        <meta
-          name="keywords"
-          content="ceramic coating near me, ceramic coating near me CT, ceramic coating near me Connecticut, best ceramic coating near me, paint protection near me, ceramic coating Fairfield County CT, paint protection Stamford CT, ceramic coating Greenwich CT, hydrophobic coating Westport CT, ceramic coat Norwalk CT, car coating Fairfield CT, ceramic coating Trumbull CT, professional ceramic coating near me Connecticut, nano ceramic coating near me Fairfield County, car coating near me"
-        />
-        <link rel="canonical" href="https://www.nasautospa.com/ceramic-coating-fairfield-county-ct" />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="Ceramic Coating in Fairfield County, CT | NAS Auto Spa"
+        description="Professional ceramic coating in Fairfield County, CT by NAS Auto Spa. Get long-lasting hydrophobic paint protection, deep gloss, and easier maintenance washes. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County. Starting at $399."
+        path="/ceramic-coating-fairfield-county-ct"
+        keywords="ceramic coating near me, ceramic coating near me CT, ceramic coating near me Connecticut, best ceramic coating near me, paint protection near me, ceramic coating Fairfield County CT, paint protection Stamford CT, ceramic coating Greenwich CT, hydrophobic coating Westport CT, ceramic coat Norwalk CT, car coating Fairfield CT, ceramic coating Trumbull CT, professional ceramic coating near me Connecticut, nano ceramic coating near me Fairfield County, car coating near me"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Services', path: '/services' },
+            { name: 'Ceramic Coating', path: '/ceramic-coating-fairfield-county-ct' },
+          ]),
+          {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
@@ -61,37 +61,24 @@ const CeramicCoatingPage = () => {
                 }
               }
             ]
-          })}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Ceramic Coating in Fairfield County, CT",
-            "description": "Professional ceramic coating application with proper paint prep, correction, and long-lasting hydrophobic protection for vehicles in Fairfield County, Connecticut.",
-            "provider": {
-              "@type": "AutoDetailing",
-              "@id": "https://www.nasautospa.com/#business",
-              "name": "NAS Auto Spa LLC"
+          },
+          servicePageSchema({
+            name: 'Ceramic Coating in Fairfield County, CT',
+            description: 'Professional ceramic coating application with proper paint prep, correction, and long-lasting hydrophobic protection for vehicles in Fairfield County, Connecticut.',
+            path: '/ceramic-coating-fairfield-county-ct',
+            offers: {
+              '@type': 'Offer',
+              priceCurrency: 'USD',
+              price: '399',
+              priceSpecification: {
+                '@type': 'PriceSpecification',
+                minPrice: '399',
+                priceCurrency: 'USD',
+              },
             },
-            "areaServed": {
-              "@type": "County",
-              "name": "Fairfield County, Connecticut"
-            },
-            "url": "https://www.nasautospa.com/ceramic-coating-fairfield-county-ct",
-            "offers": {
-              "@type": "Offer",
-              "priceCurrency": "USD",
-              "price": "399",
-              "priceSpecification": {
-                "@type": "PriceSpecification",
-                "minPrice": "399",
-                "priceCurrency": "USD"
-              }
-            }
-          })}
-        </script>
-      </Helmet>
+          }),
+        ]}
+      />
 
       <Navbar />
 

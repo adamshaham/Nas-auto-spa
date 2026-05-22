@@ -1,6 +1,7 @@
 // src/pages/AboutPage.jsx
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
+import { breadcrumbSchema } from "../seo/schemas";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
@@ -9,18 +10,18 @@ import Contact from "../components/Contact"; // ✅ import contact
 const AboutPage = () => {
   return (
     <>
-      <Helmet>
-        <title>About NAS Auto Spa | Fairfield County's Premier Mobile Detailing Service</title>
-        <meta
-          name="description"
-          content="NAS Auto Spa is Fairfield County's premier mobile auto detailing company based in Stratford, CT. Learn about our story, our commitment to quality, and why CT drivers trust us for premium detailing, paint correction, ceramic coating and fleet washing."
-        />
-        <meta
-          name="keywords"
-          content="about NAS Auto Spa, mobile detailing company Fairfield County CT, auto detailing Stratford CT, who is NAS Auto Spa, best mobile detailer Connecticut, car detailing company Fairfield County"
-        />
-        <link rel="canonical" href="https://www.nasautospa.com/about" />
-      </Helmet>
+      <SEO
+        title="About NAS Auto Spa | Fairfield County's Premier Mobile Detailing Service"
+        description="NAS Auto Spa is Fairfield County's premier mobile auto detailing company based in Stratford, CT. Learn about our story, our commitment to quality, and why CT drivers trust us for premium detailing, paint correction, ceramic coating and fleet washing."
+        path="/about"
+        keywords="about NAS Auto Spa, mobile detailing company Fairfield County CT, auto detailing Stratford CT, who is NAS Auto Spa, best mobile detailer Connecticut, car detailing company Fairfield County"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'About', path: '/about' },
+          ]),
+        ]}
+      />
 
       {/* NAVBAR */}
       <Navbar />

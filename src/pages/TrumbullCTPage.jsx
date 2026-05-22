@@ -1,5 +1,6 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
+import { breadcrumbSchema, locationServiceSchema } from "../seo/schemas";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
@@ -8,38 +9,24 @@ import Contact from "../components/Contact";
 const TrumbullCTPage = () => {
   return (
     <div className="bg-black min-h-screen text-white">
-      <Helmet>
-        <title>Mobile Auto Detailing in Trumbull, CT | NAS Auto Spa</title>
-        <meta
-          name="description"
-          content="Professional mobile car detailing in Trumbull, CT by NAS Auto Spa. Interior & exterior details, paint correction & ceramic coating with a fully mobile setup. We bring our own water & power to your home or driveway in Trumbull."
-        />
-        <meta
-          name="keywords"
-          content="mobile detailing Trumbull CT, car detailing Trumbull CT, auto detailing Trumbull Connecticut, car wash Trumbull CT, paint correction Trumbull CT, ceramic coating Trumbull CT, mobile car wash Trumbull, interior detailing Trumbull, mobile detailer near me Trumbull"
-        />
-        <link rel="canonical" href="https://www.nasautospa.com/trumbull-ct" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Mobile Car Detailing in Trumbull, CT",
-            "description": "Professional mobile car detailing, paint correction, and ceramic coating in Trumbull, CT. Fully mobile setup with our own water and power.",
-            "provider": {
-              "@type": "AutoDetailing",
-              "@id": "https://www.nasautospa.com/#business",
-              "name": "NAS Auto Spa LLC",
-              "telephone": "+1-929-307-6986"
-            },
-            "areaServed": {
-              "@type": "City",
-              "name": "Trumbull",
-              "containedInPlace": { "@type": "State", "name": "Connecticut" }
-            },
-            "url": "https://www.nasautospa.com/trumbull-ct"
-          })}
-        </script>
-      </Helmet>
+      <SEO
+        title="Mobile Auto Detailing in Trumbull, CT | NAS Auto Spa"
+        description="Professional mobile car detailing in Trumbull, CT by NAS Auto Spa. Interior & exterior details, paint correction & ceramic coating with a fully mobile setup. We bring our own water & power to your home or driveway in Trumbull."
+        path="/trumbull-ct"
+        keywords="mobile detailing Trumbull CT, car detailing Trumbull CT, auto detailing Trumbull Connecticut, car wash Trumbull CT, paint correction Trumbull CT, ceramic coating Trumbull CT, mobile car wash Trumbull, interior detailing Trumbull, mobile detailer near me Trumbull"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Service Areas', path: '/service-areas-fairfield-county-ct' },
+            { name: 'Trumbull, CT', path: '/trumbull-ct' },
+          ]),
+          locationServiceSchema({
+            city: 'Trumbull',
+            path: '/trumbull-ct',
+            description: 'Professional mobile car detailing, paint correction, and ceramic coating in Trumbull, CT. Fully mobile setup with our own water and power.',
+          }),
+        ]}
+      />
 
       <Navbar />
 

@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/sitemap-index.xml",
+      "destination": "/sitemap-index.xml"
+    },
+    {
+      "source": "/manifest.json",
+      "destination": "/manifest.json"
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/sitemap.xml"
     },

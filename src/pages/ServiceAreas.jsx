@@ -3,7 +3,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials"; // 🔁 adjust path/name if needed
 import Contact from "../components/Contact"; // 🔁 adjust path/name if needed
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
+import { breadcrumbSchema } from "../seo/schemas";
 
 const towns = [
   { name: "Fairfield", slug: "/fairfield-ct", zip: "06824" },
@@ -29,24 +30,17 @@ const towns = [
 const ServiceAreas = () => {
   return (
     <>
-      <Helmet>
-        <title>
-          Service Areas – Fairfield County CT Mobile Detailing | NAS Auto Spa
-        </title>
-        <meta
-          name="description"
-          content="NAS Auto Spa serves all of Fairfield County, CT with premium mobile detailing, paint correction, ceramic coating & fleet washing. We come to Stamford, Greenwich, Westport, Norwalk, Fairfield, Trumbull, Stratford, Milford, Bridgeport, Darien, New Canaan, Shelton, Monroe & more."
-        />
-        <meta
-          name="keywords"
-          content="mobile detailing Fairfield County CT, car detailing near me Connecticut, auto detailing service areas CT, mobile detailer Stamford Greenwich Westport Norwalk, car detailing Fairfield Trumbull Stratford Milford CT, ceramic coating service area Connecticut, paint correction service area Fairfield County"
-        />
-        <link
-          rel="canonical"
-          href="https://www.nasautospa.com/service-areas-fairfield-county-ct"
-        />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="Service Areas – Fairfield County CT Mobile Detailing | NAS Auto Spa"
+        description="NAS Auto Spa serves all of Fairfield County, CT with premium mobile detailing, paint correction, ceramic coating & fleet washing. We come to Stamford, Greenwich, Westport, Norwalk, Fairfield, Trumbull, Stratford, Milford, Bridgeport, Darien, New Canaan, Shelton, Monroe & more."
+        path="/service-areas-fairfield-county-ct"
+        keywords="mobile detailing Fairfield County CT, car detailing near me Connecticut, auto detailing service areas CT, mobile detailer Stamford Greenwich Westport Norwalk, car detailing Fairfield Trumbull Stratford Milford CT, ceramic coating service area Connecticut, paint correction service area Fairfield County"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Service Areas', path: '/service-areas-fairfield-county-ct' },
+          ]),
+          {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
@@ -91,9 +85,9 @@ const ServiceAreas = () => {
                 }
               }
             ]
-          })}
-        </script>
-      </Helmet>
+          },
+        ]}
+      />
 
       <div className="bg-black text-white min-h-screen flex flex-col">
         <Navbar />
