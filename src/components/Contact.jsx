@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const JOBBER_CLIENTHUB_ID = '306a6900-fe95-4c4f-91f5-5aaae2d0586f-4624455';
 const JOBBER_FORM_URL =
@@ -10,23 +10,6 @@ const JOBBER_JS =
 
 const Contact = () => {
   const initialized = useRef(false);
-  const containerRef = useRef(null);
-  const lastHeight = useRef(0);
-
-  const handleResize = useCallback((entries) => {
-    for (const entry of entries) {
-      const newHeight = entry.contentRect.height;
-      if (newHeight === lastHeight.current) return;
-      lastHeight.current = newHeight;
-
-      // Only scroll if the form top is above the viewport mid-point
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      if (rect.top < 0 || rect.top > window.innerHeight * 0.5) {
-        containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-  }, []);
 
   useEffect(() => {
     if (initialized.current) return;
@@ -55,16 +38,6 @@ const Contact = () => {
     document.body.appendChild(script);
   }, []);
 
-  // Watch for height changes inside the Jobber container and re-anchor scroll
-  useEffect(() => {
-    const target = containerRef.current;
-    if (!target || typeof ResizeObserver === 'undefined') return;
-
-    const observer = new ResizeObserver(handleResize);
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, [handleResize]);
-
   return (
     <section
       id="contact"
@@ -87,7 +60,6 @@ const Contact = () => {
 
         {/* Jobber embed container */}
         <div
-          ref={containerRef}
           className="bg-black border border-gray-800 rounded-3xl shadow-2xl overflow-hidden p-4 sm:p-6"
           style={{ minHeight: 420, scrollMarginTop: '80px' }}
         >
