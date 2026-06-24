@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import porscheImage from '../assets/porsche-gt3rs.jpg';
 import JobberFormEmbed from './JobberFormEmbed';
-import { DEPOSIT_POLICY } from '../data/pricing';
 
 const TRUST_BADGES = [
   { icon: '⭐', text: '5.0 Google Rating' },
@@ -11,6 +10,7 @@ const TRUST_BADGES = [
 const Hero = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 1024);
 
   useEffect(() => {
     const img = new Image();
@@ -24,6 +24,12 @@ const Hero = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   const progress = Math.min(scrollY / 500, 1);
 
   const scrollTo = (id) => (e) => {
@@ -34,7 +40,7 @@ const Hero = () => {
   return (
     <div className="relative bg-black overflow-hidden">
 
-      {/* ── Background photo (clipped to hero bounds) ── */}
+      {/* ── Background photo ── */}
       <div
         className={`absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform transition-opacity duration-1000 ${
           imageLoaded ? 'opacity-100' : 'opacity-0'
@@ -74,7 +80,7 @@ const Hero = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#e1b11b]/40 bg-[#e1b11b]/10 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-[#e1b11b] animate-pulse" />
               <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#e1b11b]">
-                Connecticuts top mobile Detailing
+                Connecticut's Top Mobile Detailing
               </span>
             </div>
 
@@ -105,8 +111,8 @@ const Hero = () => {
               ))}
             </div>
 
-            {/* CTA buttons — desktop only (mobile has duplicate below form) */}
-            <div className="hidden lg:flex gap-3 w-full max-w-xs">
+            {/* CTA buttons */}
+            <div className="flex gap-3 w-full max-w-xs">
               <button
                 type="button"
                 onClick={scrollTo('services')}
@@ -116,77 +122,61 @@ const Hero = () => {
               </button>
               <button
                 type="button"
-                onClick={scrollTo('pricing')}
+                onClick={isDesktop ? scrollTo('pricing') : scrollTo('contact')}
                 className="flex-1 py-3.5 rounded-xl border border-zinc-500 text-white text-sm font-bold tracking-wider hover:border-[#e1b11b] hover:text-[#e1b11b] transition-all duration-200"
               >
-                PACKAGES
+                {isDesktop ? 'PACKAGES' : 'GET A QUOTE'}
               </button>
             </div>
           </div>
 
-          {/* ══ RIGHT — quote form ══ */}
-          <div className="w-full">
-            <div className="relative rounded-2xl border border-zinc-700/60 bg-zinc-950/90 backdrop-blur-xl shadow-[0_20px_70px_rgba(0,0,0,0.65)]">
-              {/* Gold top accent line */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-[#e1b11b] via-amber-300 to-[#e1b11b]" />
+          {/* ══ RIGHT — quote form (desktop only, fully removed from DOM on mobile) ══ */}
+          {isDesktop && (
+            <div className="w-full">
+              <div className="relative rounded-2xl border border-zinc-700/60 bg-zinc-950/90 backdrop-blur-xl shadow-[0_20px_70px_rgba(0,0,0,0.65)]">
+                {/* Gold top accent line */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-[#e1b11b] via-amber-300 to-[#e1b11b]" />
 
-              {/* Card header */}
-              <div className="px-5 sm:px-6 pt-6 pb-4 border-b border-zinc-800/70">
-                <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#e1b11b] mb-1">
-                  Free Quote · Fast Response
-                </p>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Fill out the form and we&apos;ll get back to you — usually same day.
-                </p>
-              </div>
+                {/* Card header */}
+                <div className="px-5 sm:px-6 pt-6 pb-4 border-b border-zinc-800/70">
+                  <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#e1b11b] mb-1">
+                    Free Quote · Fast Response
+                  </p>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    Fill out the form and we&apos;ll get back to you — usually same day.
+                  </p>
+                </div>
 
-              {/* Jobber form — no padding/overflow constraints so it renders at full width */}
-              <JobberFormEmbed
-                id="hero-quote"
-                className="w-full"
-                minHeight={0}
-              />
+                {/* Jobber form */}
+                <JobberFormEmbed
+                  id="hero-quote"
+                  className="w-full"
+                  minHeight={0}
+                />
 
-              {/* Card footer */}
-              <div className="px-5 sm:px-6 py-4 border-t border-zinc-800/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                <p className="text-[10px] text-zinc-500 leading-relaxed max-w-[260px]">
-                  50% deposit secures your booking. Washes pay in full at service.
-                </p>
-                <a
-                  href="tel:+19293076986"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#e1b11b] hover:underline whitespace-nowrap"
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  (929) 307-6986
-                </a>
+                {/* Card footer */}
+                <div className="px-5 sm:px-6 py-4 border-t border-zinc-800/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <p className="text-[10px] text-zinc-500 leading-relaxed max-w-[260px]">
+                    50% deposit secures your booking. Washes pay in full at service.
+                  </p>
+                  <a
+                    href="tel:+19293076986"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#e1b11b] hover:underline whitespace-nowrap"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    (929) 307-6986
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* CTA buttons — mobile only (shown below form) */}
-          <div className="flex lg:hidden gap-3 w-full max-w-xs">
-            <button
-              type="button"
-              onClick={scrollTo('services')}
-              className="flex-1 py-3.5 rounded-xl bg-[#e1b11b] text-black text-sm font-bold tracking-wider hover:bg-amber-300 transition-all duration-200 shadow-[0_4px_20px_rgba(225,177,27,0.35)]"
-            >
-              SERVICES
-            </button>
-            <button
-              type="button"
-              onClick={scrollTo('pricing')}
-              className="flex-1 py-3.5 rounded-xl border border-zinc-500 text-white text-sm font-bold tracking-wider hover:border-[#e1b11b] hover:text-[#e1b11b] transition-all duration-200"
-            >
-              PACKAGES
-            </button>
-          </div>
+          )}
 
         </div>
       </div>
 
-      {/* ── Scroll hint ── */}
+      {/* ── Scroll hint (desktop only) ── */}
       <div
         className="hidden lg:flex absolute bottom-8 left-8 items-center gap-3 transition-opacity duration-500"
         style={{ opacity: Math.max(0, 1 - progress * 2.5) }}
