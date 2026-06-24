@@ -178,7 +178,7 @@ const Testimonials = () => {
 
           <h2
             id="testimonials-heading"
-            className="text-2xl sm:text-3xl md:text-5xl font-bold text-white leading-tight"
+            className="text-2xl sm:text-3xl md:text-5xl font-bold italic text-white leading-tight"
           >
             Trusted Mobile Detailing in Fairfield County, CT
           </h2>

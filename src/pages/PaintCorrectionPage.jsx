@@ -345,9 +345,6 @@ const PaintCorrectionPage = () => {
                   {pkg.badge}
                 </p>
                 <h3 className="text-lg md:text-xl font-semibold">{pkg.title}</h3>
-                <p className="text-sm text-[#e1b11b] font-semibold">
-                  {pkg.price}
-                </p>
                 <ul className="text-sm text-zinc-300 space-y-1 mt-1">
                   {pkg.points.map((pt) => (
                     <li key={pt}>• {pt}</li>

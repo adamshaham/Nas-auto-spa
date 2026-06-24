@@ -105,7 +105,7 @@ const ServicesList = () => {
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-left mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold italic tracking-tight">
             <span className="text-white">OUR</span>{" "}
             <span className="text-[#e1b11b]">SERVICES</span>
           </h2>

@@ -1,6 +1,7 @@
 import React from "react";
 import SEO from "../components/SEO";
 import { breadcrumbSchema, servicePageSchema } from "../seo/schemas";
+import { DEPOSIT_POLICY } from "../data/pricing";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -23,7 +24,7 @@ const CeramicCoatingPage = () => {
     <div className="bg-black min-h-screen text-white">
       <SEO
         title="Ceramic Coating in Fairfield County, CT | NAS Auto Spa"
-        description="Professional ceramic coating in Fairfield County, CT by NAS Auto Spa. Get long-lasting hydrophobic paint protection, deep gloss, and easier maintenance washes. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County. Starting at $399."
+        description="Professional ceramic coating in Fairfield County, CT by NAS Auto Spa. Get long-lasting hydrophobic paint protection, deep gloss, and easier maintenance washes. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County."
         path="/ceramic-coating-fairfield-county-ct"
         keywords="ceramic coating near me, ceramic coating near me CT, ceramic coating near me Connecticut, best ceramic coating near me, paint protection near me, ceramic coating Fairfield County CT, paint protection Stamford CT, ceramic coating Greenwich CT, hydrophobic coating Westport CT, ceramic coat Norwalk CT, car coating Fairfield CT, ceramic coating Trumbull CT, professional ceramic coating near me Connecticut, nano ceramic coating near me Fairfield County, car coating near me"
         schemas={[
@@ -66,16 +67,6 @@ const CeramicCoatingPage = () => {
             name: 'Ceramic Coating in Fairfield County, CT',
             description: 'Professional ceramic coating application with proper paint prep, correction, and long-lasting hydrophobic protection for vehicles in Fairfield County, Connecticut.',
             path: '/ceramic-coating-fairfield-county-ct',
-            offers: {
-              '@type': 'Offer',
-              priceCurrency: 'USD',
-              price: '399',
-              priceSpecification: {
-                '@type': 'PriceSpecification',
-                minPrice: '399',
-                priceCurrency: 'USD',
-              },
-            },
           }),
         ]}
       />
@@ -396,9 +387,9 @@ const CeramicCoatingPage = () => {
                 Ready to get your car coated the right way?
               </h3>
               <p className="text-sm md:text-base text-zinc-300 mt-1">
-                Share a few photos and tell us how you use the vehicle. We’ll recommend the
+                Share a few photos and tell us how you use the vehicle. We&apos;ll recommend the
                 prep, coating level, and pricing that makes the most sense for you — no fluff,
-                just honest guidance.
+                just honest guidance. {DEPOSIT_POLICY}
               </p>
             </div>
             <div className="flex flex-wrap gap-3">

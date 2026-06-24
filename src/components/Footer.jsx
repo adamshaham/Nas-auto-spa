@@ -269,7 +269,7 @@ const Footer = () => {
             "telephone": "+19293076986",
             "email": "contact@nasautospa.com",
             "description": "Fairfield County's premier mobile auto detailing company. Premium detail packages, paint correction, ceramic coating, and commercial fleet washing. We bring our own water and power.",
-            "priceRange": "$199–$399+",
+            "priceRange": "$$",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Stratford",

@@ -1,23 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { DEPOSIT_POLICY } from '../data/pricing';
 
 const Pricing = () => {
   const quickWashPackage = {
     title: 'QUICK HAND WASH',
-    price: '$50',
-    subtitle: 'EXTERIOR / INTERIOR',
+    subtitle: '1-STEP EXTERIOR WASH + QUICK VACUUM',
     features: [
+      { text: '1-STEP EXTERIOR HAND WASH', included: true },
+      { text: 'WHEEL & TIRE RINSE', included: true },
+      { text: 'WINDOW WIPE-DOWN', included: true },
+      { text: 'QUICK INTERIOR VACUUM', included: true },
     ],
     popular: false,
   };
 
   const monthlyWashPackage = {
     title: 'MAINTENANCE WASH',
-    price: '$150',
-    priceNote: '/ MONTH',
-    subtitle: 'KEEP IT CLEAN ALL MONTH',
+    subtitle: '4X / MONTH — FULL INTERIOR & EXTERIOR REFRESH',
     features: [
- 
+      { text: '4 WASHES PER MONTH', included: true },
+      { text: 'FULL EXTERIOR HAND WASH', included: true },
+      { text: 'FULL INTERIOR REFRESH', included: true },
+      { text: 'WHEEL & TIRE CLEANING', included: true },
+      { text: 'WINDOW CLEANING', included: true },
+      { text: 'VACUUM & WIPE-DOWN', included: true },
     ],
     popular: false,
   };
@@ -25,8 +32,6 @@ const Pricing = () => {
   const mainPackages = [
     {
       title: 'STAGE 1',
-      price: '$250',
-      priceNote: 'STARTING AT',
       subtitle: 'Full interior + exterior detail — perfect base reset for most vehicles.',
       features: [
         { text: 'HAND WASH (2 STAGE)', included: true },
@@ -45,8 +50,6 @@ const Pricing = () => {
     },
     {
       title: 'STAGE 2',
-      price: '$350',
-      priceNote: 'STARTING AT',
       subtitle: 'Everything in Stage 1, plus clay bar and a 1-step polish to remove light swirls and boost gloss.',
       features: [
         { text: 'HAND WASH (2 STAGE)', included: true },
@@ -65,8 +68,6 @@ const Pricing = () => {
     },
     {
       title: 'STAGE 3',
-      price: '$500',
-      priceNote: 'STARTING AT',
       subtitle: 'Full detail, 1-step correction, and 6 year ceramic coating protection for long-term shine.',
       features: [
         { text: 'HAND WASH (2 STAGE)', included: true },
@@ -105,7 +106,6 @@ const Pricing = () => {
     popular: false,
   };
 
-  // 🔥 When a package is clicked: fire event + scroll to form
   const handlePackageClick = (key) => {
     if (typeof window !== 'undefined') {
       window.dispatchEvent(
@@ -136,16 +136,6 @@ const Pricing = () => {
         <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-3 md:mb-4">
           {pkg.subtitle}
         </p>
-        <div className="flex items-baseline gap-2">
-          <span className="text-2xl md:text-3xl font-bold text-white">
-            {pkg.price}
-          </span>
-          {pkg.priceNote && (
-            <span className="text-gray-400 text-xs md:text-sm">
-              {pkg.priceNote}
-            </span>
-          )}
-        </div>
       </div>
       <ul className="space-y-2 md:space-y-2.5 mb-4 md:mb-6 flex-grow">
         {pkg.features.map((feature, idx) =>
@@ -198,20 +188,6 @@ const Pricing = () => {
               <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-1">
                 {pkg.subtitle}
               </p>
-
-              {/* 🔥 Show price here if it exists (Quick Wash will show $30 on mobile & desktop) */}
-              {pkg.price && (
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-lg md:text-2xl font-bold text-white">
-                    {pkg.price}
-                  </span>
-                  {pkg.priceNote && (
-                    <span className="text-gray-400 text-xs md:text-sm">
-                      {pkg.priceNote}
-                    </span>
-                  )}
-                </div>
-              )}
             </div>
 
             <ul className="flex flex-col md:flex-row gap-3 md:gap-6">
@@ -260,7 +236,6 @@ const Pricing = () => {
       id="pricing"
       className="relative py-12 md:py-24 bg-black overflow-hidden"
     >
-      {/* BACKGROUND BLOBS */}
       <div className="pointer-events-none absolute inset-0">
         <motion.div
           animate={{ y: [0, -18, 0] }}
@@ -280,15 +255,16 @@ const Pricing = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Section Header */}
         <div className="text-left mb-8 md:mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-bold italic mb-4 tracking-tight">
             <span className="text-white">OUR</span>
             <span className="text-yellow-400"> PACKAGES</span>
           </h2>
+          <p className="text-sm md:text-base text-zinc-400 max-w-3xl leading-relaxed">
+            {DEPOSIT_POLICY}
+          </p>
         </div>
 
-        {/* Quick Wash + Monthly Wash */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
           {[quickWashPackage, monthlyWashPackage].map((pkg, i) => (
             <div
@@ -301,18 +277,6 @@ const Pricing = () => {
               <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-3">
                 {pkg.subtitle}
               </p>
-              {pkg.price && (
-                <div className="flex items-baseline gap-2 mb-4">
-                  <span className="text-2xl md:text-3xl font-bold text-white">
-                    {pkg.price}
-                  </span>
-                  {pkg.priceNote && (
-                    <span className="text-gray-400 text-xs md:text-sm">
-                      {pkg.priceNote}
-                    </span>
-                  )}
-                </div>
-              )}
               <ul className="space-y-2 mb-5 flex-grow">
                 {pkg.features
                   .filter((f) => f.text)
@@ -336,7 +300,6 @@ const Pricing = () => {
           ))}
         </div>
 
-        {/* Main Packages */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
           {mainPackages.map((pkg, i) => (
             <div key={i} className="w-full">
@@ -345,7 +308,6 @@ const Pricing = () => {
           ))}
         </div>
 
-        {/* Enhancements */}
         <div className="w-full">
           {renderHorizontalEnhancementsCard(enhancementsPackage)}
         </div>

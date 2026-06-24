@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { DEPOSIT_POLICY } from '../data/pricing';
 
 const faqs = [
   {
@@ -25,6 +26,10 @@ const faqs = [
   {
     question: "What is ceramic coating and is it worth it?",
     answer: "Ceramic coating is a liquid polymer that bonds to your paint, creating a durable layer of protection against UV rays, bird droppings, tree sap, and minor scratches. It also makes your car much easier to wash. For anyone who wants long-lasting paint protection and that showroom shine, it's absolutely worth it."
+  },
+  {
+    question: "Do you require a deposit?",
+    answer: DEPOSIT_POLICY,
   },
   {
     question: "How do I book an appointment?",
@@ -68,7 +73,7 @@ const FAQ = () => {
   return (
     <section className="w-full py-16 sm:py-20 px-4">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-white mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold italic text-center text-white mb-2">
           Frequently Asked Questions
         </h2>
         <p className="text-sm text-zinc-400 text-center mb-10">

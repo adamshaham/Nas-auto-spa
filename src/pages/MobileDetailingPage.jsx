@@ -1,6 +1,7 @@
 import React from "react";
 import SEO from "../components/SEO";
 import { breadcrumbSchema, servicePageSchema } from "../seo/schemas";
+import { DEPOSIT_POLICY } from "../data/pricing";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -23,7 +24,7 @@ const MobileDetailingPage = () => {
     <div className="bg-black min-h-screen text-white">
       <SEO
         title="Mobile Car Detailing in Fairfield County, CT | NAS Auto Spa"
-        description="Premium mobile car detailing in Fairfield County, CT by NAS Auto Spa. We come to your home or office with our own water & power for full interior & exterior details. Stage 1 ($199), Stage 2 ($299), Stage 3 ($399) packages. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County."
+        description="Premium mobile car detailing in Fairfield County, CT by NAS Auto Spa. We come to your home or office with our own water & power for full interior & exterior details. Stage 1, Stage 2, and Stage 3 packages available. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County."
         path="/mobile-detailing-fairfield-county-ct"
         keywords="mobile car detailing near me, mobile detailing near me, car detailing near me Connecticut, auto detailing near me Fairfield County, mobile car wash near me CT, car detailing Stamford CT, auto detailing Greenwich CT, mobile car wash Westport CT, car cleaning Norwalk CT, mobile detailer Fairfield CT, interior detailing near me CT, exterior detailing near me, car detail Trumbull CT, hand car wash near me Fairfield County, SUV detailing near me CT, luxury car detailing near me Connecticut, mobile auto detail Stratford CT, best car detailing near me, mobile detailing Fairfield County CT"
         schemas={[
@@ -40,22 +41,16 @@ const MobileDetailingPage = () => {
               {
                 '@type': 'Offer',
                 name: 'Stage 1 – Exterior + Interior Reset',
-                priceCurrency: 'USD',
-                price: '199',
                 description: 'Full interior + exterior detail — hand wash, wheel cleaning, wax, steam cleaning, shampoo extraction.',
               },
               {
                 '@type': 'Offer',
                 name: 'Stage 2 – Detail + Paint Correction',
-                priceCurrency: 'USD',
-                price: '299',
                 description: 'Everything in Stage 1 plus clay bar treatment and 1-step paint correction polish.',
               },
               {
                 '@type': 'Offer',
                 name: 'Stage 3 – Paint Correction + Ceramic Coating',
-                priceCurrency: 'USD',
-                price: '399',
                 description: 'Full detail, 1-step correction, and ceramic coating protection for long-term shine.',
               },
             ],
@@ -316,10 +311,6 @@ const MobileDetailingPage = () => {
                 <h3 className="text-lg font-semibold text-white">
                   Exterior + Interior Reset
                 </h3>
-                <p className="text-sm text-[#e1b11b] font-semibold">
-                  $199{" "}
-                  <span className="text-xs text-zinc-400 font-normal">starting at</span>
-                </p>
                 <p className="text-xs text-zinc-400">
                   Full interior + exterior detail — perfect base reset for most vehicles.
                 </p>
@@ -347,10 +338,6 @@ const MobileDetailingPage = () => {
                 <h3 className="text-lg font-semibold text-white">
                   Detail + Paint Correction
                 </h3>
-                <p className="text-sm text-[#e1b11b] font-semibold">
-                  $299{" "}
-                  <span className="text-xs text-zinc-400 font-normal">starting at</span>
-                </p>
                 <p className="text-xs text-zinc-400">
                   Everything in Stage 1, plus clay bar and a 1-step polish to remove light swirls
                   and boost gloss.
@@ -381,10 +368,6 @@ const MobileDetailingPage = () => {
                 <h3 className="text-lg font-semibold text-white">
                   Paint Correction + Ceramic Coating
                 </h3>
-                <p className="text-sm text-[#e1b11b] font-semibold">
-                  $399{" "}
-                  <span className="text-xs text-zinc-400 font-normal">starting at</span>
-                </p>
                 <p className="text-xs text-zinc-400">
                   Full detail, 1-step correction, and ceramic coating protection for long-term shine
                   and easier washes.
@@ -410,8 +393,7 @@ const MobileDetailingPage = () => {
             </div>
 
             <p className="text-xs text-zinc-500">
-              Prices vary based on size, condition, and location. We&apos;ll confirm final pricing
-              after a quick look at the vehicle or photos.
+              Final pricing depends on vehicle size, condition, and location. Contact us for a personalized quote. {DEPOSIT_POLICY}
             </p>
           </motion.section>
 
