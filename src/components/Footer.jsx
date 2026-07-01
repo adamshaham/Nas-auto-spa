@@ -247,9 +247,17 @@ const Footer = () => {
         </div>
 
         {/* BOTTOM COPYRIGHT */}
-        <div className="border-t border-gray-800 pt-8 mt-8 text-center px-4">
+        <div className="border-t border-gray-800 pt-8 mt-8 text-center px-4 space-y-2">
           <p className="text-gray-400 text-sm">
             © {currentYear} NAS Auto Spa LLC. All Rights Reserved.
+          </p>
+          <p>
+            <a
+              href="/privacy-policy"
+              className="text-zinc-500 hover:text-[#e1b11b] text-xs transition-colors"
+            >
+              Privacy Policy
+            </a>
           </p>
         </div>
       </div>

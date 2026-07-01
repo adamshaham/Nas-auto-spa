@@ -29,6 +29,7 @@ import MilfordCTPage from './pages/MilfordCTPage';
 import TrumbullCTPage from './pages/TrumbullCTPage';
 import FairfieldCTPage from './pages/FairfieldCTPage';
 import NotFoundPage from './pages/NotFoundPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 // 🔹 Scroll handler that supports hashes (#pricing)
 const ScrollToTop = () => {
@@ -93,6 +94,7 @@ function App() {
          <Route path="/trumbull-ct" element={<TrumbullCTPage />} />
          <Route path="/fairfield-ct" element={<FairfieldCTPage />} />
 
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
