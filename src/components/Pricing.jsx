@@ -38,12 +38,12 @@ const Pricing = () => {
         { text: 'WHEEL AND TIRE CLEANING', included: true },
         { text: 'WINDOW CLEANING', included: true },
         { text: 'DOOR JAMS', included: true },
-        { text: 'FULL EXTERIOR WAX', included: true },
+        { text: 'EXTERIOR CERAMIC SEALER', included: true },
         { text: 'ENGINE BAY CLEANING', included: true },
         { text: 'INTERIOR STEAM CLEANING', included: true },
         { text: 'SHAMPOO EXTRACTION', included: true },
-        { text: '', included: false },
-        { text: '', included: false },
+        { text: 'SEAT CLEANING', included: true },
+        { text: 'DASH & UPHOLSTERY WIPE-DOWN', included: true },
         { text: '', included: false },
       ],
       popular: true,
@@ -53,16 +53,17 @@ const Pricing = () => {
       subtitle: 'Everything in Stage 1, plus clay bar and a 1-step polish to remove light swirls and boost gloss.',
       features: [
         { text: 'HAND WASH (2 STAGE)', included: true },
-        { text: 'ENGINE BAY CLEANING', included: true },
         { text: 'WHEEL AND TIRE CLEANING', included: true },
         { text: 'WINDOW CLEANING', included: true },
         { text: 'DOOR JAMS', included: true },
-        { text: 'FULL EXTERIOR WAX', included: true },
+        { text: 'EXTERIOR CERAMIC SEALER', included: true },
+        { text: 'ENGINE BAY CLEANING', included: true },
         { text: 'INTERIOR STEAM CLEANING', included: true },
         { text: 'SHAMPOO EXTRACTION', included: true },
+        { text: 'SEAT CLEANING', included: true },
+        { text: 'DASH & UPHOLSTERY WIPE-DOWN', included: true },
         { text: '1 STEP PAINT CORRECTION', included: true },
         { text: 'CLAY BAR', included: true },
-        { text: '', included: false },
       ],
       popular: true,
     },
@@ -71,16 +72,18 @@ const Pricing = () => {
       subtitle: 'Full detail, 1-step correction, and 6 year ceramic coating protection for long-term shine.',
       features: [
         { text: 'HAND WASH (2 STAGE)', included: true },
-        { text: 'ENGINE BAY CLEANING', included: true },
         { text: 'WHEEL AND TIRE CLEANING', included: true },
         { text: 'WINDOW CLEANING', included: true },
         { text: 'DOOR JAMS', included: true },
-        { text: 'FULL EXTERIOR WAX', included: true },
+        { text: 'EXTERIOR CERAMIC SEALER', included: true },
+        { text: 'ENGINE BAY CLEANING', included: true },
         { text: 'INTERIOR STEAM CLEANING', included: true },
         { text: 'SHAMPOO EXTRACTION', included: true },
+        { text: 'SEAT CLEANING', included: true },
+        { text: 'DASH & UPHOLSTERY WIPE-DOWN', included: true },
         { text: '1 STEP PAINT CORRECTION', included: true },
         { text: 'CLAY BAR', included: true },
-        { text: '6 YEAR CERAMIC COATING', included: true },
+        { text: '6-YEAR CERAMIC COATING', included: true },
       ],
       popular: true,
     },
@@ -91,34 +94,51 @@ const Pricing = () => {
     subtitle: 'ADDITIONAL SERVICES',
     features: [
       { text: 'PAINT CORRECTION', included: true },
-      { text: 'CERAMIC COATING', included: true },
+      { text: '6-YEAR CERAMIC COATING', included: true },
       { text: 'ENGINE BAY CLEANING', included: true },
-      { text: '', included: false },
-      { text: '', included: false },
-      { text: '', included: false },
-      { text: '', included: false },
-      { text: '', included: false },
-      { text: '', included: false },
-      { text: '', included: false },
-      { text: '', included: false },
-      { text: '', included: false },
     ],
     popular: false,
   };
 
-  const handlePackageClick = (key) => {
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(
-        new CustomEvent('nasPackageSelect', { detail: key })
-      );
+  const headlightRestorationPackage = {
+    title: 'HEADLIGHT RESTORATION',
+    subtitle: 'RESTORE CLARITY & NIGHT VISIBILITY',
+    features: [
+      { text: 'SAND & POLISH LENSES', included: true },
+      { text: 'REMOVE YELLOWING & OXIDATION', included: true },
+      { text: 'UV SEALANT PROTECTION', included: true },
+    ],
+    popular: false,
+  };
 
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        window.location.href = '/#contact';
-      }
+  const ceramicCoatingWheelsPackage = {
+    title: 'CERAMIC COATING — WHEELS',
+    subtitle: 'LONG-LASTING WHEEL PROTECTION',
+    features: [
+      { text: 'DEEP CLEAN & DECONTAMINATION', included: true },
+      { text: 'CERAMIC COATING ON WHEELS', included: true },
+      { text: 'HYDROPHOBIC, EASY-TO-CLEAN FINISH', included: true },
+    ],
+    popular: false,
+  };
+
+  const scrollToBookingForm = (key) => {
+    if (typeof window === 'undefined') return;
+
+    window.dispatchEvent(
+      new CustomEvent('nasPackageSelect', { detail: key })
+    );
+
+    const isDesktop = window.innerWidth >= 1024;
+    const targetId = isDesktop ? 'hero-quote' : 'contact';
+    const target = document.getElementById(targetId);
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
     }
+
+    window.location.href = isDesktop ? '/#hero-quote' : '/#contact';
   };
 
   const renderPackageCard = (pkg) => (
@@ -164,7 +184,7 @@ const Pricing = () => {
 
       <button
         type="button"
-        onClick={() => handlePackageClick(pkg.title)}
+        onClick={() => scrollToBookingForm(pkg.title)}
         className={`block w-full py-2 md:py-3 text-center mt-auto ${
           pkg.popular
             ? 'bg-yellow-400 text-black hover:bg-yellow-300'
@@ -176,57 +196,51 @@ const Pricing = () => {
     </div>
   );
 
-  const renderHorizontalEnhancementsCard = (pkg) => (
-    <div className="relative bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20 backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.01] hover:border-yellow-400/80 transition-all duration-300 overflow-hidden">
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
-        <div className="flex-shrink-0 text-left w-full md:w-auto">
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-8">
-            <div className="flex-shrink-0">
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">
-                {pkg.title}
-              </h3>
-              <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-1">
-                {pkg.subtitle}
-              </p>
-            </div>
-
-            <ul className="flex flex-col md:flex-row gap-3 md:gap-6">
-              {pkg.features
-                .filter((f) => f.text)
-                .map((feature, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-center text-white/90 text-xs"
-                  >
-                    <svg
-                      className="w-4 h-4 text-yellow-400 mr-2 flex-shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span className="break-words">{feature.text}</span>
-                  </li>
-                ))}
-            </ul>
-          </div>
+  const renderHorizontalServiceCard = (pkg) => (
+    <div className="relative bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20 backdrop-blur-sm p-4 md:p-6 rounded-lg hover:border-yellow-400/80 transition-all duration-300">
+      <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,240px)_1fr_auto] lg:items-center lg:gap-6">
+        <div className="min-w-0">
+          <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
+            {pkg.title}
+          </h3>
+          <p className="text-yellow-400 text-xs md:text-sm font-semibold">
+            {pkg.subtitle}
+          </p>
         </div>
 
-        <div className="flex-shrink-0 w-full md:w-auto">
-          <button
-            type="button"
-            onClick={() => handlePackageClick(pkg.title === 'ENHANCEMENTS' ? 'ENHANCEMENTS' : 'QUICK WASH')}
-            className="block w-full md:w-auto px-6 md:px-8 py-2 md:py-3 text-center bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base"
-          >
-            Book Now
-          </button>
-        </div>
+        <ul className="flex flex-col sm:flex-row sm:flex-wrap gap-x-5 gap-y-2 min-w-0">
+          {pkg.features
+            .filter((f) => f.text)
+            .map((feature, idx) => (
+              <li
+                key={idx}
+                className="flex items-center text-white/90 text-xs"
+              >
+                <svg
+                  className="w-4 h-4 text-yellow-400 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>{feature.text}</span>
+              </li>
+            ))}
+        </ul>
+
+        <button
+          type="button"
+          onClick={() => scrollToBookingForm(pkg.title)}
+          className="flex-shrink-0 w-full lg:w-auto px-6 py-2.5 md:py-3 text-center bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base whitespace-nowrap"
+        >
+          Book Now
+        </button>
       </div>
     </div>
   );
@@ -291,7 +305,7 @@ const Pricing = () => {
               </ul>
               <button
                 type="button"
-                onClick={() => handlePackageClick(pkg.title)}
+                onClick={() => scrollToBookingForm(pkg.title)}
                 className="block w-full py-2 md:py-3 text-center bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base mt-auto"
               >
                 Book Now
@@ -308,8 +322,10 @@ const Pricing = () => {
           ))}
         </div>
 
-        <div className="w-full">
-          {renderHorizontalEnhancementsCard(enhancementsPackage)}
+        <div className="w-full space-y-4 md:space-y-6">
+          {renderHorizontalServiceCard(enhancementsPackage)}
+          {renderHorizontalServiceCard(headlightRestorationPackage)}
+          {renderHorizontalServiceCard(ceramicCoatingWheelsPackage)}
         </div>
       </div>
     </section>
