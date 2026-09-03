@@ -41,6 +41,13 @@ const ServicesPage = () => {
       stage: 'commercial',
       features: ['Fleet Maintenance', 'Scheduled Service', 'Flexible Contracts', 'Professional Appearance'],
     },
+    {
+      title: 'LUXURY CAR RENTALS',
+      description:
+        'Arrive in style with our luxury, exotic, and chauffeur services across Connecticut, Massachusetts, and New York. Perfect for weddings, corporate events, airport transfers, and special occasions — with premium vehicles and professional drivers when you need them.',
+      stage: 'rentals',
+      features: ['Luxury & Exotic', 'Chauffeur Service', 'CT · MA · NY', 'Event Ready'],
+    },
   ];
 
   // map stage key to route
@@ -54,6 +61,8 @@ const ServicesPage = () => {
         return '/paint-correction-fairfield-county-ct';
       case 'commercial':
         return '/fleet-detailing-fairfield-county-ct'; // 🔼 matches App.js route
+      case 'rentals':
+        return '/luxury-car-rentals-ct-ny-ma';
       default:
         return '/services';
     }

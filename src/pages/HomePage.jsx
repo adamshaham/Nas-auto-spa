@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import GoogleRatingBadge from "../components/GoogleReviewsWidget";
 import Hero from '../components/Hero';
 import ServicesList from '../components/ServicesList';
+import CarRentals from '../components/CarRentals';
 import Pricing from '../components/Pricing';
 import Contact from '../components/Contact';
 import Testimonials from '../components/Testimonials';
@@ -14,11 +15,13 @@ import Footer from '../components/Footer';
 
 const HomePage = () => {
   const servicesRef = useRef(null);
+  const rentalsRef = useRef(null);
   const pricingRef = useRef(null);
   const contactRef = useRef(null);
   const testimonialsRef = useRef(null);
 
   const servicesInView = useInView(servicesRef, { once: true, amount: 0.2 });
+  const rentalsInView = useInView(rentalsRef, { once: true, amount: 0.2 });
   const pricingInView = useInView(pricingRef, { once: true, amount: 0.2 });
   const contactInView = useInView(contactRef, { once: true, amount: 0.2 });
   const testimonialsInView = useInView(testimonialsRef, { once: true, amount: 0.2 });
@@ -83,6 +86,18 @@ const HomePage = () => {
           className="w-full"
         >
           <ServicesList />
+        </motion.div>
+      </div>
+
+      <div className="overflow-x-hidden w-full">
+        <motion.div
+          ref={rentalsRef}
+          initial="hidden"
+          animate={rentalsInView ? 'visible' : 'hidden'}
+          variants={slideInFromRight}
+          className="w-full"
+        >
+          <CarRentals />
         </motion.div>
       </div>
 

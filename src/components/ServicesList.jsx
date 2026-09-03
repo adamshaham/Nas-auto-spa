@@ -23,6 +23,12 @@ const services = [
     link: "/fleet-detailing-fairfield-county-ct",
     allowWrap: true,
   },
+  {
+    title: "CAR RENTALS",
+    image: "/images/gallery/lamborghini-urus.jpg",
+    link: "/luxury-car-rentals-ct-ny-ma",
+    allowWrap: true,
+  },
 ];
 
 const ServiceCard = ({ service, index }) => {
@@ -110,9 +116,9 @@ const ServicesList = () => {
             <span className="text-[#e1b11b]">SERVICES</span>
           </h2>
           <p className="mt-3 text-sm md:text-base text-zinc-400 max-w-xl">
-            Mobile detailing, paint correction, ceramic coating, and commercial
-            fleet care — all brought directly to your driveway anywhere in
-            Fairfield County.
+            Mobile detailing, paint correction, ceramic coating, commercial
+            fleet care, and luxury car rentals — brought directly to you across
+            Fairfield County and the tri-state area.
           </p>
         </div>
 

@@ -89,6 +89,10 @@ const Navbar = () => {
               Fleet Detailing
             </Link>
             {divider}
+            <Link to="/luxury-car-rentals-ct-ny-ma" className={navLinkClass}>
+              Car Rentals
+            </Link>
+            {divider}
             <Link to="/gallery" className={navLinkClass}>
               Gallery
             </Link>
@@ -216,6 +220,9 @@ const Navbar = () => {
               </Link>
               <Link to="/fleet-detailing-fairfield-county-ct" onClick={closeMenu} className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase">
                 Fleet Detailing
+              </Link>
+              <Link to="/luxury-car-rentals-ct-ny-ma" onClick={closeMenu} className="block text-sm font-medium text-white hover:text-[#e1b11b] uppercase">
+                Car Rentals
               </Link>
 
               <div className="pt-2 border-t border-zinc-800 mt-2" />

@@ -136,6 +136,14 @@ const Footer = () => {
                     Fleet & Commercial Detailing
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="/luxury-car-rentals-ct-ny-ma"
+                    className="text-gray-400 hover:text-gold-500"
+                  >
+                    Luxury Car Rentals
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

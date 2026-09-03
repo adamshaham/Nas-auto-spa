@@ -18,6 +18,7 @@ import MobileDetailingPage from './pages/MobileDetailingPage';
 import PaintCorrectionPage from './pages/PaintCorrectionPage';
 import CeramicCoatingPage from './pages/CeramicCoatingPage';
 import CommercialWashPage from './pages/CommercialWashPage';
+import CarRentalsPage from './pages/CarRentalsPage';
 import ServiceAreas from './pages/ServiceAreas';
 import StamfordCTPage from './pages/StamfordCTPage';
 import WestportCTPage from './pages/WestportCTPage';
@@ -81,6 +82,7 @@ function App() {
           <Route path="/paint-correction-fairfield-county-ct" element={<PaintCorrectionPage />} />
           <Route path="/ceramic-coating-fairfield-county-ct" element={<CeramicCoatingPage />} />
           <Route path="/fleet-detailing-fairfield-county-ct" element={<CommercialWashPage />} />
+          <Route path="/luxury-car-rentals-ct-ny-ma" element={<CarRentalsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
          <Route path="/service-areas-fairfield-county-ct" element={<ServiceAreas />} />
