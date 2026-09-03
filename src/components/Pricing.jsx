@@ -267,7 +267,7 @@ const Pricing = () => {
         <div className="text-left mb-8 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold italic mb-4 tracking-tight">
             <span className="text-white">OUR</span>
-            <span className="text-yellow-400"> PACKAGES</span>
+            <span className="text-yellow-400"> DETAIL PACKAGES</span>
           </h2>
           <p className="text-sm md:text-base text-zinc-400 max-w-3xl leading-relaxed">
             {DEPOSIT_POLICY}

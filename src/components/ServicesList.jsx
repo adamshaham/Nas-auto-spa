@@ -25,7 +25,7 @@ const services = [
   },
   {
     title: "CAR RENTALS",
-    image: "/images/gallery/lamborghini-urus.jpg",
+    image: "/images/rentals/ferrari-488-spider/exterior.jpg",
     link: "/luxury-car-rentals-ct-ny-ma",
     allowWrap: true,
   },

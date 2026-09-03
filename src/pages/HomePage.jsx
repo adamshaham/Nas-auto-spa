@@ -91,18 +91,6 @@ const HomePage = () => {
 
       <div className="overflow-x-hidden w-full">
         <motion.div
-          ref={rentalsRef}
-          initial="hidden"
-          animate={rentalsInView ? 'visible' : 'hidden'}
-          variants={slideInFromRight}
-          className="w-full"
-        >
-          <CarRentals />
-        </motion.div>
-      </div>
-
-      <div className="overflow-x-hidden w-full">
-        <motion.div
           ref={pricingRef}
           initial="hidden"
           animate={pricingInView ? 'visible' : 'hidden'}
@@ -110,6 +98,18 @@ const HomePage = () => {
           className="w-full"
         >
           <Pricing />
+        </motion.div>
+      </div>
+
+      <div className="overflow-x-hidden w-full">
+        <motion.div
+          ref={rentalsRef}
+          initial="hidden"
+          animate={rentalsInView ? 'visible' : 'hidden'}
+          variants={slideInFromLeft}
+          className="w-full"
+        >
+          <CarRentals />
         </motion.div>
       </div>
 
