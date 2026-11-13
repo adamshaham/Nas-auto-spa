@@ -144,6 +144,11 @@ const Pricing = () => {
           : 'bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20'
       } backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.02] hover:border-yellow-400/80 transition-all duration-300 flex flex-col h-full w-full`}
     >
+      {pkg.popular && (
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#e1b11b] text-black text-[10px] font-bold uppercase tracking-wider whitespace-nowrap shadow-[0_4px_14px_rgba(225,177,27,0.4)]">
+          Most Popular
+        </span>
+      )}
       <div className="relative mb-4 md:mb-6">
         <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
           {pkg.title}
@@ -309,9 +314,15 @@ const Pricing = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
+        <p className="text-xs text-zinc-500 mb-3 md:hidden tracking-wide">
+          Swipe for Stage 1–3 packages →
+        </p>
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 pb-2 md:pb-0">
           {mainPackages.map((pkg, i) => (
-            <div key={i} className="w-full">
+            <div
+              key={i}
+              className="w-[min(88vw,20rem)] shrink-0 snap-center md:w-full md:shrink"
+            >
               {renderPackageCard(pkg)}
             </div>
           ))}

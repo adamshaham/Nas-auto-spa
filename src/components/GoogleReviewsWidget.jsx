@@ -95,10 +95,10 @@ const GoogleReviewsWidget = () => {
       {/* Floating badge bottom-right */}
       <button
         onClick={openDrawer}
-        className="fixed bottom-4 right-4 z-[3000]"
+        className="fixed bottom-[5.25rem] right-3 sm:right-4 lg:bottom-4 z-[2600]"
         aria-label="View Google Reviews"
       >
-        <div className="flex items-center gap-3 rounded-2xl bg-black/90 border border-[#e1b11b]/70 shadow-[0_0_20px_rgba(0,0,0,0.7)] px-3 py-2 hover:shadow-[0_0_30px_rgba(0,0,0,0.9)] hover:scale-[1.02] transition-transform duration-150">
+        <div className="flex items-center gap-2 sm:gap-3 rounded-2xl bg-black/90 border border-[#e1b11b]/70 shadow-[0_0_20px_rgba(0,0,0,0.7)] px-2.5 py-2 sm:px-3 hover:shadow-[0_0_30px_rgba(0,0,0,0.9)] hover:scale-[1.02] transition-transform duration-150">
           <div className="bg-white rounded-xl p-1.5 flex items-center justify-center">
             <img
               src="/images/gallery/google-reviews1.png"
@@ -108,7 +108,7 @@ const GoogleReviewsWidget = () => {
           </div>
 
           <div className="flex flex-col leading-tight text-left">
-            <span className="text-[11px] font-medium text-gray-300">
+            <span className="text-[11px] font-medium text-gray-300 hidden min-[360px]:block">
               Google Rating
             </span>
             <div className="flex items-center gap-1">

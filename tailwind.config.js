@@ -25,6 +25,8 @@ module.exports = {
         'fade-in': 'fadeIn 0.8s ease-out forwards',
         'slide-up': 'slideUp 0.8s ease-out forwards',
         'blob': 'blob 7s infinite',
+        marquee: 'marquee 28s linear infinite',
+        'marquee-reverse': 'marqueeReverse 34s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -48,6 +50,14 @@ module.exports = {
           '100%': {
             transform: 'translate(0px, 0px) scale(1)',
           },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-33.333%)' },
+        },
+        marqueeReverse: {
+          '0%': { transform: 'translateX(-33.333%)' },
+          '100%': { transform: 'translateX(0)' },
         },
       },
       transitionProperty: {

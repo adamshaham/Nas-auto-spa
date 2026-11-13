@@ -39,7 +39,11 @@ const faqs = [
 
 const FAQItem = ({ question, answer, isOpen, onClick }) => (
   <div
-    className="border border-zinc-800 rounded-xl overflow-hidden transition-colors duration-200 hover:border-zinc-700"
+    className={`border rounded-xl overflow-hidden transition-all duration-300 ${
+      isOpen
+        ? 'border-[#e1b11b]/50 bg-[#e1b11b]/5 shadow-[0_0_24px_rgba(225,177,27,0.08)]'
+        : 'border-zinc-800 hover:border-[#e1b11b]/30'
+    }`}
   >
     <button
       onClick={onClick}

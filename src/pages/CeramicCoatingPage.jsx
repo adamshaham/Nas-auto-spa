@@ -6,6 +6,7 @@ import { DEPOSIT_POLICY } from "../data/pricing";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import LoopVideo from "../components/LoopVideo";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -174,7 +175,6 @@ const CeramicCoatingPage = () => {
       {/* MAIN CONTENT */}
       <section className="bg-black pb-24 md:pb-28">
         <div className="max-w-5xl mx-auto px-6 space-y-14 md:space-y-16">
-
           {/* What is ceramic coating */}
           <motion.div
             className="border border-zinc-800 rounded-3xl bg-zinc-950/70 p-6 md:p-8 space-y-5"
@@ -316,6 +316,34 @@ const CeramicCoatingPage = () => {
                 </div>
               ))}
             </div>
+          </motion.div>
+
+          <motion.div
+            className="border border-zinc-800 rounded-3xl bg-zinc-950/70 p-4 sm:p-6 md:p-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUp}
+            custom={0}
+          >
+            <div className="mb-5">
+              <p className="text-[11px] uppercase tracking-[0.3em] text-[#e1b11b] mb-2">
+                Hydrophobic finish
+              </p>
+              <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
+                Water that sheets instead of sticking
+              </h2>
+              <p className="mt-2 text-sm md:text-base text-zinc-300 max-w-2xl">
+                Ceramic coating creates a slick, hydrophobic layer on the paint —
+                so water beads, sheets, and carries dirt with it instead of sitting
+                on the clear coat.
+              </p>
+            </div>
+            <LoopVideo
+              src="/videos/ceramic-coating.mp4"
+              poster="/images/before-after/ceramic-coating-poster.jpg"
+              title="Ceramic coating hydrophobic water sheeting on dark paint"
+            />
           </motion.div>
 
           {/* Why ceramic / benefits */}

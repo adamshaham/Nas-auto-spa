@@ -26,7 +26,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative py-24 bg-black text-white overflow-x-hidden"
+      className="relative py-16 md:py-24 bg-black text-white overflow-x-hidden"
     >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">

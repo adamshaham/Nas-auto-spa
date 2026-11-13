@@ -5,6 +5,8 @@ import { motion, useInView } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import GoogleRatingBadge from "../components/GoogleReviewsWidget";
 import Hero from '../components/Hero';
+import HomeTicker from '../components/HomeTicker';
+import HomeStats from '../components/HomeStats';
 import ServicesList from '../components/ServicesList';
 import CarRentals from '../components/CarRentals';
 import Pricing from '../components/Pricing';
@@ -12,6 +14,8 @@ import Contact from '../components/Contact';
 import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
+import HomeMobileProcess from '../components/HomeMobileProcess';
+import MobileStickyCta from '../components/MobileStickyCta';
 
 const HomePage = () => {
   const servicesRef = useRef(null);
@@ -28,35 +32,36 @@ const HomePage = () => {
   const faqRef = useRef(null);
   const faqInView = useInView(faqRef, { once: true, amount: 0.2 });
 
-  // Smoother, softer slide animations
   const slideInFromLeft = {
-    hidden: { opacity: 0, x: -20 },
+    hidden: { opacity: 0, y: 36, filter: 'blur(6px)' },
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
+      filter: 'blur(0px)',
       transition: {
         type: 'tween',
-        duration: 0.9,
-        ease: [0.22, 1, 0.36, 1], // smooth ease-out curve
+        duration: 0.85,
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   };
 
   const slideInFromRight = {
-    hidden: { opacity: 0, x: 20 },
+    hidden: { opacity: 0, y: 36, filter: 'blur(6px)' },
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
+      filter: 'blur(0px)',
       transition: {
         type: 'tween',
-        duration: 0.9,
+        duration: 0.85,
         ease: [0.22, 1, 0.36, 1],
       },
     },
   };
 
   return (
-    <div className="bg-gradient-to-b from-black via-gray-900 to-black min-h-screen text-white overflow-x-hidden w-full">
+    <div className="bg-gradient-to-b from-black via-gray-900 to-black min-h-screen text-white overflow-x-hidden w-full pb-[4.75rem] lg:pb-0">
       <SEO
         title="NAS Auto Spa LLC | Mobile Detailing, Paint Correction, Ceramic Coating & Fleet Detailing in Fairfield County CT"
         description="NAS Auto Spa is Fairfield County's top-rated mobile auto detailing company based in Stratford, CT. Premium detail packages, paint correction, ceramic coating & fleet washing. We come to you with our own water & power. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield, Trumbull & more."
@@ -76,17 +81,14 @@ const HomePage = () => {
       <Navbar />
       <GoogleRatingBadge />
       <Hero />
+      <HomeTicker />
+      <HomeStats />
+      <HomeMobileProcess />
 
       <div className="overflow-x-hidden w-full">
-        <motion.div
-          ref={servicesRef}
-          initial="hidden"
-          animate={servicesInView ? 'visible' : 'hidden'}
-          variants={slideInFromLeft}
-          className="w-full"
-        >
+        <div ref={servicesRef} className="w-full">
           <ServicesList />
-        </motion.div>
+        </div>
       </div>
 
       <div className="overflow-x-hidden w-full">
@@ -150,6 +152,7 @@ const HomePage = () => {
       </div>
 
       <Footer />
+      <MobileStickyCta />
     </div>
   );
 };

@@ -1,25 +1,251 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import porscheImage from '../assets/porsche-gt3rs.jpg';
 import JobberFormEmbed from './JobberFormEmbed';
 
 const TRUST_BADGES = [
-  { icon: '⭐', text: '5.0 Google Rating' },
-  { icon: '📍', text: 'Fairfield County, CT' },
+  { text: 'Certified System X Installer' },
+  { text: 'Your cars, our passion' },
 ];
 
+const STATS = [
+  { value: '5.0', label: 'Google rating' },
+  { value: '100%', label: 'Mobile — water & power' },
+  { value: 'CT', label: 'Fairfield County' },
+];
+
+const MagneticButton = ({ children, className, onClick, reduced }) => {
+  const ref = useRef(null);
+
+  const onMove = (e) => {
+    if (reduced || !ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    ref.current.style.transform = `translate(${x * 0.22}px, ${y * 0.28}px)`;
+  };
+
+  const onLeave = () => {
+    if (!ref.current) return;
+    ref.current.style.transform = 'translate(0, 0)';
+  };
+
+  return (
+    <button
+      type="button"
+      ref={ref}
+      onClick={onClick}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className={className}
+    >
+      <span className="relative z-10">{children}</span>
+      <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]">
+        <span className="hero-btn-shine" />
+      </span>
+    </button>
+  );
+};
+
+const SparkleField = ({ enabled, mouseRef }) => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    if (!enabled) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let raf = 0;
+    let running = true;
+
+    const particles = Array.from({ length: 48 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      r: Math.random() * 1.7 + 0.35,
+      s: Math.random() * 0.22 + 0.04,
+      a: Math.random() * 0.45 + 0.12,
+      tw: Math.random() * Math.PI * 2,
+    }));
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      if (!w || !h) return;
+      const nextW = Math.round(w * dpr);
+      const nextH = Math.round(h * dpr);
+      if (canvas.width === nextW && canvas.height === nextH) return;
+      canvas.width = nextW;
+      canvas.height = nextH;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    resize();
+    const ro = new ResizeObserver(() => {
+      requestAnimationFrame(resize);
+    });
+    if (canvas.parentElement) ro.observe(canvas.parentElement);
+
+    const tick = () => {
+      if (!running) return;
+      const w = canvas.offsetWidth;
+      const h = canvas.offsetHeight;
+      ctx.clearRect(0, 0, w, h);
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+
+      particles.forEach((p) => {
+        p.y -= p.s / 140;
+        p.tw += 0.02;
+        if (p.y < -0.04) {
+          p.y = 1.04;
+          p.x = Math.random();
+        }
+        const dx = mx - p.x;
+        const dy = my - p.y;
+        const dist = Math.hypot(dx, dy) || 0.0001;
+        if (dist < 0.18) {
+          p.x -= (dx / dist) * 0.0018;
+          p.y -= (dy / dist) * 0.0018;
+        }
+        const pulse = 0.55 + Math.sin(p.tw) * 0.45;
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(225,177,27,${p.a * pulse})`;
+        ctx.arc(p.x * w, p.y * h, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => {
+      running = false;
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
+  }, [enabled, mouseRef]);
+
+  if (!enabled) return null;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 pointer-events-none z-[2]"
+      aria-hidden="true"
+    />
+  );
+};
+
+const SplitWord = ({ text, className, delay = 0, reduced }) => {
+  const chars = Array.from(text);
+  return (
+              <span className={`inline-flex overflow-hidden whitespace-nowrap pb-[0.08em] pr-[0.06em] ${className}`}>
+      {chars.map((char, i) => (
+        <motion.span
+          key={`${char}-${i}`}
+          className="inline-block"
+          initial={reduced ? false : { y: '115%' }}
+          animate={{ y: '0%' }}
+          transition={{
+            delay: delay + i * 0.045,
+            duration: 0.72,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+};
+
+const HERO_VIDEO = '/videos/hero-porsche.mp4';
+
 const Hero = () => {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const sectionRef = useRef(null);
+  const glowRef = useRef(null);
+  const photoRef = useRef(null);
+  const videoRef = useRef(null);
+  const mouseRef = useRef({ x: 0.62, y: 0.42 });
+  const scrollRef = useRef(0);
+  const applyPhotoRef = useRef(() => {});
+  const reduceMotion = useReducedMotion();
+
+  applyPhotoRef.current = () => {
+    const el = photoRef.current;
+    if (!el) return;
+    const { x, y } = mouseRef.current;
+    const fine = window.matchMedia('(pointer: fine)').matches && !reduceMotion;
+    const px = fine ? (x - 0.5) * 28 : 0;
+    const py = scrollRef.current * 0.1 + (fine ? (y - 0.5) * 16 : 0);
+    el.style.transform = `translate3d(${px}px, ${py}px, 0) scale(1.08)`;
+  };
+  const [mediaReady, setMediaReady] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 1024);
+  const [isDesktop, setIsDesktop] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth >= 1024 : true
+  );
+  const [canSparkle, setCanSparkle] = useState(false);
 
   useEffect(() => {
-    const img = new Image();
-    img.src = porscheImage;
-    img.onload = () => setImageLoaded(true);
-  }, []);
+    const video = videoRef.current;
+    if (!video) return;
+
+    const markReady = () => setMediaReady(true);
+    video.addEventListener('playing', markReady);
+    video.addEventListener('loadeddata', markReady);
+
+    const tryPlay = () => {
+      video.muted = true;
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    };
+
+    if (reduceMotion) {
+      video.pause();
+      setMediaReady(true);
+    } else {
+      tryPlay();
+      video.addEventListener('canplay', tryPlay);
+    }
+
+    const onVisibility = () => {
+      if (reduceMotion) return;
+      if (document.hidden) {
+        video.pause();
+      } else {
+        tryPlay();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (reduceMotion) return;
+        if (entry.isIntersecting) tryPlay();
+        else video.pause();
+      },
+      { threshold: 0.15 }
+    );
+    io.observe(video);
+
+    return () => {
+      video.removeEventListener('playing', markReady);
+      video.removeEventListener('loadeddata', markReady);
+      video.removeEventListener('canplay', tryPlay);
+      document.removeEventListener('visibilitychange', onVisibility);
+      io.disconnect();
+    };
+  }, [reduceMotion]);
 
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY || 0);
+    const onScroll = () => {
+      const y = window.scrollY || 0;
+      scrollRef.current = y;
+      setScrollY(y);
+      applyPhotoRef.current();
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -30,6 +256,41 @@ const Hero = () => {
     return () => window.removeEventListener('resize', check);
   }, []);
 
+  useEffect(() => {
+    const fine = window.matchMedia('(pointer: fine)').matches;
+    setCanSparkle(!reduceMotion && fine && window.innerWidth >= 1024);
+  }, [reduceMotion]);
+
+  useEffect(() => {
+    const root = sectionRef.current;
+    if (!root) return;
+
+    const onMove = (e) => {
+      const rect = root.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      mouseRef.current = { x, y };
+      root.style.setProperty('--mx', `${x * 100}%`);
+      root.style.setProperty('--my', `${y * 100}%`);
+      applyPhotoRef.current();
+      if (glowRef.current) {
+        glowRef.current.style.opacity = '1';
+        glowRef.current.style.transform = `translate3d(${e.clientX - rect.left}px, ${e.clientY - rect.top}px, 0) translate(-50%, -50%)`;
+      }
+    };
+
+    const onLeave = () => {
+      if (glowRef.current) glowRef.current.style.opacity = '0';
+    };
+
+    root.addEventListener('mousemove', onMove);
+    root.addEventListener('mouseleave', onLeave);
+    return () => {
+      root.removeEventListener('mousemove', onMove);
+      root.removeEventListener('mouseleave', onLeave);
+    };
+  }, []);
+
   const progress = Math.min(scrollY / 500, 1);
 
   const scrollTo = (id) => (e) => {
@@ -38,153 +299,247 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative bg-black overflow-hidden">
-
-      {/* ── Background photo ── */}
+    <div
+      ref={sectionRef}
+      className="relative bg-black overflow-hidden hero-interactive"
+      style={{ '--mx': '62%', '--my': '42%', '--mxn': 0.62, '--myn': 0.42 }}
+    >
       <div
-        className={`absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform transition-opacity duration-1000 ${
-          imageLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
+        ref={glowRef}
+        className="pointer-events-none absolute top-0 left-0 z-[4] hidden lg:block w-[28rem] h-[28rem] rounded-full opacity-0 transition-opacity duration-300 mix-blend-screen"
         style={{
-          backgroundImage: `url(${porscheImage})`,
-          transform: `translateY(${scrollY * 0.1}px) scale(1.06)`,
+          background:
+            'radial-gradient(circle, rgba(225,177,27,0.22) 0%, rgba(225,177,27,0.06) 38%, transparent 70%)',
+          transform: 'translate3d(-50%, -50%, 0)',
         }}
+        aria-hidden="true"
       />
 
-      {/* ── Overlays ── */}
-      <div className="absolute inset-0 bg-black/55" />
+      <div
+        ref={photoRef}
+        className={`absolute inset-0 will-change-transform transition-opacity duration-1000 hero-photo ${
+          mediaReady ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{ transform: 'translate3d(0, 0, 0) scale(1.08)' }}
+      >
+        <video
+          ref={videoRef}
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={porscheImage}
+          disablePictureInPicture
+          controls={false}
+          aria-hidden="true"
+        >
+          <source src={HERO_VIDEO} type="video/mp4" />
+        </video>
+      </div>
+
+      <div className="absolute inset-0 bg-black/50 lg:bg-black/50 max-lg:bg-black/62" />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'linear-gradient(105deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.20) 65%, rgba(0,0,0,0.50) 100%)',
+            'linear-gradient(105deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.58) 38%, rgba(0,0,0,0.18) 64%, rgba(0,0,0,0.55) 100%)',
         }}
       />
-
-      {/* ── Gold glow ── */}
-      <div className="pointer-events-none absolute -top-24 -left-16 w-96 h-96 rounded-full bg-[#e1b11b]/10 blur-[90px]" />
-
-      {/* ── Content wrapper ── */}
       <div
-        className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 py-28 lg:py-0 lg:min-h-screen lg:flex lg:items-center"
+        className="absolute inset-0 pointer-events-none z-[1] lg:hidden"
+        style={{
+          background:
+            'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.78) 100%)',
+        }}
+        aria-hidden
+      />
+      <div className="hero-spotlight pointer-events-none absolute inset-0 z-[1]" />
+      <div className="hero-grid pointer-events-none absolute inset-0 z-[1] opacity-40" />
+
+      <SparkleField enabled={canSparkle} mouseRef={mouseRef} />
+
+      <div className="pointer-events-none absolute -top-24 -left-16 w-[28rem] h-[28rem] rounded-full bg-[#e1b11b]/15 blur-[90px] animate-blob" />
+      <div
+        className="pointer-events-none absolute -bottom-24 right-0 w-[22rem] h-[22rem] rounded-full bg-amber-300/10 blur-[80px] animate-blob"
+        style={{ animationDelay: '2.5s' }}
+      />
+      <div className="hero-grain pointer-events-none absolute inset-0 z-[3] opacity-[0.18]" />
+
+      <div
+        className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 min-h-[90svh] flex flex-col justify-end pb-8 pt-28 lg:min-h-screen lg:justify-center lg:py-20 lg:items-center"
         style={{ transform: `translateY(${-progress * 16}px)` }}
       >
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-20 gap-y-10 lg:py-36">
-
-          {/* ══ LEFT — copy ══ */}
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-20 gap-y-10 lg:py-20">
           <div
             className="flex flex-col items-start"
             style={{ opacity: 1 - progress * 0.4 }}
           >
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#e1b11b]/40 bg-[#e1b11b]/10 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e1b11b] animate-pulse" />
-              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#e1b11b]">
-                Connecticut's Top Mobile Detailing
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#e1b11b]/40 bg-[#e1b11b]/10 mb-6 backdrop-blur-sm"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-[#e1b11b] opacity-75 animate-ping" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e1b11b]" />
               </span>
-            </div>
+              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#e1b11b]">
+                Connecticut&apos;s Top Mobile Detailing
+              </span>
+            </motion.div>
 
-            {/* Headline */}
-            <h1 className="text-[3rem] sm:text-[3.75rem] md:text-[4.5rem] font-bold leading-[0.92] tracking-tight mb-6">
-              <span className="block italic text-white">NAS</span>
-              <span className="block italic text-transparent bg-clip-text bg-gradient-to-r from-[#e1b11b] via-amber-300 to-yellow-500">
-                AUTO SPA
+            <h1 className="text-[2.75rem] sm:text-[3.75rem] md:text-[4.5rem] font-bold leading-[0.92] tracking-tight mb-3 sm:mb-4 drop-shadow-[0_2px_20px_rgba(0,0,0,0.55)]">
+              <span className="block italic text-white">
+                <SplitWord text="NAS" reduced={reduceMotion} />
+              </span>
+              <span className="block italic hero-shine">
+                <SplitWord text="AUTO SPA" delay={0.18} reduced={reduceMotion} />
               </span>
             </h1>
 
-            {/* Sub */}
-            <p className="text-zinc-300 text-base sm:text-lg max-w-md leading-relaxed mb-8">
-              Premium mobile detailing, paint correction, ceramic coating &amp; fleet
-              washing across Fairfield County, CT — with our own water &amp; power.
-            </p>
+            <motion.p
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.42 }}
+              className="lg:hidden text-[1.35rem] sm:text-[1.5rem] font-bold leading-tight mb-4"
+            >
+              <span className="block text-white">We Come To You.</span>
+              <span className="block text-[#e1b11b]">Years Of Looking New.</span>
+            </motion.p>
 
-            {/* Trust badges */}
-            <div className="flex flex-wrap gap-2.5 mb-8">
-              {TRUST_BADGES.map((b) => (
+            <motion.p
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="text-zinc-300 text-sm sm:text-lg max-w-md leading-relaxed mb-5"
+            >
+              <span className="lg:hidden">
+                Mobile detailing, paint correction &amp; ceramic coating — water &amp; power
+                included across Fairfield County.
+              </span>
+              <span className="hidden lg:inline">
+                Premium mobile detailing, paint correction, ceramic coating &amp; fleet
+                washing across Fairfield County, CT — with our own water &amp; power.
+              </span>
+            </motion.p>
+
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="flex flex-wrap gap-2.5 mb-5"
+            >
+              {TRUST_BADGES.map((b, i) => (
                 <span
                   key={b.text}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-300"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-300 hover:border-[#e1b11b]/50 hover:bg-[#e1b11b]/10 transition-colors duration-300"
+                  style={{ animation: `floatY 5.5s ease-in-out ${i * 0.6}s infinite` }}
                 >
-                  <span>{b.icon}</span>
                   {b.text}
                 </span>
               ))}
-            </div>
+            </motion.div>
 
-            {/* CTA buttons */}
-            <div className="flex gap-3 w-full max-w-xs">
-              <button
-                type="button"
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.82 }}
+              className="grid grid-cols-2 gap-3 w-full max-w-none sm:max-w-md mb-6"
+            >
+              <MagneticButton
+                reduced={reduceMotion}
                 onClick={scrollTo('services')}
-                className="flex-1 py-3.5 rounded-xl bg-[#e1b11b] text-black text-sm font-bold tracking-wider hover:bg-amber-300 transition-all duration-200 shadow-[0_4px_20px_rgba(225,177,27,0.4)]"
+                className="relative flex-1 py-3.5 rounded-xl bg-[#e1b11b] text-black text-sm font-bold tracking-wider hover:bg-amber-300 transition-colors duration-200 shadow-[0_4px_20px_rgba(225,177,27,0.4)] overflow-hidden will-change-transform"
               >
                 SERVICES
-              </button>
-              <button
-                type="button"
+              </MagneticButton>
+              <MagneticButton
+                reduced={reduceMotion}
                 onClick={isDesktop ? scrollTo('pricing') : scrollTo('contact')}
-                className="flex-1 py-3.5 rounded-xl border border-zinc-500 text-white text-sm font-bold tracking-wider hover:border-[#e1b11b] hover:text-[#e1b11b] transition-all duration-200"
+                className="relative flex-1 py-3.5 rounded-xl border border-zinc-500 text-white text-sm font-bold tracking-wider hover:border-[#e1b11b] hover:text-[#e1b11b] transition-colors duration-200 overflow-hidden will-change-transform"
               >
                 {isDesktop ? 'PACKAGES' : 'GET A QUOTE'}
-              </button>
-            </div>
+              </MagneticButton>
+            </motion.div>
+
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="hidden lg:flex flex-wrap gap-6 sm:gap-8"
+            >
+              {STATS.map((s) => (
+                <div key={s.label} className="min-w-[5.5rem]">
+                  <div className="text-2xl sm:text-3xl font-bold italic text-white tracking-tight">
+                    {s.value}
+                  </div>
+                  <div className="text-[10px] uppercase tracking-[0.18em] text-zinc-500 mt-1">
+                    {s.label}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
 
-          {/* ══ RIGHT — quote form (desktop only, fully removed from DOM on mobile) ══ */}
           {isDesktop && (
-            <div className="w-full">
-              <div className="relative rounded-2xl border border-zinc-700/60 bg-zinc-950/90 backdrop-blur-xl shadow-[0_20px_70px_rgba(0,0,0,0.65)]">
-                {/* Gold top accent line */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-[#e1b11b] via-amber-300 to-[#e1b11b]" />
+            <motion.div
+              className="w-full"
+              initial={reduceMotion ? false : { opacity: 0, x: 28, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="hero-form-frame relative rounded-2xl p-[1px]">
+                <div className="relative rounded-2xl bg-zinc-950/90 backdrop-blur-xl shadow-[0_20px_70px_rgba(0,0,0,0.65)] overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-[#e1b11b] via-amber-300 to-[#e1b11b]" />
+                  <div className="hero-form-sheen pointer-events-none absolute inset-0" />
 
-                {/* Card header */}
-                <div className="px-5 sm:px-6 pt-6 pb-4 border-b border-zinc-800/70">
-                  <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#e1b11b] mb-1">
-                    Free Quote · Fast Response
-                  </p>
-                  <p className="text-xs text-zinc-400 leading-relaxed">
-                    Fill out the form and we&apos;ll get back to you — usually same day.
-                  </p>
-                </div>
+                  <div className="px-5 sm:px-6 pt-6 pb-4 border-b border-zinc-800/70">
+                    <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#e1b11b] mb-1">
+                      Free Quote · Fast Response
+                    </p>
+                    <p className="text-xs text-zinc-400 leading-relaxed">
+                      Fill out the form and we&apos;ll get back to you — usually same day.
+                    </p>
+                  </div>
 
-                {/* Jobber form */}
-                <JobberFormEmbed
-                  id="hero-quote"
-                  className="w-full"
-                  minHeight={0}
-                />
+                  <JobberFormEmbed
+                    id="hero-quote"
+                    className="w-full"
+                    minHeight={0}
+                  />
 
-                {/* Card footer */}
-                <div className="px-5 sm:px-6 py-4 border-t border-zinc-800/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <p className="text-[10px] text-zinc-500 leading-relaxed max-w-[260px]">
-                    50% deposit secures your booking. Washes pay in full at service.
-                  </p>
-                  <a
-                    href="tel:+19293076986"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#e1b11b] hover:underline whitespace-nowrap"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    (929) 307-6986
-                  </a>
+                  <div className="px-5 sm:px-6 py-4 border-t border-zinc-800/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <p className="text-[10px] text-zinc-500 leading-relaxed max-w-[260px]">
+                      50% deposit secures your booking. Washes pay in full at service.
+                    </p>
+                    <a
+                      href="tel:+19293076986"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#e1b11b] hover:underline whitespace-nowrap"
+                    >
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      (929) 307-6986
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
-
         </div>
       </div>
 
-      {/* ── Scroll hint (desktop only) ── */}
       <div
-        className="hidden lg:flex absolute bottom-8 left-8 items-center gap-3 transition-opacity duration-500"
+        className="hidden lg:flex absolute bottom-8 left-8 items-center gap-3 transition-opacity duration-500 z-10"
         style={{ opacity: Math.max(0, 1 - progress * 2.5) }}
       >
-        <div className="w-5 h-8 rounded-full border border-zinc-600 flex justify-center items-start pt-1.5">
-          <div className="w-0.5 h-2 bg-zinc-500 rounded-full animate-bounce" />
+        <div className="w-5 h-8 rounded-full border border-zinc-500 flex justify-center items-start pt-1.5">
+          <div className="w-0.5 h-2 bg-[#e1b11b] rounded-full animate-bounce" />
         </div>
-        <span className="text-zinc-500 text-xs tracking-widest uppercase">Scroll</span>
+        <span className="text-zinc-400 text-xs tracking-widest uppercase">Scroll</span>
       </div>
     </div>
   );

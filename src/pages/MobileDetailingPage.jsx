@@ -5,6 +5,7 @@ import { DEPOSIT_POLICY } from "../data/pricing";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import BeforeAfterSlider from "../components/BeforeAfterSlider";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -153,6 +154,39 @@ const MobileDetailingPage = () => {
       {/* CONTENT */}
       <section className="bg-black pb-24 md:pb-28">
         <div className="max-w-5xl mx-auto px-6 space-y-12 md:space-y-16">
+          <motion.div
+            className="border border-zinc-800 rounded-3xl bg-zinc-950/70 p-4 sm:p-6 md:p-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUp}
+            custom={0}
+          >
+            <div className="mb-5">
+              <p className="text-[11px] uppercase tracking-[0.3em] text-[#e1b11b] mb-2">
+                Before &amp; after
+              </p>
+              <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
+                A neglected cabin, then the interior reset
+              </h2>
+              <p className="mt-2 text-sm md:text-base text-zinc-300 max-w-2xl">
+                Scroll through this section — or drag the gold handle — to wipe
+                from grimy cloth seats to a fully extracted, steamed interior.
+              </p>
+            </div>
+            <BeforeAfterSlider
+              beforeSrc="/images/before-after/interior-before.jpg"
+              afterSrc="/images/before-after/interior-after.jpg"
+              beforeAlt="Dirty cloth car seats before interior detailing"
+              afterAlt="Clean gray cloth car seats after interior detailing"
+              beforeLabel="Dirty interior"
+              afterLabel="After detail"
+              ariaLabel="Before and after car detailing reveal"
+              hint="Scroll to wipe the interior, or drag the gold handle yourself."
+              objectPosition="center 48%"
+            />
+          </motion.div>
+
           {/* Step-by-step full detail */}
           <motion.section
             className="border border-zinc-800 rounded-3xl bg-zinc-950/70 p-6 md:p-8 space-y-6"
