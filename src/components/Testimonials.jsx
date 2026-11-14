@@ -1,67 +1,13 @@
 import React, { useState, useEffect } from 'react';
-
-const GOOGLE_REVIEWS_URL = "https://share.google/whU8wUAAESFLZUJ3m";
+import {
+  GOOGLE_REVIEW_COUNT,
+  GOOGLE_REVIEWS_URL,
+  GOOGLE_REVIEWS,
+  toTestimonialCard,
+} from '../data/googleReviews';
 
 const Testimonials = () => {
-  // Real reviews from Google Business Profile added to the beginning
-  const testimonials = [
-    {
-      name: "Paul Tilkins",
-      role: "Verified Google Review",
-      text: "Best detailers around. They had my dirty work truck looking like it just came off the lot! Amazing work and even better customer service. Highly recommend going to NAS Auto Spa for all of your detailing needs! Unfortunately, I didn't take a picture of the interior but just look at how clean she is!",
-      rating: 5,
-      initial: "P"
-    },
-    {
-      name: "Raymil De Jesús",
-      role: "Verified Google Review",
-      text: "Worth every penny!!! I took my car there for a Stage 2 detail and I was impressed by the results, they made it look like it was new out the dealership. 10/10 service, I would recommend it to anyone!!!",
-      rating: 5,
-      initial: "R"
-    },
-    {
-      name: "Noman Qayyum",
-      role: "Verified Google Review",
-      text: "I got my car detailed and they did really nice job on the point prices are decent as compared to others..highly recommended !!!!",
-      rating: 5,
-      initial: "N"
-    },
-    {
-      name: "Angela Rilley",
-      role: "Verified Google Review",
-      text: "I got my moms car detailed for her birthday and wow🔥🔥 her car looked brand new and ended up getting my dads car detailed too.",
-      rating: 5,
-      initial: "A"
-    },
-    {
-      name: "xavier sierra",
-      role: "Verified Google Review",
-      text: "Great Service, very professional, Left my car looking brand new. Definitely would go back to them!",
-      rating: 5,
-      initial: "x"
-    },
-    {
-      name: "Zach Anderson",
-      role: "Verified Google Review",
-      text: "Awesome service, Definitely worth it!",
-      rating: 5,
-      initial: "Z"
-    },
-    {
-      name: "James Wilson",
-      role: "Verified Google Review",
-      text: "NAS Auto Spa came right to my driveway and completely transformed my SUV. The convenience of mobile detailing is a game changer, and their attention to detail is unmatched in Fairfield County.",
-      rating: 5,
-      initial: "J"
-    },
-    {
-      name: "Sarah Connors",
-      role: "Verified Google Review",
-      text: "I was about to sell my car but decided to get it detailed first. After they finished the interior deep clean and exterior wax, it looked brand new! I actually decided to keep it. Highly recommend.",
-      rating: 5,
-      initial: "S"
-    },
-  ];
+  const testimonials = GOOGLE_REVIEWS.map(toTestimonialCard);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -120,7 +66,7 @@ const Testimonials = () => {
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '5.0',
-      ratingCount: testimonials.length.toString(),
+      ratingCount: String(GOOGLE_REVIEW_COUNT),
     },
     // Do not add itemReviewed on each Review here — parent LocalBusiness is the reviewed entity.
     review: testimonials.map((t) => ({

@@ -343,6 +343,7 @@ const CeramicCoatingPage = () => {
               src="/videos/ceramic-coating.mp4"
               poster="/images/before-after/ceramic-coating-poster.jpg"
               title="Ceramic coating hydrophobic water sheeting on dark paint"
+              flipHorizontal
             />
           </motion.div>
 

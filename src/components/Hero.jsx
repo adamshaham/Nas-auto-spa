@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import porscheImage from '../assets/porsche-gt3rs.jpg';
 import JobberFormEmbed from './JobberFormEmbed';
+import HeroGoogleReviews from './HeroGoogleReviews';
 
-const TRUST_BADGES = [
-  { text: 'Certified System X Installer' },
-  { text: 'Your cars, our passion' },
+const HERO_SERVICE_PILLS = [
+  { label: 'Mobile Detailing', to: '/mobile-detailing-fairfield-county-ct' },
+  { label: 'Paint Correction', to: '/paint-correction-fairfield-county-ct' },
+  { label: 'Ceramic Coating', to: '/ceramic-coating-fairfield-county-ct' },
 ];
 
 const STATS = [
@@ -188,6 +191,7 @@ const Hero = () => {
 
   useEffect(() => {
     const video = videoRef.current;
+    const section = sectionRef.current;
     if (!video) return;
 
     const markReady = () => setMediaReady(true);
@@ -195,23 +199,31 @@ const Hero = () => {
     video.addEventListener('loadeddata', markReady);
 
     const tryPlay = () => {
+      video.defaultMuted = true;
       video.muted = true;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', 'true');
       const playPromise = video.play();
       if (playPromise && typeof playPromise.catch === 'function') {
-        playPromise.catch(() => {});
+        playPromise.catch(() => {
+          window.setTimeout(() => {
+            video.play().catch(() => {});
+          }, 350);
+        });
       }
     };
 
-    if (reduceMotion) {
-      video.pause();
-      setMediaReady(true);
-    } else {
+    tryPlay();
+    video.addEventListener('canplay', tryPlay);
+    video.addEventListener('loadedmetadata', tryPlay);
+
+    const unlockOnGesture = () => {
       tryPlay();
-      video.addEventListener('canplay', tryPlay);
-    }
+    };
+    window.addEventListener('touchstart', unlockOnGesture, { once: true, passive: true });
+    window.addEventListener('click', unlockOnGesture, { once: true });
 
     const onVisibility = () => {
-      if (reduceMotion) return;
       if (document.hidden) {
         video.pause();
       } else {
@@ -220,24 +232,29 @@ const Hero = () => {
     };
     document.addEventListener('visibilitychange', onVisibility);
 
+    const ioTarget = section || video;
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (reduceMotion) return;
         if (entry.isIntersecting) tryPlay();
-        else video.pause();
+        else if (!entry.isIntersecting && entry.boundingClientRect.top < -80) {
+          video.pause();
+        }
       },
-      { threshold: 0.15 }
+      { threshold: 0.05 }
     );
-    io.observe(video);
+    io.observe(ioTarget);
 
     return () => {
       video.removeEventListener('playing', markReady);
       video.removeEventListener('loadeddata', markReady);
       video.removeEventListener('canplay', tryPlay);
+      video.removeEventListener('loadedmetadata', tryPlay);
       document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('touchstart', unlockOnGesture);
+      window.removeEventListener('click', unlockOnGesture);
       io.disconnect();
     };
-  }, [reduceMotion]);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -301,7 +318,7 @@ const Hero = () => {
   return (
     <div
       ref={sectionRef}
-      className="relative bg-black overflow-hidden hero-interactive"
+      className="relative min-h-0 overflow-hidden bg-black hero-interactive lg:min-h-screen"
       style={{ '--mx': '62%', '--my': '42%', '--mxn': 0.62, '--myn': 0.42 }}
     >
       <div
@@ -326,6 +343,7 @@ const Hero = () => {
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay
+          defaultMuted
           muted
           loop
           playsInline
@@ -368,7 +386,7 @@ const Hero = () => {
       <div className="hero-grain pointer-events-none absolute inset-0 z-[3] opacity-[0.18]" />
 
       <div
-        className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 min-h-[90svh] flex flex-col justify-end pb-8 pt-28 lg:min-h-screen lg:justify-center lg:py-20 lg:items-center"
+        className="relative z-10 mx-auto flex max-w-7xl flex-col justify-start px-5 pb-8 pt-[5.75rem] sm:px-8 sm:pb-10 sm:pt-[6rem] lg:min-h-screen lg:items-center lg:justify-center lg:py-20"
         style={{ transform: `translateY(${-progress * 16}px)` }}
       >
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-20 gap-y-10 lg:py-20">
@@ -380,7 +398,7 @@ const Hero = () => {
               initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#e1b11b]/40 bg-[#e1b11b]/10 mb-6 backdrop-blur-sm"
+              className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#e1b11b]/40 bg-[#e1b11b]/10 px-3 py-1.5 backdrop-blur-sm lg:mb-6"
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-[#e1b11b] opacity-75 animate-ping" />
@@ -404,50 +422,46 @@ const Hero = () => {
               initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.42 }}
-              className="lg:hidden text-[1.35rem] sm:text-[1.5rem] font-bold leading-tight mb-4"
+              className="mb-3 text-[1.35rem] font-bold leading-tight sm:text-[1.5rem] lg:hidden"
             >
-              <span className="block text-white">We Come To You.</span>
-              <span className="block text-[#e1b11b]">Years Of Looking New.</span>
-            </motion.p>
-
-            <motion.p
-              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="text-zinc-300 text-sm sm:text-lg max-w-md leading-relaxed mb-5"
-            >
-              <span className="lg:hidden">
-                Mobile detailing, paint correction &amp; ceramic coating — water &amp; power
-                included across Fairfield County.
-              </span>
-              <span className="hidden lg:inline">
-                Premium mobile detailing, paint correction, ceramic coating &amp; fleet
-                washing across Fairfield County, CT — with our own water &amp; power.
-              </span>
+              <span className="text-white">Your Cars, </span>
+              <span className="text-[#e1b11b]">Our Passion.</span>
             </motion.p>
 
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex flex-wrap gap-2.5 mb-5"
+              transition={{ duration: 0.65, delay: 0.5 }}
+              className="mb-3 flex flex-wrap gap-2 lg:hidden"
             >
-              {TRUST_BADGES.map((b, i) => (
-                <span
-                  key={b.text}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-300 hover:border-[#e1b11b]/50 hover:bg-[#e1b11b]/10 transition-colors duration-300"
-                  style={{ animation: `floatY 5.5s ease-in-out ${i * 0.6}s infinite` }}
+              {HERO_SERVICE_PILLS.map((pill) => (
+                <Link
+                  key={pill.label}
+                  to={pill.to}
+                  className="inline-flex items-center rounded-full border border-white/15 bg-black/40 px-3 py-1.5 text-[11px] font-semibold tracking-wide text-zinc-100 backdrop-blur-sm transition hover:border-[#e1b11b]/50 hover:bg-[#e1b11b]/10 hover:text-white"
                 >
-                  {b.text}
-                </span>
+                  {pill.label}
+                </Link>
               ))}
             </motion.div>
+
+            <motion.p
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="mb-5 hidden max-w-md text-lg leading-relaxed text-zinc-300 lg:block"
+            >
+              Premium mobile detailing, paint correction, ceramic coating &amp; fleet
+              washing across Fairfield County, CT — with our own water &amp; power.
+            </motion.p>
+
+            {!isDesktop && <HeroGoogleReviews reduced={reduceMotion} />}
 
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.82 }}
-              className="grid grid-cols-2 gap-3 w-full max-w-none sm:max-w-md mb-6"
+              className="mb-2 mt-4 hidden w-full max-w-none grid-cols-2 gap-3 sm:max-w-md lg:mb-6 lg:mt-0 lg:grid"
             >
               <MagneticButton
                 reduced={reduceMotion}
@@ -492,9 +506,11 @@ const Hero = () => {
               transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="hero-form-frame relative rounded-2xl p-[1px]">
-                <div className="relative rounded-2xl bg-zinc-950/90 backdrop-blur-xl shadow-[0_20px_70px_rgba(0,0,0,0.65)] overflow-hidden">
-                  <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-[#e1b11b] via-amber-300 to-[#e1b11b]" />
-                  <div className="hero-form-sheen pointer-events-none absolute inset-0" />
+                <div className="relative overflow-visible rounded-2xl bg-zinc-950/90 backdrop-blur-xl shadow-[0_20px_70px_rgba(0,0,0,0.65)]">
+                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
+                    <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-[#e1b11b] via-amber-300 to-[#e1b11b]" />
+                    <div className="hero-form-sheen absolute inset-0" />
+                  </div>
 
                   <div className="px-5 sm:px-6 pt-6 pb-4 border-b border-zinc-800/70">
                     <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#e1b11b] mb-1">
@@ -507,8 +523,9 @@ const Hero = () => {
 
                   <JobberFormEmbed
                     id="hero-quote"
-                    className="w-full"
-                    minHeight={0}
+                    className="relative z-[1] w-full px-3 sm:px-4"
+                    mode="embed"
+                    minHeight={500}
                   />
 
                   <div className="px-5 sm:px-6 py-4 border-t border-zinc-800/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">

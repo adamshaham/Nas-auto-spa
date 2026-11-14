@@ -352,6 +352,28 @@ button:hover > span > .hero-btn-shine {
   );
 }
 
+/* Jobber quote embed — single full-width iframe inside hero card */
+#hero-quote .jobber-embed-host,
+#hero-quote .jobber-inline-work-request,
+#contact-quote .jobber-embed-host,
+#contact-quote .jobber-inline-work-request {
+  width: 100% !important;
+  max-width: 100%;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+#hero-quote iframe.jobber-work-request,
+#contact-quote iframe.jobber-work-request,
+#hero-quote iframe[src*='clienthub.getjobber'],
+#contact-quote iframe[src*='clienthub.getjobber'] {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  border: none !important;
+  margin: 0 !important;
+}
+
 .service-spotlight {
   background: radial-gradient(
     380px circle at var(--sx, 50%) var(--sy, 50%),

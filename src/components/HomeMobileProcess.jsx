@@ -1,13 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const TRUST_POINTS = [
-  'Certified System X installer',
-  'We bring water & power',
-  'Mobile anywhere in Fairfield County',
-  'Same-day quote response',
-];
-
 const STEPS = [
   {
     num: '01',
@@ -39,23 +32,6 @@ const HomeMobileProcess = () => (
     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-950/80 to-black" />
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
       <div className="mb-8">
-        <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#e1b11b] mb-2">
-          What you can count on
-        </p>
-        <ul className="space-y-2.5 mb-8">
-          {TRUST_POINTS.map((item) => (
-            <li key={item} className="flex items-start gap-2.5 text-sm text-zinc-300">
-              <span
-                className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e1b11b]/15 border border-[#e1b11b]/40 text-[#e1b11b] text-xs font-bold"
-                aria-hidden
-              >
-                ✓
-              </span>
-              {item}
-            </li>
-          ))}
-        </ul>
-
         <h2 className="text-2xl font-bold italic tracking-tight text-white">
           How it <span className="text-[#e1b11b]">works</span>
         </h2>

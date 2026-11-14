@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
 
 const LoopVideo = ({
   src,
   poster,
   title = 'Service video',
-  leftLabel = 'After',
-  rightLabel = 'Before',
+  leftLabel = 'Before',
+  rightLabel = 'After',
+  flipHorizontal = false,
 }) => {
   const videoRef = useRef(null);
-  const reduced = useReducedMotion();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -21,23 +20,27 @@ const LoopVideo = ({
     video.addEventListener('loadeddata', markReady);
 
     const tryPlay = () => {
+      video.defaultMuted = true;
       video.muted = true;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', 'true');
       const playPromise = video.play();
       if (playPromise && typeof playPromise.catch === 'function') {
-        playPromise.catch(() => {});
+        playPromise.catch(() => {
+          window.setTimeout(() => video.play().catch(() => {}), 350);
+        });
       }
     };
 
-    if (reduced) {
-      video.pause();
-      setReady(true);
-    } else {
-      tryPlay();
-      video.addEventListener('canplay', tryPlay);
-    }
+    tryPlay();
+    video.addEventListener('canplay', tryPlay);
+    video.addEventListener('loadedmetadata', tryPlay);
+
+    const unlockOnGesture = () => tryPlay();
+    window.addEventListener('touchstart', unlockOnGesture, { once: true, passive: true });
+    window.addEventListener('click', unlockOnGesture, { once: true });
 
     const onVisibility = () => {
-      if (reduced) return;
       if (document.hidden) video.pause();
       else tryPlay();
     };
@@ -45,11 +48,10 @@ const LoopVideo = ({
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (reduced) return;
         if (entry.isIntersecting) tryPlay();
         else video.pause();
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
     io.observe(video);
 
@@ -57,10 +59,13 @@ const LoopVideo = ({
       video.removeEventListener('playing', markReady);
       video.removeEventListener('loadeddata', markReady);
       video.removeEventListener('canplay', tryPlay);
+      video.removeEventListener('loadedmetadata', tryPlay);
       document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('touchstart', unlockOnGesture);
+      window.removeEventListener('click', unlockOnGesture);
       io.disconnect();
     };
-  }, [reduced, src]);
+  }, [src]);
 
   return (
     <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-[1.4rem] bg-black aspect-[16/10] min-h-[250px] sm:min-h-0 md:aspect-video">
@@ -68,8 +73,9 @@ const LoopVideo = ({
         ref={videoRef}
         className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
           ready ? 'opacity-100' : 'opacity-0'
-        }`}
-        autoPlay={!reduced}
+        } ${flipHorizontal ? '-scale-x-100' : ''}`}
+        autoPlay
+        defaultMuted
         muted
         loop
         playsInline

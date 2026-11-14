@@ -40,12 +40,16 @@ const CountUp = ({ value, decimals = 0, suffix = '', active, duration = 2400, de
   const [display, setDisplay] = useState(reduced ? value : 0);
 
   useEffect(() => {
-    if (!active) return;
+    if (!active) {
+      setDisplay(reduced ? value : 0);
+      return;
+    }
     if (reduced) {
       setDisplay(value);
       return;
     }
 
+    setDisplay(0);
     let raf;
     let startAt;
     const timeout = window.setTimeout(() => {
@@ -71,12 +75,15 @@ const CountUp = ({ value, decimals = 0, suffix = '', active, duration = 2400, de
 };
 
 const HomeStats = () => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.35 });
+  const statsGridRef = useRef(null);
+  const statsInView = useInView(statsGridRef, {
+    once: true,
+    amount: 0.55,
+    margin: '0px 0px -12% 0px',
+  });
 
   return (
     <section
-      ref={ref}
       className="relative py-14 md:py-24 bg-black overflow-hidden"
       aria-label="NAS Auto Spa by the numbers"
     >
@@ -99,13 +106,16 @@ const HomeStats = () => {
             <span className="text-white">TRUSTED</span>{' '}
             <span className="hero-shine">LOCALLY</span>
           </h2>
-          <p className="mt-4 text-sm md:text-base text-zinc-400 max-w-2xl leading-relaxed">
-            Premium mobile detailing, brought to driveways across Fairfield County —
-            with our own water and power.
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-zinc-400 md:text-base">
+            Mobile detailing, paint correction, System X ceramic coating, and fleet washing — we
+            come to your driveway across Fairfield County with our own water and power.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div
+          ref={statsGridRef}
+          className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4"
+        >
           {STATS.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -121,7 +131,7 @@ const HomeStats = () => {
                     value={stat.value}
                     decimals={stat.decimals || 0}
                     suffix={stat.suffix}
-                    active={inView}
+                    active={statsInView}
                     delay={index * 70}
                   />
                 </p>

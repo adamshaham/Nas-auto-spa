@@ -9,18 +9,25 @@ const PERKS = [
   { icon: '🛡️', label: '50% deposit secures your booking' },
 ];
 
+const LG_BREAKPOINT = 1024;
+
 const Contact = () => {
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 1024);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < LG_BREAKPOINT : false
+  );
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024);
+    const check = () => setIsMobile(window.innerWidth < LG_BREAKPOINT);
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
 
   const scrollToHero = (e) => {
     e.preventDefault();
-    document.getElementById('hero-quote')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const quoteEl =
+      document.getElementById('hero-quote') ||
+      document.getElementById('contact-quote');
+    quoteEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
@@ -51,15 +58,16 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* ── MOBILE: show the real Jobber form ── */}
+        {/* ── MOBILE: show the real Jobber form (hero form hidden below lg) ── */}
         {isMobile && (
           <>
-            <div className="relative rounded-2xl border border-zinc-700/60 bg-zinc-950/90 shadow-[0_20px_70px_rgba(0,0,0,0.65)] mb-4">
+            <div className="relative mb-4 overflow-visible rounded-2xl border border-zinc-700/60 bg-zinc-950/90 shadow-[0_20px_70px_rgba(0,0,0,0.65)]">
               <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-[#e1b11b] via-amber-300 to-[#e1b11b]" />
               <JobberFormEmbed
-                id="hero-quote"
-                className="w-full"
-                minHeight={0}
+                id="contact-quote"
+                className="relative z-[1] w-full px-3"
+                mode="embed"
+                minHeight={500}
               />
               <div className="px-5 py-4 border-t border-zinc-800/70">
                 <p className="text-[10px] text-zinc-500 leading-relaxed text-center">

@@ -3,11 +3,6 @@ import { Link } from "react-router-dom";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import LoopVideo from "./LoopVideo";
 
-const scrollToContact = (e) => {
-  e.preventDefault();
-  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
-};
-
 const ServicesList = () => {
   return (
     <section id="services" className="relative py-14 md:py-24 bg-black overflow-hidden">
@@ -126,77 +121,8 @@ const ServicesList = () => {
               src="/videos/ceramic-coating.mp4"
               poster="/images/before-after/ceramic-coating-poster.jpg"
               title="Ceramic coating hydrophobic water sheeting on dark paint"
+              flipHorizontal
             />
-          </div>
-        </div>
-
-        <div
-          id="luxury-rentals"
-          className="hero-form-frame rounded-[1.6rem] p-[1px]"
-        >
-          <div className="rounded-[1.55rem] bg-zinc-950/90 backdrop-blur-xl overflow-hidden">
-            <div className="flex flex-col lg:flex-row">
-              <div className="fleet-photo-frame lg:min-h-[280px] lg:w-[52%] lg:aspect-auto">
-                <img
-                  src="/images/gallery/lamborghini-urus.jpg"
-                  alt="Glossy black Lamborghini Urus exotic luxury rental"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-black/20 lg:to-zinc-950/95" />
-                <span className="absolute top-4 left-4 text-xs tracking-[0.28em] text-[#e1b11b]/90">
-                  04
-                </span>
-              </div>
-
-              <div className="p-5 sm:p-6 lg:p-8 lg:flex lg:flex-col lg:justify-center">
-                <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#e1b11b] mb-2">
-                  Exotic / luxury rentals
-                </p>
-                <h3 className="text-2xl sm:text-3xl font-bold italic tracking-tight text-white mb-3">
-                  Drive Something{" "}
-                  <span className="hero-shine">Extraordinary</span>
-                </h3>
-                <p className="text-sm text-zinc-400 leading-relaxed mb-5 max-w-xl">
-                  Exotic and luxury vehicle rentals for weekends, events, and special
-                  occasions across Fairfield County. Every car is showroom-clean before
-                  handoff — the same standard we bring to our mobile detailing clients.
-                </p>
-                <ul className="space-y-2 mb-6 text-sm text-zinc-300">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#e1b11b] mt-0.5" aria-hidden>
-                      ✓
-                    </span>
-                    Exotics, supercars &amp; luxury SUVs
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#e1b11b] mt-0.5" aria-hidden>
-                      ✓
-                    </span>
-                    Detailed, protected, and ready to impress
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#e1b11b] mt-0.5" aria-hidden>
-                      ✓
-                    </span>
-                    Flexible delivery &amp; pickup options
-                  </li>
-                </ul>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Link
-                    to="/luxury-car-rentals-ct-ny-ma"
-                    className="w-full sm:flex-1 py-3.5 rounded-xl bg-[#e1b11b] text-black text-sm font-bold tracking-wide text-center hover:bg-amber-300 transition-colors"
-                  >
-                    View Fleet
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={scrollToContact}
-                    className="w-full sm:flex-1 py-3.5 rounded-xl border border-zinc-600 text-white text-sm font-bold tracking-wide hover:border-[#e1b11b]/60 transition-colors"
-                  >
-                    Check Availability
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

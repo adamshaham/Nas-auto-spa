@@ -5,7 +5,6 @@ import { motion, useInView } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import GoogleRatingBadge from "../components/GoogleReviewsWidget";
 import Hero from '../components/Hero';
-import HomeTicker from '../components/HomeTicker';
 import HomeStats from '../components/HomeStats';
 import ServicesList from '../components/ServicesList';
 import CarRentals from '../components/CarRentals';
@@ -81,7 +80,6 @@ const HomePage = () => {
       <Navbar />
       <GoogleRatingBadge />
       <Hero />
-      <HomeTicker />
       <HomeStats />
       <HomeMobileProcess />
 
