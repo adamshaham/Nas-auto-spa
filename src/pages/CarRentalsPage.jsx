@@ -16,6 +16,8 @@ import JobberFormEmbed, {
 } from '../components/JobberFormEmbed';
 import { RENTAL_FLEET, RENTAL_FLEET_META } from '../data/rentalFleet';
 
+const { renterRequirements } = RENTAL_FLEET_META;
+
 const PATH = '/luxury-car-rentals-ct-ny-ma';
 const PAGE_TITLE =
   'Luxury & Exotic Car Rentals in CT, NY & MA | NAS Exotics | NAS Auto Spa';
@@ -57,6 +59,10 @@ const FAQS = [
   {
     q: 'How far in advance should I reserve?',
     a: 'As early as possible for weekends, holidays, and weddings. Same-week requests are sometimes available depending on the fleet. Submit the form and we will confirm what we can deliver for your date.',
+  },
+  {
+    q: 'What are the driver requirements for a NAS Exotics rental?',
+    a: `${RENTAL_FLEET_META.renterRequirements} Chauffeur service is available if you prefer not to self-drive.`,
   },
 ];
 
@@ -276,9 +282,15 @@ const CarRentalsPage = () => {
                 >
                   Request availability
                 </h2>
-                <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-6">
+                <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-4">
                   Share dates, pickup city, and the car you want. Pricing is never listed
                   here — you get a quote after we confirm the fleet.
+                </p>
+                <p className="text-sm text-zinc-300 leading-relaxed mb-6 rounded-xl border border-white/[0.08] bg-zinc-950/60 px-4 py-3">
+                  <span className="text-[#e1b11b] font-semibold uppercase tracking-[0.14em] text-[10px] block mb-1.5">
+                    Driver requirements
+                  </span>
+                  {renterRequirements}
                 </p>
                 <a
                   href="tel:+19293076986"

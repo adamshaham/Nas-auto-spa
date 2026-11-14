@@ -96,6 +96,9 @@ const CarInventory = ({
               Colors and specs listed. Chauffeur {RENTAL_FLEET_META.chauffeur.toLowerCase()}.
               Pricing is quoted privately.
             </p>
+            <p className="mt-3 text-sm text-zinc-500 leading-relaxed border-l-2 border-[#e1b11b]/50 pl-3">
+              {RENTAL_FLEET_META.renterRequirements}
+            </p>
           </div>
         </div>
       )}

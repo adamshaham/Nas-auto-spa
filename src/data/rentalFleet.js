@@ -4,6 +4,8 @@ export const RENTAL_FLEET_META = {
   chauffeur: 'Available on request',
   depositNote:
     'Availability and booking details are confirmed after you submit a rental request.',
+  renterRequirements:
+    'Self-drive renters must be at least 21 years old with a valid driver’s license and active auto insurance in Connecticut, Massachusetts, or New York.',
 };
 
 export const RENTAL_FLEET = [
