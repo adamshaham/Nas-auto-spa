@@ -417,4 +417,12 @@ button:hover > span > .hero-btn-shine {
   .mobile-sticky-cta {
     padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
   }
+
+  .fleet-photo-frame {
+    @apply relative w-full aspect-video shrink-0 overflow-hidden bg-zinc-950;
+  }
+
+  .fleet-photo-frame img {
+    @apply absolute inset-0 h-full w-full object-contain object-center p-1.5 sm:p-2;
+  }
 } 

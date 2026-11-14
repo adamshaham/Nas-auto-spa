@@ -22,6 +22,7 @@ export const PRERENDER_ROUTES = [
   '/paint-correction-fairfield-county-ct',
   '/ceramic-coating-fairfield-county-ct',
   '/fleet-detailing-fairfield-county-ct',
+  '/luxury-car-rentals-ct-ny-ma',
   '/fairfield-ct',
   '/stamford-ct',
   '/greenwich-ct',

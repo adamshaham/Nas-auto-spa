@@ -136,11 +136,10 @@ const ServicesList = () => {
         >
           <div className="rounded-[1.55rem] bg-zinc-950/90 backdrop-blur-xl overflow-hidden">
             <div className="flex flex-col lg:flex-row">
-              <div className="relative min-h-[220px] sm:min-h-[280px] lg:min-h-[320px] lg:w-[52%] shrink-0">
+              <div className="fleet-photo-frame lg:min-h-[280px] lg:w-[52%] lg:aspect-auto">
                 <img
                   src="/images/gallery/lamborghini-urus.jpg"
                   alt="Glossy black Lamborghini Urus exotic luxury rental"
-                  className="absolute inset-0 h-full w-full object-cover object-[center_55%]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-black/20 lg:to-zinc-950/95" />
                 <span className="absolute top-4 left-4 text-xs tracking-[0.28em] text-[#e1b11b]/90">

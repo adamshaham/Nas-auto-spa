@@ -45,6 +45,36 @@ export const locationServiceSchema = ({
   url: toAbsoluteUrl(path),
 });
 
+export const rentalServiceSchema = ({ path, description }) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'NAS Exotics Luxury & Exotic Car Rentals',
+  serviceType: 'Luxury and exotic car rental with chauffeur service',
+  description,
+  brand: { '@type': 'Brand', name: 'NAS Exotics' },
+  provider: businessProvider(),
+  url: toAbsoluteUrl(path),
+  areaServed: [
+    { '@type': 'State', name: 'Connecticut' },
+    { '@type': 'State', name: 'Massachusetts' },
+    { '@type': 'State', name: 'New York' },
+  ],
+});
+
+export const rentalFleetItemListSchema = (fleet, path) => ({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'NAS Exotics rental fleet',
+  numberOfItems: fleet.length,
+  itemListElement: fleet.map((car, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: `${car.make} ${car.model}`,
+    url: `${toAbsoluteUrl(path)}#${car.id}`,
+    image: car.image ? toAbsoluteUrl(car.image) : undefined,
+  })),
+});
+
 export const servicePageSchema = ({
   name,
   description,

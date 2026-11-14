@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import CarInventory from './CarInventory';
-import { RENTAL_INVENTORY } from '../data/rentalInventory';
+import { RENTAL_FLEET } from '../data/rentalFleet';
 
 const offerings = [
   {
@@ -90,11 +89,13 @@ const CarRentals = () => {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 0.61, 0.36, 1] }}
             className="relative"
           >
-            <div className="relative rounded-3xl overflow-hidden border border-zinc-800 aspect-[4/3] lg:aspect-auto lg:h-[420px]">
+            <div className="fleet-photo-frame rounded-3xl border border-zinc-800 lg:aspect-[4/3]">
               <img
-                src={RENTAL_INVENTORY[0]?.images[0]?.src || '/images/gallery/lamborghini-urus.jpg'}
+                src={
+                  RENTAL_FLEET.find((c) => c.image)?.image ||
+                  '/images/gallery/lamborghini-urus.jpg'
+                }
                 alt="Luxury and exotic car rental by NAS Auto Spa"
-                className="w-full h-full object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
             </div>

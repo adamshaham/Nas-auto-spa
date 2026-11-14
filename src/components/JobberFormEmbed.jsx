@@ -1,9 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
 export const JOBBER_CLIENTHUB_ID =
   '306a6900-fe95-4c4f-91f5-5aaae2d0586f-4624455';
 export const JOBBER_FORM_URL =
   'https://clienthub.getjobber.com/client_hubs/306a6900-fe95-4c4f-91f5-5aaae2d0586f/public/work_request/embedded_work_request_form?form_id=4624455';
+
+export const JOBBER_RENTALS_CLIENTHUB_ID =
+  '306a6900-fe95-4c4f-91f5-5aaae2d0586f-5302617';
+export const JOBBER_RENTALS_FORM_URL =
+  'https://clienthub.getjobber.com/client_hubs/306a6900-fe95-4c4f-91f5-5aaae2d0586f/public/work_request/embedded_work_request_form?form_id=5302617';
 const JOBBER_CSS =
   'https://d3ey4dbjkt2f6s.cloudfront.net/assets/external/work_request_embed.css';
 const JOBBER_JS =
@@ -14,14 +19,12 @@ const JobberFormEmbed = ({
   minHeight = 420,
   id,
   mode = 'embed',
+  clientHubId = JOBBER_CLIENTHUB_ID,
+  formUrl = JOBBER_FORM_URL,
+  title = 'Request a quote from NAS Auto Spa',
 }) => {
-  const initialized = useRef(false);
-
   useEffect(() => {
     if (mode === 'iframe') return;
-
-    if (initialized.current) return;
-    initialized.current = true;
 
     if (!document.querySelector('link[data-jobber]')) {
       const link = document.createElement('link');
@@ -37,11 +40,11 @@ const JobberFormEmbed = ({
     const script = document.createElement('script');
     script.src = JOBBER_JS;
     script.async = true;
-    script.setAttribute('clienthub_id', JOBBER_CLIENTHUB_ID);
-    script.setAttribute('form_url', JOBBER_FORM_URL);
+    script.setAttribute('clienthub_id', clientHubId);
+    script.setAttribute('form_url', formUrl);
     script.setAttribute('data-jobber', 'script');
     document.body.appendChild(script);
-  }, [mode]);
+  }, [mode, clientHubId, formUrl]);
 
   if (mode === 'iframe') {
     return (
@@ -51,8 +54,8 @@ const JobberFormEmbed = ({
         style={{ scrollMarginTop: '88px', width: '100%' }}
       >
         <iframe
-          src={JOBBER_FORM_URL}
-          title="Request a quote from NAS Auto Spa"
+          src={formUrl}
+          title={title}
           style={{
             display: 'block',
             width: '100%',
@@ -71,7 +74,7 @@ const JobberFormEmbed = ({
       className={className}
       style={{ scrollMarginTop: '88px' }}
     >
-      <div id={JOBBER_CLIENTHUB_ID} />
+      <div id={clientHubId} />
     </div>
   );
 };
