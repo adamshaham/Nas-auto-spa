@@ -38,6 +38,7 @@ const packages = [
         ],
       },
     ],
+    timeOnSite: '2–6 hours on site',
     popular: false,
     bookKey: 'FULL DETAIL',
   },
@@ -54,6 +55,7 @@ const packages = [
       '1-step paint correction (removes swirls)',
       'Deep gloss and clarity restored',
     ],
+    timeOnSite: '6–10 hours on site',
     popular: false,
     bookKey: 'PAINT CORRECTION',
   },
@@ -70,6 +72,9 @@ const packages = [
       '3-year, 6-year, or 10-year System X ceramic (your choice)',
       'Long-lasting gloss & easier washing',
     ],
+    timeOnSite: '8–12 hours on site',
+    cureNote:
+      'After coating, allow 12 hours to cure — keep the vehicle out of sun, rain, and the elements.',
     popular: true,
     bookKey: 'CERAMIC COATING',
   },
@@ -197,9 +202,22 @@ const Pricing = () => {
                 <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight mb-2 shrink-0">
                   {pkg.title}
                 </h3>
-                <p className="text-sm text-zinc-400 leading-relaxed mb-5 min-h-[3.25rem] shrink-0">
+                <p className="text-sm text-zinc-400 leading-relaxed mb-3 min-h-[3.25rem] shrink-0">
                   {pkg.subtitle}
                 </p>
+                {(pkg.timeOnSite || pkg.cureNote) && (
+                  <div className="mb-5 shrink-0 space-y-1.5 rounded-lg border border-white/[0.06] bg-black/30 px-3 py-2.5">
+                    {pkg.timeOnSite && (
+                      <p className="text-xs text-zinc-300">
+                        <span className="font-semibold text-[#e1b11b]">Time on site: </span>
+                        {pkg.timeOnSite}
+                      </p>
+                    )}
+                    {pkg.cureNote && (
+                      <p className="text-[11px] text-zinc-500 leading-relaxed">{pkg.cureNote}</p>
+                    )}
+                  </div>
+                )}
 
                 <div className="mb-6 flex flex-1 flex-col min-h-[14.5rem]">
                   {pkg.sections ? (

@@ -22,10 +22,10 @@ const STATS = [
     detail: 'From verified local reviews',
   },
   {
-    value: 10,
+    value: 4,
     suffix: '+',
-    label: 'Towns served',
-    detail: 'Stamford to Milford and beyond',
+    label: 'Counties served',
+    detail: 'Fairfield County and beyond',
   },
 ];
 

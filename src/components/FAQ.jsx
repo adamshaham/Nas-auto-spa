@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     question: "How long does a detail take?",
-    answer: "It depends on the package and your vehicle's condition. A full detail typically takes 1–2 hours, paint correction takes 2–4 hours, and ceramic coating (with prep and correction) can take 4–6 hours or more. We'll give you a time estimate when you book."
+    answer: "It depends on the package and your vehicle's condition. A full detail typically takes 2–6 hours on site. Paint correction usually takes 6–10 hours. Ceramic coating takes about 8–12 hours on site, plus 12 hours of cure time afterward — the car should stay out of sun, rain, and the elements during that window. We'll confirm timing when you book."
   },
 
   {

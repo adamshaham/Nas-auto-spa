@@ -182,7 +182,6 @@ const Hero = () => {
     const py = scrollRef.current * 0.1 + (fine ? (y - 0.5) * 16 : 0);
     el.style.transform = `translate3d(${px}px, ${py}px, 0) scale(1.08)`;
   };
-  const [mediaReady, setMediaReady] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [isDesktop, setIsDesktop] = useState(() =>
     typeof window !== 'undefined' ? window.innerWidth >= 1024 : true
@@ -193,10 +192,6 @@ const Hero = () => {
     const video = videoRef.current;
     const section = sectionRef.current;
     if (!video) return;
-
-    const markReady = () => setMediaReady(true);
-    video.addEventListener('playing', markReady);
-    video.addEventListener('loadeddata', markReady);
 
     const tryPlay = () => {
       video.defaultMuted = true;
@@ -245,8 +240,6 @@ const Hero = () => {
     io.observe(ioTarget);
 
     return () => {
-      video.removeEventListener('playing', markReady);
-      video.removeEventListener('loadeddata', markReady);
       video.removeEventListener('canplay', tryPlay);
       video.removeEventListener('loadedmetadata', tryPlay);
       document.removeEventListener('visibilitychange', onVisibility);
@@ -316,9 +309,10 @@ const Hero = () => {
   };
 
   return (
+    <>
     <div
       ref={sectionRef}
-      className="relative min-h-0 overflow-hidden bg-black hero-interactive lg:min-h-screen"
+      className="relative h-[100svh] min-h-[100svh] overflow-hidden bg-black hero-interactive lg:h-auto lg:min-h-screen"
       style={{ '--mx': '62%', '--my': '42%', '--mxn': 0.62, '--myn': 0.42 }}
     >
       <div
@@ -334,14 +328,12 @@ const Hero = () => {
 
       <div
         ref={photoRef}
-        className={`absolute inset-0 will-change-transform transition-opacity duration-1000 hero-photo ${
-          mediaReady ? 'opacity-100' : 'opacity-0'
-        }`}
+        className="hero-photo absolute inset-0 will-change-transform"
         style={{ transform: 'translate3d(0, 0, 0) scale(1.08)' }}
       >
         <video
           ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-center"
           autoPlay
           defaultMuted
           muted
@@ -357,9 +349,9 @@ const Hero = () => {
         </video>
       </div>
 
-      <div className="absolute inset-0 bg-black/50 lg:bg-black/50 max-lg:bg-black/62" />
+      <div className="absolute inset-0 bg-black/35 lg:bg-black/50" />
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none hidden lg:block"
         style={{
           background:
             'linear-gradient(105deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.58) 38%, rgba(0,0,0,0.18) 64%, rgba(0,0,0,0.55) 100%)',
@@ -369,27 +361,61 @@ const Hero = () => {
         className="absolute inset-0 pointer-events-none z-[1] lg:hidden"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.78) 100%)',
+            'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.28) 42%, rgba(0,0,0,0.45) 100%)',
         }}
         aria-hidden
       />
-      <div className="hero-spotlight pointer-events-none absolute inset-0 z-[1]" />
-      <div className="hero-grid pointer-events-none absolute inset-0 z-[1] opacity-40" />
+      <div className="hero-spotlight pointer-events-none absolute inset-0 z-[1] hidden lg:block" />
+      <div className="hero-grid pointer-events-none absolute inset-0 z-[1] hidden opacity-40 lg:block" />
 
       <SparkleField enabled={canSparkle} mouseRef={mouseRef} />
 
-      <div className="pointer-events-none absolute -top-24 -left-16 w-[28rem] h-[28rem] rounded-full bg-[#e1b11b]/15 blur-[90px] animate-blob" />
+      <div className="pointer-events-none absolute -top-24 -left-16 hidden h-[28rem] w-[28rem] rounded-full bg-[#e1b11b]/15 blur-[90px] animate-blob lg:block" />
       <div
-        className="pointer-events-none absolute -bottom-24 right-0 w-[22rem] h-[22rem] rounded-full bg-amber-300/10 blur-[80px] animate-blob"
+        className="pointer-events-none absolute -bottom-24 right-0 hidden h-[22rem] w-[22rem] rounded-full bg-amber-300/10 blur-[80px] animate-blob lg:block"
         style={{ animationDelay: '2.5s' }}
       />
-      <div className="hero-grain pointer-events-none absolute inset-0 z-[3] opacity-[0.18]" />
+      <div className="hero-grain pointer-events-none absolute inset-0 z-[3] opacity-[0.12] lg:opacity-[0.18]" />
 
       <div
-        className="relative z-10 mx-auto flex max-w-7xl flex-col justify-start px-5 pb-8 pt-[5.75rem] sm:px-8 sm:pb-10 sm:pt-[6rem] lg:min-h-screen lg:items-center lg:justify-center lg:py-20"
+        className="relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col lg:min-h-screen lg:items-center lg:justify-center lg:px-8 lg:py-20"
         style={{ transform: `translateY(${-progress * 16}px)` }}
       >
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-20 gap-y-10 lg:py-20">
+        <div className="flex h-full flex-col justify-center px-6 pb-8 pt-24 lg:hidden">
+          <p className="text-sm font-medium text-zinc-200">Fairfield County mobile detailing</p>
+          <h1 className="mt-3 whitespace-nowrap text-[2.15rem] font-bold italic leading-none tracking-tight drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)]">
+            <span className="text-white">NAS </span>
+            <span className="text-[#e1b11b]">AUTO SPA</span>
+          </h1>
+          <p className="mt-3 text-[1.65rem] font-semibold leading-tight text-white">
+            Your cars, <span className="text-[#e1b11b]">our passion.</span>
+          </p>
+          <button
+            type="button"
+            onClick={scrollTo('services')}
+            className="mt-6 w-fit rounded-full bg-[#e1b11b] px-6 py-2.5 text-sm font-semibold text-black"
+          >
+            Explore Services
+          </button>
+
+          <div className="mt-10 space-y-5">
+            {[
+              { title: 'Google recommended', body: 'Rated by local clients' },
+              { title: 'We bring everything', body: 'Own water, power, and gear' },
+              { title: 'System X certified', body: '3, 6, or 10-year ceramic' },
+            ].map((item) => (
+              <div key={item.title} className="flex gap-4">
+                <span className="w-px shrink-0 bg-[#e1b11b]" aria-hidden />
+                <div>
+                  <p className="text-sm font-semibold text-white">{item.title}</p>
+                  <p className="text-sm text-zinc-300">{item.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="hidden w-full grid-cols-1 gap-x-12 gap-y-10 lg:grid lg:grid-cols-2 xl:gap-x-20 lg:py-20">
           <div
             className="flex flex-col items-start"
             style={{ opacity: 1 - progress * 0.4 }}
@@ -398,7 +424,7 @@ const Hero = () => {
               initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05 }}
-              className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#e1b11b]/40 bg-[#e1b11b]/10 px-3 py-1.5 backdrop-blur-sm lg:mb-6"
+              className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#e1b11b]/40 bg-black/35 px-3 py-1.5 backdrop-blur-sm lg:mb-6 lg:bg-[#e1b11b]/10"
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-[#e1b11b] opacity-75 animate-ping" />
@@ -409,7 +435,7 @@ const Hero = () => {
               </span>
             </motion.div>
 
-            <h1 className="text-[2.75rem] sm:text-[3.75rem] md:text-[4.5rem] font-bold leading-[0.92] tracking-tight mb-3 sm:mb-4 drop-shadow-[0_2px_20px_rgba(0,0,0,0.55)]">
+            <h1 className="mb-2 text-[2.55rem] font-bold leading-[0.9] tracking-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.55)] sm:mb-4 sm:text-[3.75rem] md:text-[4.5rem] lg:leading-[0.92]">
               <span className="block italic text-white">
                 <SplitWord text="NAS" reduced={reduceMotion} />
               </span>
@@ -422,28 +448,11 @@ const Hero = () => {
               initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.42 }}
-              className="mb-3 text-[1.35rem] font-bold leading-tight sm:text-[1.5rem] lg:hidden"
+              className="mb-4 text-[1.2rem] font-bold leading-tight sm:text-[1.5rem] lg:hidden"
             >
               <span className="text-white">Your Cars, </span>
               <span className="text-[#e1b11b]">Our Passion.</span>
             </motion.p>
-
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.5 }}
-              className="mb-3 flex flex-wrap gap-2 lg:hidden"
-            >
-              {HERO_SERVICE_PILLS.map((pill) => (
-                <Link
-                  key={pill.label}
-                  to={pill.to}
-                  className="inline-flex items-center rounded-full border border-white/15 bg-black/40 px-3 py-1.5 text-[11px] font-semibold tracking-wide text-zinc-100 backdrop-blur-sm transition hover:border-[#e1b11b]/50 hover:bg-[#e1b11b]/10 hover:text-white"
-                >
-                  {pill.label}
-                </Link>
-              ))}
-            </motion.div>
 
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
@@ -455,35 +464,41 @@ const Hero = () => {
               washing across Fairfield County, CT — with our own water &amp; power.
             </motion.p>
 
-            {!isDesktop && <HeroGoogleReviews reduced={reduceMotion} />}
-
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.82 }}
-              className="mb-2 mt-4 hidden w-full max-w-none grid-cols-2 gap-3 sm:max-w-md lg:mb-6 lg:mt-0 lg:grid"
+              className="mb-4 mt-1 grid w-full grid-cols-2 gap-3 sm:max-w-md lg:mb-6 lg:mt-0"
             >
               <MagneticButton
                 reduced={reduceMotion}
-                onClick={scrollTo('services')}
-                className="relative flex-1 py-3.5 rounded-xl bg-[#e1b11b] text-black text-sm font-bold tracking-wider hover:bg-amber-300 transition-colors duration-200 shadow-[0_4px_20px_rgba(225,177,27,0.4)] overflow-hidden will-change-transform"
+                onClick={isDesktop ? scrollTo('services') : scrollTo('contact')}
+                className="relative flex-1 overflow-hidden rounded-xl bg-[#e1b11b] py-3.5 text-sm font-bold tracking-wider text-black shadow-[0_4px_20px_rgba(225,177,27,0.4)] transition-colors duration-200 will-change-transform hover:bg-amber-300"
               >
-                SERVICES
+                {isDesktop ? 'SERVICES' : 'GET A QUOTE'}
               </MagneticButton>
               <MagneticButton
                 reduced={reduceMotion}
-                onClick={isDesktop ? scrollTo('pricing') : scrollTo('contact')}
-                className="relative flex-1 py-3.5 rounded-xl border border-zinc-500 text-white text-sm font-bold tracking-wider hover:border-[#e1b11b] hover:text-[#e1b11b] transition-colors duration-200 overflow-hidden will-change-transform"
+                onClick={isDesktop ? scrollTo('pricing') : scrollTo('services')}
+                className={`relative flex-1 overflow-hidden rounded-xl py-3.5 text-sm font-bold tracking-wider transition-colors duration-200 will-change-transform ${
+                  isDesktop
+                    ? 'border border-zinc-500 text-white hover:border-[#e1b11b] hover:text-[#e1b11b]'
+                    : 'border border-white/25 bg-black/30 text-white backdrop-blur-sm hover:border-[#e1b11b] hover:text-[#e1b11b]'
+                }`}
               >
-                {isDesktop ? 'PACKAGES' : 'GET A QUOTE'}
+                {isDesktop ? 'PACKAGES' : 'SERVICES'}
               </MagneticButton>
             </motion.div>
+
+            <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-zinc-300 lg:hidden">
+              5.0 Google · We come to you · Fairfield County
+            </p>
 
             <motion.div
               initial={reduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1 }}
-              className="hidden lg:flex flex-wrap gap-6 sm:gap-8"
+              className="hidden flex-wrap gap-5 sm:gap-8 lg:flex"
             >
               {STATS.map((s) => (
                 <div key={s.label} className="min-w-[5.5rem]">
@@ -559,6 +574,23 @@ const Hero = () => {
         <span className="text-zinc-400 text-xs tracking-widest uppercase">Scroll</span>
       </div>
     </div>
+    {!isDesktop && (
+      <div className="bg-black px-5 pb-8 pt-6 sm:px-8">
+        <div className="mb-4 flex flex-wrap gap-2">
+          {HERO_SERVICE_PILLS.map((pill) => (
+            <Link
+              key={pill.label}
+              to={pill.to}
+              className="inline-flex items-center rounded-full border border-white/15 bg-zinc-950 px-3 py-1.5 text-[11px] font-semibold tracking-wide text-zinc-100 transition hover:border-[#e1b11b]/50 hover:text-white"
+            >
+              {pill.label}
+            </Link>
+          ))}
+        </div>
+        <HeroGoogleReviews reduced={reduceMotion} />
+      </div>
+    )}
+    </>
   );
 };
 
