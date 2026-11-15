@@ -54,7 +54,7 @@ const packages = [
       '1-step paint correction (removes swirls)',
       'Deep gloss and clarity restored',
     ],
-    popular: true,
+    popular: false,
     bookKey: 'PAINT CORRECTION',
   },
   {
@@ -70,7 +70,7 @@ const packages = [
       '3-year, 6-year, or 10-year System X ceramic (your choice)',
       'Long-lasting gloss & easier washing',
     ],
-    popular: false,
+    popular: true,
     bookKey: 'CERAMIC COATING',
   },
 ];
