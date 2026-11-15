@@ -12,7 +12,7 @@ export const RENTAL_FLEET = [
   {
     id: 'ferrari-488-spider-yellow',
     make: 'Ferrari',
-    model: '488 Spider',
+    model: '488 Spyder',
     category: 'Exotic',
     exterior: 'Yellow',
     interior: 'Black & yellow',

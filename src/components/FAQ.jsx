@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     question: "How long does a detail take?",
-    answer: "It depends on the package and your vehicle's condition. A Stage 1 detail typically takes 1–2 hours, Stage 2 takes 2–4 hours, and Stage 3 (full interior + exterior restoration) can take 4–6 hours. We'll give you a time estimate when you book."
+    answer: "It depends on the package and your vehicle's condition. A full detail typically takes 1–2 hours, paint correction takes 2–4 hours, and ceramic coating (with prep and correction) can take 4–6 hours or more. We'll give you a time estimate when you book."
   },
 
   {
@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     question: "How often should I get my car detailed?",
-    answer: "We recommend a maintenance detail (Stage 1) every 2–4 weeks and a deeper detail (Stage 2 or 3) every 3–6 months. If you have ceramic coating, regular maintenance washes help keep the coating performing at its best."
+    answer: "We recommend a full detail every 2–4 months for daily drivers, and paint correction or ceramic coating when you want to restore gloss or add long-term protection. If you have ceramic coating, gentle routine washes help keep the coating performing at its best."
   },
   {
     question: "What is ceramic coating and is it worth it?",

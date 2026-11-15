@@ -38,7 +38,7 @@ const BRANDS = [
 const FAQS = [
   {
     q: 'What luxury and exotic cars can I rent from NAS Exotics?',
-    a: `Our current fleet includes ${RENTAL_FLEET_META.totalVehicles} vehicles: Ferrari 488 Spider, McLaren 720S Spider, Rolls-Royce Cullinan (including Black Badge), Lamborghini Urus and Urus Performante, Mercedes-Maybach GLS 600, Mercedes-Benz G63, Chevrolet Corvette C8, and BMW 760i. Color and configuration details are listed below. Availability depends on your dates and pickup location.`,
+    a: `Our current fleet includes ${RENTAL_FLEET_META.totalVehicles} vehicles: Ferrari 488 Spyder, McLaren 720S Spider, Rolls-Royce Cullinan (including Black Badge), Lamborghini Urus and Urus Performante, Mercedes-Maybach GLS 600, Mercedes-Benz G63, Chevrolet Corvette C8, and BMW 760i. Color and configuration details are listed below. Availability depends on your dates and pickup location.`,
   },
   {
     q: 'Where do you deliver luxury car rentals in CT, NY, and MA?',
@@ -207,7 +207,7 @@ const CarRentalsPage = () => {
                 {
                   n: '01',
                   title: 'Exotic',
-                  text: 'Ferrari 488 Spider, McLaren 720S, Lamborghini Urus, Corvette C8.',
+                  text: 'Ferrari 488 Spyder, McLaren 720S, Lamborghini Urus, Corvette C8.',
                 },
                 {
                   n: '02',

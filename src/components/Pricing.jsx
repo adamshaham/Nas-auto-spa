@@ -2,127 +2,113 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { DEPOSIT_POLICY } from '../data/pricing';
 
+const packages = [
+  {
+    label: 'PACKAGE 01',
+    title: 'FULL DETAIL',
+    subtitle:
+      'A complete reset, inside and out — the fastest way to fall back in love with your car.',
+    image: '/images/gallery/car-detailing.jpg',
+    imageAlt: 'Mobile full interior and exterior detail in Fairfield County CT',
+    sections: [
+      {
+        title: 'Exterior',
+        items: [
+          'High pH soap pre-rinse',
+          'Full contact wash',
+          'Wheel cleaning',
+          'Tire cleaning',
+          'Window cleaning',
+          'Door jams',
+          'Trunk jams',
+          'Tire shine',
+        ],
+      },
+      {
+        title: 'Interior',
+        items: [
+          'Interior steam cleaning (if necessary)',
+          'Carpet extraction (if necessary)',
+          'Odor removal (if necessary)',
+          'Dash & upholstery wipe-down',
+          'Thorough vacuum',
+          'Seat cleaning',
+          'Window cleaning',
+          'Trunk cleaning',
+        ],
+      },
+    ],
+    popular: false,
+    bookKey: 'FULL DETAIL',
+  },
+  {
+    label: 'PACKAGE 02 · PAINT CORRECTION',
+    title: 'PAINT CORRECTION',
+    subtitle:
+      'Full detail plus correction that removes swirls and brings the clear coat back to life.',
+    image: '/images/gallery/paint-correction.jpg',
+    imageAlt: 'Paint correction on gloss black paint in Connecticut',
+    bullets: [
+      'Full interior & exterior detail',
+      'Clay bar & surface decontamination',
+      '1-step paint correction (removes swirls)',
+      'Deep gloss and clarity restored',
+    ],
+    popular: true,
+    bookKey: 'PAINT CORRECTION',
+  },
+  {
+    label: 'PACKAGE 03 · CERAMIC COATING',
+    title: 'CERAMIC COATING',
+    subtitle:
+      'Maximum protection — choose 3-year, 6-year, or 10-year System X ceramic based on how long you\'re keeping the car.',
+    image: '/images/gallery/ceramic-coating-package.jpg',
+    imageAlt: 'Technician applying System X MAX ceramic coating with a microfiber applicator',
+    bullets: [
+      'Full interior & exterior detail',
+      '1-step paint correction (removes swirls)',
+      '3-year, 6-year, or 10-year System X ceramic (your choice)',
+      'Long-lasting gloss & easier washing',
+    ],
+    popular: false,
+    bookKey: 'CERAMIC COATING',
+  },
+];
+
+const maintenanceWash = {
+  label: 'Monthly · Maintenance',
+  title: 'MAINTENANCE WASH',
+  subtitle: '4× per month — full interior & exterior refresh. Keep coated or corrected paint looking its best.',
+  image: '/images/gallery/ext-gal.jpg',
+  imageAlt: 'Exterior maintenance wash on a vehicle in Fairfield County CT',
+  bullets: [
+    '4 washes per month',
+    'Full exterior hand wash',
+    'Full interior refresh',
+    'Wheel & tire cleaning',
+    'Window cleaning',
+    'Vacuum & wipe-down',
+  ],
+  bookKey: 'MAINTENANCE WASH',
+};
+
+const CheckIcon = () => (
+  <svg
+    className="w-4 h-4 text-[#e1b11b] shrink-0 mt-0.5"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+  </svg>
+);
+
 const Pricing = () => {
-  const quickWashPackage = {
-    title: 'QUICK HAND WASH',
-    subtitle: '1-STEP EXTERIOR WASH + QUICK VACUUM',
-    features: [
-      { text: '1-STEP EXTERIOR HAND WASH', included: true },
-      { text: 'WHEEL & TIRE RINSE', included: true },
-      { text: 'WINDOW WIPE-DOWN', included: true },
-      { text: 'QUICK INTERIOR VACUUM', included: true },
-    ],
-    popular: false,
-  };
-
-  const monthlyWashPackage = {
-    title: 'MAINTENANCE WASH',
-    subtitle: '4X / MONTH — FULL INTERIOR & EXTERIOR REFRESH',
-    features: [
-      { text: '4 WASHES PER MONTH', included: true },
-      { text: 'FULL EXTERIOR HAND WASH', included: true },
-      { text: 'FULL INTERIOR REFRESH', included: true },
-      { text: 'WHEEL & TIRE CLEANING', included: true },
-      { text: 'WINDOW CLEANING', included: true },
-      { text: 'VACUUM & WIPE-DOWN', included: true },
-    ],
-    popular: false,
-  };
-
-  const mainPackages = [
-    {
-      title: 'STAGE 1',
-      subtitle: 'Full interior + exterior detail — perfect base reset for most vehicles.',
-      features: [
-        { text: 'HAND WASH (2 STAGE)', included: true },
-        { text: 'WHEEL AND TIRE CLEANING', included: true },
-        { text: 'WINDOW CLEANING', included: true },
-        { text: 'DOOR JAMS', included: true },
-        { text: 'INTERIOR STEAM CLEANING', included: true },
-        { text: 'SHAMPOO EXTRACTION', included: true },
-        { text: 'SEAT CLEANING', included: true },
-        { text: 'DASH & UPHOLSTERY WIPE-DOWN', included: true },
-        { text: '', included: false },
-      ],
-      popular: true,
-    },
-    {
-      title: 'STAGE 2',
-      subtitle: 'Everything in Stage 1, plus clay bar and a 1-step polish to remove light swirls and boost gloss.',
-      features: [
-        { text: 'HAND WASH (2 STAGE)', included: true },
-        { text: 'WHEEL AND TIRE CLEANING', included: true },
-        { text: 'WINDOW CLEANING', included: true },
-        { text: 'DOOR JAMS', included: true },
-        { text: 'INTERIOR STEAM CLEANING', included: true },
-        { text: 'SHAMPOO EXTRACTION', included: true },
-        { text: 'SEAT CLEANING', included: true },
-        { text: 'DASH & UPHOLSTERY WIPE-DOWN', included: true },
-        { text: '1 STEP PAINT CORRECTION', included: true },
-        { text: 'CLAY BAR', included: true },
-      ],
-      popular: true,
-    },
-    {
-      title: 'STAGE 3',
-      subtitle: 'Full detail, 1-step correction, and 6 year ceramic coating protection for long-term shine.',
-      features: [
-        { text: 'HAND WASH (2 STAGE)', included: true },
-        { text: 'WHEEL AND TIRE CLEANING', included: true },
-        { text: 'WINDOW CLEANING', included: true },
-        { text: 'DOOR JAMS', included: true },
-        { text: 'INTERIOR STEAM CLEANING', included: true },
-        { text: 'SHAMPOO EXTRACTION', included: true },
-        { text: 'SEAT CLEANING', included: true },
-        { text: 'DASH & UPHOLSTERY WIPE-DOWN', included: true },
-        { text: '1 STEP PAINT CORRECTION', included: true },
-        { text: 'CLAY BAR', included: true },
-        { text: '6-YEAR CERAMIC COATING', included: true },
-      ],
-      popular: true,
-    },
-  ];
-
-  const enhancementsPackage = {
-    title: 'ENHANCEMENTS',
-    subtitle: 'ADDITIONAL SERVICES',
-    features: [
-      { text: 'PAINT CORRECTION', included: true },
-      { text: '6-YEAR CERAMIC COATING', included: true },
-      { text: 'EXTERIOR CERAMIC SEALER', included: true },
-      { text: 'ENGINE BAY CLEANING', included: true },
-    ],
-    popular: false,
-  };
-
-  const headlightRestorationPackage = {
-    title: 'HEADLIGHT RESTORATION',
-    subtitle: 'RESTORE CLARITY & NIGHT VISIBILITY',
-    features: [
-      { text: 'SAND & POLISH LENSES', included: true },
-      { text: 'REMOVE YELLOWING & OXIDATION', included: true },
-      { text: 'UV SEALANT PROTECTION', included: true },
-    ],
-    popular: false,
-  };
-
-  const ceramicCoatingWheelsPackage = {
-    title: 'CERAMIC COATING — WHEELS',
-    subtitle: 'LONG-LASTING WHEEL PROTECTION',
-    features: [
-      { text: 'DEEP CLEAN & DECONTAMINATION', included: true },
-      { text: 'CERAMIC COATING ON WHEELS', included: true },
-      { text: 'HYDROPHOBIC, EASY-TO-CLEAN FINISH', included: true },
-    ],
-    popular: false,
-  };
-
   const scrollToBookingForm = (key) => {
     if (typeof window === 'undefined') return;
 
-    window.dispatchEvent(
-      new CustomEvent('nasPackageSelect', { detail: key })
-    );
+    window.dispatchEvent(new CustomEvent('nasPackageSelect', { detail: key }));
 
     const isDesktop = window.innerWidth >= 1024;
     const targetId = isDesktop ? 'hero-quote' : 'contact';
@@ -136,120 +122,8 @@ const Pricing = () => {
     window.location.href = isDesktop ? '/#hero-quote' : '/#contact';
   };
 
-  const renderPackageCard = (pkg) => (
-    <div
-      className={`relative ${
-        pkg.popular
-          ? 'bg-gradient-to-br from-zinc-950/90 to-black/95 border-2 border-yellow-400/60'
-          : 'bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20'
-      } backdrop-blur-sm p-4 md:p-6 rounded-lg transform hover:scale-[1.02] hover:border-yellow-400/80 transition-all duration-300 flex flex-col h-full w-full`}
-    >
-      {pkg.popular && (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#e1b11b] text-black text-[10px] font-bold uppercase tracking-wider whitespace-nowrap shadow-[0_4px_14px_rgba(225,177,27,0.4)]">
-          Most Popular
-        </span>
-      )}
-      <div className="relative mb-4 md:mb-6">
-        <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-          {pkg.title}
-        </h3>
-        <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-3 md:mb-4">
-          {pkg.subtitle}
-        </p>
-      </div>
-      <ul className="space-y-2 md:space-y-2.5 mb-4 md:mb-6 flex-grow">
-        {pkg.features.map((feature, idx) =>
-          feature.text ? (
-            <li key={idx} className="flex items-start text-white/90 text-xs">
-              <svg
-                className="w-4 h-4 text-yellow-400 mr-2 mt-0.5 flex-shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-              <span className="break-words">{feature.text}</span>
-            </li>
-          ) : (
-            <li key={idx} className="h-4 md:h-5"></li>
-          )
-        )}
-      </ul>
-
-      <button
-        type="button"
-        onClick={() => scrollToBookingForm(pkg.title)}
-        className={`block w-full py-2 md:py-3 text-center mt-auto ${
-          pkg.popular
-            ? 'bg-yellow-400 text-black hover:bg-yellow-300'
-            : 'bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10'
-        } font-semibold rounded-lg transition-all duration-300 text-sm md:text-base`}
-      >
-        Book Now
-      </button>
-    </div>
-  );
-
-  const renderHorizontalServiceCard = (pkg) => (
-    <div className="relative bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20 backdrop-blur-sm p-4 md:p-6 rounded-lg hover:border-yellow-400/80 transition-all duration-300">
-      <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,240px)_1fr_auto] lg:items-center lg:gap-6">
-        <div className="min-w-0">
-          <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
-            {pkg.title}
-          </h3>
-          <p className="text-yellow-400 text-xs md:text-sm font-semibold">
-            {pkg.subtitle}
-          </p>
-        </div>
-
-        <ul className="flex flex-col sm:flex-row sm:flex-wrap gap-x-5 gap-y-2 min-w-0">
-          {pkg.features
-            .filter((f) => f.text)
-            .map((feature, idx) => (
-              <li
-                key={idx}
-                className="flex items-center text-white/90 text-xs"
-              >
-                <svg
-                  className="w-4 h-4 text-yellow-400 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-                <span>{feature.text}</span>
-              </li>
-            ))}
-        </ul>
-
-        <button
-          type="button"
-          onClick={() => scrollToBookingForm(pkg.title)}
-          className="flex-shrink-0 w-full lg:w-auto px-6 py-2.5 md:py-3 text-center bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base whitespace-nowrap"
-        >
-          Book Now
-        </button>
-      </div>
-    </div>
-  );
-
   return (
-    <section
-      id="pricing"
-      className="relative py-12 md:py-24 bg-black overflow-hidden"
-    >
+    <section id="pricing" className="relative py-16 md:py-28 bg-black overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <motion.div
           animate={{ y: [0, -18, 0] }}
@@ -258,81 +132,193 @@ const Pricing = () => {
         />
         <motion.div
           animate={{ y: [0, 18, 0] }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 1,
-          }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           className="absolute bottom-0 left-0 w-72 h-72 bg-yellow-400/10 rounded-full blur-3xl opacity-60"
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-left mb-8 md:mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold italic mb-4 tracking-tight">
-            <span className="text-white">OUR</span>
-            <span className="text-yellow-400"> DETAIL PACKAGES</span>
+      <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="max-w-3xl mb-10 md:mb-14">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#e1b11b] mb-4">
+            Mobile · Fairfield County · We bring water &amp; power
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] mb-4">
+            <span className="text-white">Fairfield County roads are brutal.</span>{' '}
+            <span className="hero-shine italic">Your paint doesn&apos;t have to be.</span>
           </h2>
-          <p className="text-sm md:text-base text-zinc-400 max-w-3xl leading-relaxed">
-            {DEPOSIT_POLICY}
+          <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
+            Every package is a complete, start-to-finish job — detailed, corrected, and protected
+            at your home or office. Pick the level that fits how long you&apos;re keeping the car.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
-          {[quickWashPackage, monthlyWashPackage].map((pkg, i) => (
-            <div
-              key={i}
-              className="relative bg-gradient-to-br from-black/80 via-zinc-950/80 to-yellow-900/10 border border-yellow-400/20 backdrop-blur-sm p-5 md:p-6 rounded-lg hover:scale-[1.01] hover:border-yellow-400/80 transition-all duration-300 flex flex-col h-full"
+        <div className="flex items-center gap-4 mb-8 md:mb-10">
+          <div className="h-px flex-1 bg-white/10" />
+          <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-zinc-500 whitespace-nowrap">
+            Our packages
+          </p>
+          <div className="h-px flex-1 bg-white/10" />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-7 items-stretch">
+          {packages.map((pkg, i) => (
+            <motion.article
+              key={pkg.bookKey}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className={`flex flex-col h-full min-h-0 overflow-hidden rounded-2xl bg-zinc-950/90 ${
+                pkg.popular
+                  ? 'border-2 border-[#e1b11b] shadow-[0_0_40px_rgba(225,177,27,0.12)]'
+                  : 'border border-white/10'
+              }`}
             >
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
-                {pkg.title}
-              </h3>
-              <p className="text-yellow-400 text-xs md:text-sm font-semibold mb-3">
-                {pkg.subtitle}
-              </p>
-              <ul className="space-y-2 mb-5 flex-grow">
-                {pkg.features
-                  .filter((f) => f.text)
-                  .map((feature, idx) => (
-                    <li key={idx} className="flex items-start text-white/90 text-xs">
-                      <svg className="w-4 h-4 text-yellow-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>{feature.text}</span>
+              <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-zinc-900">
+                <img
+                  src={pkg.image}
+                  alt={pkg.imageAlt}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                {pkg.popular && (
+                  <span className="absolute top-3 left-3 rounded-full bg-[#e1b11b] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-black">
+                    Most Popular
+                  </span>
+                )}
+              </div>
+
+              <div className="flex flex-1 flex-col p-5 md:p-6 min-h-[28rem]">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#e1b11b] mb-2 shrink-0">
+                  {pkg.label}
+                </p>
+                <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight mb-2 shrink-0">
+                  {pkg.title}
+                </h3>
+                <p className="text-sm text-zinc-400 leading-relaxed mb-5 min-h-[3.25rem] shrink-0">
+                  {pkg.subtitle}
+                </p>
+
+                <div className="mb-6 flex flex-1 flex-col min-h-[14.5rem]">
+                  {pkg.sections ? (
+                    <div className="grid grid-cols-2 gap-4 flex-1 items-start">
+                      {pkg.sections.map((section) => (
+                        <div key={section.title} className="min-w-0">
+                          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-500 mb-2">
+                            {section.title}
+                          </p>
+                          <ul className="space-y-1.5">
+                            {section.items.map((line) => (
+                              <li
+                                key={line}
+                                className="flex gap-1.5 text-[11px] sm:text-xs text-zinc-300 leading-snug"
+                              >
+                                <CheckIcon />
+                                <span>{line}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <ul className="space-y-2.5 flex-1">
+                      {pkg.bullets.map((line) => (
+                        <li
+                          key={line}
+                          className="flex gap-2.5 text-sm text-zinc-300 leading-snug"
+                        >
+                          <CheckIcon />
+                          <span>{line}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => scrollToBookingForm(pkg.bookKey)}
+                  className={`mt-auto w-full shrink-0 rounded-xl py-3 text-sm font-bold tracking-wide transition-all duration-200 ${
+                    pkg.popular
+                      ? 'bg-[#e1b11b] text-black hover:bg-amber-300 shadow-[0_4px_20px_rgba(225,177,27,0.35)]'
+                      : 'border border-[#e1b11b]/40 text-[#e1b11b] bg-transparent hover:bg-[#e1b11b]/10'
+                  }`}
+                >
+                  Get Quote
+                </button>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        <motion.div
+          className="mt-8 lg:mt-10 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/90"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="flex flex-col lg:flex-row lg:items-stretch">
+            <div className="relative h-48 sm:h-56 lg:h-auto lg:w-[min(42%,22rem)] shrink-0 bg-zinc-900">
+              <img
+                src={maintenanceWash.image}
+                alt={maintenanceWash.imageAlt}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent to-black/40 lg:bg-gradient-to-t lg:from-black/50 lg:to-transparent" />
+            </div>
+
+            <div className="flex flex-1 flex-col gap-4 p-5 md:p-6 lg:p-8 lg:grid lg:grid-cols-[1fr_auto] lg:gap-8 lg:items-center">
+              <div className="min-w-0">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#e1b11b] mb-2">
+                  {maintenanceWash.label}
+                </p>
+                <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight mb-2">
+                  {maintenanceWash.title}
+                </h3>
+                <p className="text-sm text-zinc-400 leading-relaxed mb-4 lg:mb-5 max-w-xl">
+                  {maintenanceWash.subtitle}
+                </p>
+                <ul className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2">
+                  {maintenanceWash.bullets.map((line) => (
+                    <li
+                      key={line}
+                      className="flex items-center gap-2 text-xs sm:text-sm text-zinc-300"
+                    >
+                      <CheckIcon />
+                      <span>{line}</span>
                     </li>
                   ))}
-              </ul>
+                </ul>
+              </div>
+
               <button
                 type="button"
-                onClick={() => scrollToBookingForm(pkg.title)}
-                className="block w-full py-2 md:py-3 text-center bg-black/50 text-yellow-400 border border-yellow-400/30 hover:bg-yellow-400/10 font-semibold rounded-lg transition-all duration-300 text-sm md:text-base mt-auto"
+                onClick={() => scrollToBookingForm(maintenanceWash.bookKey)}
+                className="shrink-0 w-full lg:w-auto rounded-xl border border-[#e1b11b]/40 px-8 py-3 text-sm font-bold tracking-wide text-[#e1b11b] transition-all duration-200 hover:bg-[#e1b11b]/10 lg:self-center"
               >
-                Book Now
+                Get Quote
               </button>
             </div>
-          ))}
-        </div>
+          </div>
+        </motion.div>
 
-        <p className="text-xs text-zinc-500 mb-3 md:hidden tracking-wide">
-          Swipe for Stage 1–3 packages →
+        <p className="mt-8 md:mt-10 text-sm text-zinc-400 text-center max-w-2xl mx-auto leading-relaxed">
+          Ceramic packages are installed with{' '}
+          <strong className="font-medium text-zinc-200">System X</strong> — we&apos;re a certified
+          installer. Choose <strong className="font-medium text-zinc-200">3-year</strong>,{' '}
+          <strong className="font-medium text-zinc-200">6-year</strong>, or{' '}
+          <strong className="font-medium text-zinc-200">10-year</strong> protection when you book.
+          Not sure which package fits? Tell us about your car and we&apos;ll point you to the right one.
         </p>
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 pb-2 md:pb-0">
-          {mainPackages.map((pkg, i) => (
-            <div
-              key={i}
-              className="w-[min(88vw,20rem)] shrink-0 snap-center md:w-full md:shrink"
-            >
-              {renderPackageCard(pkg)}
-            </div>
-          ))}
-        </div>
-
-        <div className="w-full space-y-4 md:space-y-6">
-          {renderHorizontalServiceCard(enhancementsPackage)}
-          {renderHorizontalServiceCard(headlightRestorationPackage)}
-          {renderHorizontalServiceCard(ceramicCoatingWheelsPackage)}
-        </div>
+        <p className="mt-4 text-xs text-zinc-500 text-center max-w-2xl mx-auto leading-relaxed">
+          {DEPOSIT_POLICY}
+        </p>
       </div>
     </section>
   );

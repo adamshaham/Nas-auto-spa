@@ -6,7 +6,7 @@ const PERKS = [
   { icon: '⚡', label: 'Same-day response' },
   { icon: '💧', label: 'We bring our own water & power' },
   { icon: '📍', label: 'We come to you — anywhere in Fairfield County' },
-  { icon: '🛡️', label: '50% deposit secures your booking' },
+  { icon: '🛡️', label: 'Deposit for correction, coating & rentals — not full details' },
 ];
 
 const LG_BREAKPOINT = 1024;

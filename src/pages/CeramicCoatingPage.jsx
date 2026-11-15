@@ -625,9 +625,8 @@ const CeramicCoatingPage = () => {
                   Is ceramic coating included in your detail packages?
                 </p>
                 <p className="text-zinc-300 mt-1">
-                  Yes — our <strong className="text-white">Stage 3 detail</strong> includes full prep,
-                  paint correction, and a 6-year System X ceramic coating. You can also add ceramic
-                  coating as a standalone enhancement.{" "}
+                  Yes — our <strong className="text-white">ceramic coating package</strong> includes full prep,
+                  paint correction, and a 6-year System X ceramic coating.{" "}
                   <Link to="/#pricing" className="text-[#e1b11b] hover:underline">
                     View our packages
                   </Link>.
@@ -676,7 +675,7 @@ const CeramicCoatingPage = () => {
                 to="/#pricing"
                 className="inline-flex items-center justify-center rounded-full border border-zinc-700 px-8 py-3.5 text-sm font-medium tracking-wide text-zinc-300 hover:border-zinc-500 hover:text-white transition"
               >
-                See Stage 3 package
+                See ceramic coating package
               </Link>
             </div>
 

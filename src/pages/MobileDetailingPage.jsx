@@ -25,7 +25,7 @@ const MobileDetailingPage = () => {
     <div className="bg-black min-h-screen text-white">
       <SEO
         title="Mobile Car Detailing in Fairfield County, CT | NAS Auto Spa"
-        description="Premium mobile car detailing in Fairfield County, CT by NAS Auto Spa. We come to your home or office with our own water & power for full interior & exterior details. Stage 1, Stage 2, and Stage 3 packages available. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County."
+        description="Premium mobile car detailing in Fairfield County, CT by NAS Auto Spa. We come to your home or office with our own water & power for full details, paint correction, and ceramic coating. Serving Stamford, Greenwich, Westport, Norwalk, Fairfield & all of Fairfield County."
         path="/mobile-detailing-fairfield-county-ct"
         keywords="mobile car detailing near me, mobile detailing near me, car detailing near me Connecticut, auto detailing near me Fairfield County, mobile car wash near me CT, car detailing Stamford CT, auto detailing Greenwich CT, mobile car wash Westport CT, car cleaning Norwalk CT, mobile detailer Fairfield CT, interior detailing near me CT, exterior detailing near me, car detail Trumbull CT, hand car wash near me Fairfield County, SUV detailing near me CT, luxury car detailing near me Connecticut, mobile auto detail Stratford CT, best car detailing near me, mobile detailing Fairfield County CT"
         schemas={[
@@ -36,23 +36,23 @@ const MobileDetailingPage = () => {
           ]),
           servicePageSchema({
             name: 'Mobile Car Detailing in Fairfield County, CT',
-            description: 'Full interior & exterior mobile detailing packages. Stage 1 (Exterior + Interior Reset), Stage 2 (Detail + Paint Correction), and Stage 3 (Paint Correction + Ceramic Coating). We bring our own water and power.',
+            description: 'Mobile detailing packages: Full Detail, Paint Correction, and Ceramic Coating. We bring our own water and power.',
             path: '/mobile-detailing-fairfield-county-ct',
             offers: [
               {
                 '@type': 'Offer',
-                name: 'Stage 1 – Exterior + Interior Reset',
-                description: 'Full interior + exterior detail — hand wash, wheel cleaning, wax, steam cleaning, shampoo extraction.',
+                name: 'Full Detail',
+                description: 'Full interior + exterior detail — hand wash, wheels, glass, steam cleaning, shampoo extraction, and wipe-down.',
               },
               {
                 '@type': 'Offer',
-                name: 'Stage 2 – Detail + Paint Correction',
-                description: 'Everything in Stage 1 plus clay bar treatment and 1-step paint correction polish.',
+                name: 'Paint Correction',
+                description: 'Full detail plus clay bar treatment and 1-step paint correction polish.',
               },
               {
                 '@type': 'Offer',
-                name: 'Stage 3 – Paint Correction + Ceramic Coating',
-                description: 'Full detail, 1-step correction, and ceramic coating protection for long-term shine.',
+                name: 'Ceramic Coating',
+                description: 'Full detail, paint correction prep, and 6-year ceramic coating protection.',
               },
             ],
           }),
@@ -311,7 +311,7 @@ const MobileDetailingPage = () => {
             </p>
           </motion.section>
 
-          {/* Stage 1 vs Stage 2 vs Stage 3 */}
+          {/* Package comparison */}
           <motion.section
             className="border border-zinc-800 rounded-3xl bg-zinc-950/80 p-6 md:p-8 space-y-6"
             initial="hidden"
@@ -326,24 +326,22 @@ const MobileDetailingPage = () => {
                   Package Comparison
                 </p>
                 <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
-                  Stage 1 vs Stage 2 vs Stage 3
+                  Full detail, paint correction &amp; ceramic coating
                 </h2>
                 <p className="text-sm md:text-base text-zinc-300 max-w-3xl mt-1">
-                  All stages include a full interior and exterior detail. As you move up,
-                  you&apos;re adding more paint correction and long-term protection on top of that
-                  base clean.
+                  Start with a full interior and exterior detail, step up to paint correction
+                  for gloss, or add long-term protection with ceramic coating.
                 </p>
               </div>
             </div>
 
             <div className="grid gap-6 md:grid-cols-3">
-              {/* Stage 1 */}
               <div className="rounded-2xl border border-zinc-700 bg-black/60 p-5 flex flex-col gap-3">
                 <p className="text-xs uppercase tracking-[0.3em] text-zinc-500">
-                  Stage 1
+                  Full detail
                 </p>
                 <h3 className="text-lg font-semibold text-white">
-                  Exterior + Interior Reset
+                  Exterior + interior reset
                 </h3>
                 <p className="text-xs text-zinc-400">
                   Full interior + exterior detail — perfect base reset for most vehicles.
@@ -364,17 +362,16 @@ const MobileDetailingPage = () => {
                 </p>
               </div>
 
-              {/* Stage 2 */}
               <div className="rounded-2xl border border-[#e1b11b]/70 bg-black/80 p-5 flex flex-col gap-3 shadow-[0_0_35px_rgba(225,177,27,0.25)]">
                 <p className="text-xs uppercase tracking-[0.3em] text-[#e1b11b]">
-                  Stage 2
+                  Paint correction
                 </p>
                 <h3 className="text-lg font-semibold text-white">
-                  Detail + Paint Correction
+                  Detail + paint correction
                 </h3>
                 <p className="text-xs text-zinc-400">
-                  Everything in Stage 1, plus clay bar and a 1-step polish to remove light swirls
-                  and boost gloss.
+                  Full detail plus clay bar and a 1-step polish to remove light swirls and boost
+                  gloss.
                 </p>
                 <ul className="text-sm text-zinc-300 space-y-2 mt-2">
                   <li>• Hand wash (2 stage)</li>
@@ -394,13 +391,12 @@ const MobileDetailingPage = () => {
                 </p>
               </div>
 
-              {/* Stage 3 */}
               <div className="rounded-2xl border border-zinc-700 bg-black/60 p-5 flex flex-col gap-3">
                 <p className="text-xs uppercase tracking-[0.3em] text-zinc-500">
-                  Stage 3
+                  Ceramic coating
                 </p>
                 <h3 className="text-lg font-semibold text-white">
-                  Paint Correction + Ceramic Coating
+                  Correction + ceramic coating
                 </h3>
                 <p className="text-xs text-zinc-400">
                   Full detail, 1-step correction, and ceramic coating protection for long-term shine

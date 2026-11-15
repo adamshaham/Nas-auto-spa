@@ -530,7 +530,7 @@ const Hero = () => {
 
                   <div className="px-5 sm:px-6 py-4 border-t border-zinc-800/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <p className="text-[10px] text-zinc-500 leading-relaxed max-w-[260px]">
-                      50% deposit secures your booking. Washes pay in full at service.
+                      Deposit required for paint correction &amp; ceramic coating. Full details paid at service.
                     </p>
                     <a
                       href="tel:+19293076986"

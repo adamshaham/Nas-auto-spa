@@ -82,7 +82,7 @@ export const RENTAL_INVENTORY = [
   },
   {
     id: 'ferrari-488-spider',
-    name: 'Ferrari 488 Spider',
+    name: 'Ferrari 488 Spyder',
     category: 'Exotic',
     color: 'Giallo Modena',
     description:
@@ -91,19 +91,19 @@ export const RENTAL_INVENTORY = [
     images: [
       {
         src: '/images/rentals/ferrari-488-spider/exterior.jpg',
-        alt: 'Ferrari 488 Spider exterior profile in yellow',
+        alt: 'Ferrari 488 Spyder exterior profile in yellow',
       },
       {
         src: '/images/rentals/ferrari-488-spider/front.jpg',
-        alt: 'Ferrari 488 Spider front hood and badge',
+        alt: 'Ferrari 488 Spyder front hood and badge',
       },
       {
         src: '/images/rentals/ferrari-488-spider/interior.jpg',
-        alt: 'Ferrari 488 Spider interior with yellow stitching',
+        alt: 'Ferrari 488 Spyder interior with yellow stitching',
       },
       {
         src: '/images/rentals/ferrari-488-spider/wheel.jpg',
-        alt: 'Ferrari 488 Spider wheel and yellow brake calipers',
+        alt: 'Ferrari 488 Spyder wheel and yellow brake calipers',
       },
     ],
   },
